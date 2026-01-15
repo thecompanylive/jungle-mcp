@@ -1,0 +1,24 @@
+{
+  "name": "com.squido.jungle-xrkit.mcp",
+  "version": "9.0.3",
+  "displayName": "Jungle XR Kit - MCP",
+  "description": "A bridge that connects AI assistants to Jungle XR Kit via the MCP (Model Context Protocol). Allows AI clients like Claude Code, Cursor, and VSCode to directly control your Unity Editor for enhanced development workflows.\n\nFeatures automated setup wizard, cross-platform support, and seamless integration with popular AI development tools.",
+  "unity": "2021.3",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
+  },
+  "keywords": [
+    "unity",
+    "ai",
+    "llm",
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "mcp-client",
+    "jungle",
+    "xrkit"
+  ],
+  "author": {
+    "name": "Squido Studio"
+  }
+}
