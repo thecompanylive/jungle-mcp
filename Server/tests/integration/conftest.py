@@ -16,9 +16,9 @@ if str(SERVER_SRC) not in sys.path:
 # To run: cd Server && uv run pytest tests/integration/ -v
 
 # Stub version module for tests
-version = types.ModuleType("version")
+version = types.ModuleType("core.version")
 version.get_package_version = lambda: "0.0.0"
-sys.modules.setdefault("version", version)
+sys.modules.setdefault("core.version", version)
 
 # Stub fastmcp module (not mcp.server.fastmcp)
 fastmcp = types.ModuleType("fastmcp")
