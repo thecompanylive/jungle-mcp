@@ -154,14 +154,15 @@ namespace MCPForUnity.Editor.Windows
             allKeys.Sort();
             
             // Create items for existing prefs
-            foreach (var key in allKeys)
+            var items = allKeys
+                .Select(key => CreateEditorPrefItem(key))
+                .Where(item => item != null)
+                .ToList();
+            
+            currentPrefs.AddRange(items);
+            foreach (var item in items)
             {
-                var item = CreateEditorPrefItem(key);
-                if (item != null)
-                {
-                    currentPrefs.Add(item);
-                    prefsContainer.Add(CreateItemUI(item));
-                }
+                prefsContainer.Add(CreateItemUI(item));
             }
         }
         
