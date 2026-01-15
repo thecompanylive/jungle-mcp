@@ -38,7 +38,6 @@ namespace MCPForUnity.Editor.Windows
             { EditorPrefKeys.SetupCompleted, EditorPrefType.Bool },
             { EditorPrefKeys.SetupDismissed, EditorPrefType.Bool },
             { EditorPrefKeys.CustomToolRegistrationEnabled, EditorPrefType.Bool },
-            { EditorPrefKeys.TelemetryDisabled, EditorPrefType.Bool },
             { EditorPrefKeys.DevModeForceServerRefresh, EditorPrefType.Bool },
             
             // Integer prefs
@@ -155,18 +154,15 @@ namespace MCPForUnity.Editor.Windows
             allKeys.Sort();
             
             // Create items for existing prefs
-            foreach (var key in allKeys)
+            var items = allKeys
+                .Select(key => CreateEditorPrefItem(key))
+                .Where(item => item != null)
+                .ToList();
+            
+            currentPrefs.AddRange(items);
+            foreach (var item in items)
             {
-                // Skip Customer UUID but show everything else that's defined
-                if (key != EditorPrefKeys.CustomerUuid)
-                {
-                    var item = CreateEditorPrefItem(key);
-                    if (item != null)
-                    {
-                        currentPrefs.Add(item);
-                        prefsContainer.Add(CreateItemUI(item));
-                    }
-                }
+                prefsContainer.Add(CreateItemUI(item));
             }
         }
         

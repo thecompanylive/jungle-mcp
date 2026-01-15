@@ -69,7 +69,7 @@ Use this to run the latest released version from the repository. Change the vers
       "command": "uvx",
       "args": [
         "--from",
-        "git+https://github.com/CoplayDev/unity-mcp@v9.0.3#subdirectory=Server",
+        "git+https://github.com/CoplayDev/unity-mcp@v9.0.7#subdirectory=Server",
         "mcp-for-unity",
         "--transport",
         "stdio"
@@ -117,7 +117,6 @@ The server connects to Unity Editor automatically when both are running. No addi
 
 **Environment Variables:**
 
-- `DISABLE_TELEMETRY=true` - Opt out of anonymous usage analytics
 - `LOG_LEVEL=DEBUG` - Enable detailed logging (default: INFO)
 
 ---
