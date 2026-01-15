@@ -50,8 +50,5 @@ namespace MCPForUnity.Editor.Constants
         internal const string LastUpdateCheck = "MCPForUnity.LastUpdateCheck";
         internal const string LatestKnownVersion = "MCPForUnity.LatestKnownVersion";
         internal const string LastStdIoUpgradeVersion = "MCPForUnity.LastStdIoUpgradeVersion";
-
-        internal const string TelemetryDisabled = "MCPForUnity.TelemetryDisabled";
-        internal const string CustomerUuid = "MCPForUnity.CustomerUUID";
     }
 }

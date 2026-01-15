@@ -117,7 +117,6 @@ The server connects to Unity Editor automatically when both are running. No addi
 
 **Environment Variables:**
 
-- `DISABLE_TELEMETRY=true` - Opt out of anonymous usage analytics
 - `LOG_LEVEL=DEBUG` - Enable detailed logging (default: INFO)
 
 ---

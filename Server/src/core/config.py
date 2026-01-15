@@ -42,11 +42,6 @@ class ServerConfig:
     # Port discovery cache
     port_registry_ttl: float = 5.0
 
-    # Telemetry settings
-    telemetry_enabled: bool = True
-    # Align with telemetry.py default Cloud Run endpoint
-    telemetry_endpoint: str = "https://api-prod.coplay.dev/telemetry/events"
-
     def configure_logging(self) -> None:
         level = getattr(logging, self.log_level, logging.INFO)
         logging.basicConfig(level=level, format=self.log_format)
