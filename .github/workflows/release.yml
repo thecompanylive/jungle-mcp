@@ -160,7 +160,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/junglemcpserver
+      url: https://pypi.org/p/mcpforunityserver
     permissions:
       contents: read
       id-token: write

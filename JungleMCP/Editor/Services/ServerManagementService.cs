@@ -1113,7 +1113,7 @@ namespace Squido.JungleMCP.Editor.Services
                         bool mentionsMcp = wmicCompact.Contains("jungle-mcp")
                                            || wmicCompact.Contains("mcp_for_unity")
                                            || wmicCompact.Contains("junglemcp")
-                                           || wmicCompact.Contains("junglemcpserver");
+                                           || wmicCompact.Contains("mcpforunityserver");
                         bool mentionsTransport = wmicCompact.Contains("--transporthttp") || (wmicCompact.Contains("--transport") && wmicCompact.Contains("http"));
                         bool mentionsUvicorn = wmicCombined.Contains("uvicorn");
 

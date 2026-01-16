@@ -168,10 +168,10 @@ namespace Squido.JungleMCP.Editor.Helpers
             if (version == "unknown")
             {
                 // Fall back to latest PyPI version so configs remain valid in test scenarios
-                return "junglemcpserver";
+                return "mcpforunityserver";
             }
 
-            return $"junglemcpserver=={version}";
+            return $"mcpforunityserver=={version}";
         }
 
         /// <summary>

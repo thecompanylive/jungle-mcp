@@ -24,7 +24,7 @@ Install and run directly from PyPI using `uvx`.
 **Run Server (HTTP):**
 
 ```bash
-uvx --from junglemcpserver jungle-mcp --transport http --http-url http://localhost:8080
+uvx --from mcpforunityserver jungle-mcp --transport http --http-url http://localhost:8080
 ```
 
 **MCP Client Configuration (HTTP):**
@@ -48,7 +48,7 @@ uvx --from junglemcpserver jungle-mcp --transport http --http-url http://localho
       "command": "uvx",
       "args": [
         "--from",
-        "junglemcpserver",
+        "mcpforunityserver",
         "jungle-mcp",
         "--transport",
         "stdio"
