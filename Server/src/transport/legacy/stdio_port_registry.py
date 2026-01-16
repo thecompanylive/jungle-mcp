@@ -10,7 +10,7 @@ from core.config import config
 from models.models import UnityInstanceInfo
 from transport.legacy.port_discovery import PortDiscovery
 
-logger = logging.getLogger("jungle-mcp-server")
+logger = logging.getLogger("mcp-for-unity-server")
 
 
 class StdioPortRegistry:

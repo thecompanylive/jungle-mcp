@@ -78,23 +78,23 @@ Jungle MCP acts as a bridge, allowing AI assistants (Claude, Cursor, Antigravity
 
   Your LLM can retrieve the following resources:
 
-* `custom_tools` [`junglemcp://custom-tools`]: Lists custom tools available for the active Unity project.
-* `unity_instances` [`junglemcp://instances`]: Lists all running Unity Editor instances with details (name, path, hash, status, session).
-* `menu_items` [`junglemcp://menu-items`]: All available menu items in the Unity Editor.
-* `get_tests` [`junglemcp://tests`]: All available tests (EditMode + PlayMode) in the Unity Editor.
-* `get_tests_for_mode` [`junglemcp://tests/{mode}`]: All available tests for a specific mode (EditMode or PlayMode).
-* `gameobject_api` [`junglemcp://scene/gameobject-api`]: Documentation for GameObject resources and how to use `find_gameobjects` tool.
-* `gameobject` [`junglemcp://scene/gameobject/{instance_id}`]: Read-only access to GameObject data (name, tag, transform, components, children).
-* `gameobject_components` [`junglemcp://scene/gameobject/{instance_id}/components`]: Read-only access to all components on a GameObject with full property serialization.
-* `gameobject_component` [`junglemcp://scene/gameobject/{instance_id}/component/{component_name}`]: Read-only access to a specific component's properties.
-* `editor_active_tool` [`junglemcp://editor/active-tool`]: Currently active editor tool (Move, Rotate, Scale, etc.) and transform handle settings.
-* `editor_prefab_stage` [`junglemcp://editor/prefab-stage`]: Current prefab editing context if a prefab is open in isolation mode.
-* `editor_selection` [`junglemcp://editor/selection`]: Detailed information about currently selected objects in the editor.
-* `editor_state` [`junglemcp://editor/state`]: Editor readiness snapshot with advice and staleness info.
-* `editor_windows` [`junglemcp://editor/windows`]: All currently open editor windows with titles, types, positions, and focus state.
-* `project_info` [`junglemcp://project/info`]: Static project information (root path, Unity version, platform).
-* `project_layers` [`junglemcp://project/layers`]: All layers defined in TagManager with their indices (0-31).
-* `project_tags` [`junglemcp://project/tags`]: All tags defined in TagManager.
+* `custom_tools` [`mcpforunity://custom-tools`]: Lists custom tools available for the active Unity project.
+* `unity_instances` [`mcpforunity://instances`]: Lists all running Unity Editor instances with details (name, path, hash, status, session).
+* `menu_items` [`mcpforunity://menu-items`]: All available menu items in the Unity Editor.
+* `get_tests` [`mcpforunity://tests`]: All available tests (EditMode + PlayMode) in the Unity Editor.
+* `get_tests_for_mode` [`mcpforunity://tests/{mode}`]: All available tests for a specific mode (EditMode or PlayMode).
+* `gameobject_api` [`mcpforunity://scene/gameobject-api`]: Documentation for GameObject resources and how to use `find_gameobjects` tool.
+* `gameobject` [`mcpforunity://scene/gameobject/{instance_id}`]: Read-only access to GameObject data (name, tag, transform, components, children).
+* `gameobject_components` [`mcpforunity://scene/gameobject/{instance_id}/components`]: Read-only access to all components on a GameObject with full property serialization.
+* `gameobject_component` [`mcpforunity://scene/gameobject/{instance_id}/component/{component_name}`]: Read-only access to a specific component's properties.
+* `editor_active_tool` [`mcpforunity://editor/active-tool`]: Currently active editor tool (Move, Rotate, Scale, etc.) and transform handle settings.
+* `editor_prefab_stage` [`mcpforunity://editor/prefab-stage`]: Current prefab editing context if a prefab is open in isolation mode.
+* `editor_selection` [`mcpforunity://editor/selection`]: Detailed information about currently selected objects in the editor.
+* `editor_state` [`mcpforunity://editor/state`]: Editor readiness snapshot with advice and staleness info.
+* `editor_windows` [`mcpforunity://editor/windows`]: All currently open editor windows with titles, types, positions, and focus state.
+* `project_info` [`mcpforunity://project/info`]: Static project information (root path, Unity version, platform).
+* `project_layers` [`mcpforunity://project/layers`]: All layers defined in TagManager with their indices (0-31).
+* `project_tags` [`mcpforunity://project/tags`]: All tags defined in TagManager.
 </details>
 ---
 

@@ -61,7 +61,7 @@ logging.basicConfig(
     stream=None,  # None -> defaults to sys.stderr; avoid stdout used by MCP stdio
     force=True    # Ensure our handler replaces any prior stdout handlers
 )
-logger = logging.getLogger("jungle-mcp-server")
+logger = logging.getLogger("mcp-for-unity-server")
 
 # Also write logs to a rotating file so logs are available when launched via stdio
 try:
@@ -167,15 +167,15 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
 
 # Initialize MCP server
 mcp = FastMCP(
-    name="jungle-mcp-server",
+    name="mcp-for-unity-server",
     lifespan=server_lifespan,
     instructions="""
 This server provides tools to interact with the Unity Game Engine Editor.
 
-I have a dynamic tool system. Always check the junglemcp://custom-tools resource first to see what special capabilities are available for the current project.
+I have a dynamic tool system. Always check the mcpforunity://custom-tools resource first to see what special capabilities are available for the current project.
 
 Targeting Unity instances:
-- Use the resource junglemcp://instances to list active Unity sessions (Name@hash).
+- Use the resource mcpforunity://instances to list active Unity sessions (Name@hash).
 - When multiple instances are connected, call set_active_instance with the exact Name@hash before using tools/resources. The server will error if multiple are connected and no active instance is set.
 
 Important Workflows:

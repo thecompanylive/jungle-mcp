@@ -92,7 +92,7 @@ xdg-open htmlcov/index.html  # Linux
 ![Advanced Settings](./images/advanced-setting.png)
 
 - **UV/UVX Path Override**：当系统 PATH 解析不正确时，可在 UI 中指定 `uv`/`uvx` 可执行文件路径（例如使用自定义安装）。清空后会回退到自动发现。
-- **Server Source Override**：为 Python server（`uvx --from <url> jungle-mcp`）设置本地文件夹或 git URL。清空后使用默认打包版本。
+- **Server Source Override**：为 Python server（`uvx --from <url> mcp-for-unity`）设置本地文件夹或 git URL。清空后使用默认打包版本。
 - **Dev Mode（强制全新安装 server）**：启用后，生成的 `uvx` 命令会在启动前添加 `--no-cache --refresh`。会更慢，但可避免在迭代 `Server/` 时误用旧缓存构建。
 - **Local Package Deployment**：选择本地 `JungleMCP` 文件夹（必须包含 `Editor/` 与 `Runtime/`），点击 **Deploy to Project** 后会将其复制到当前已安装的 package 路径（来自 `Packages/manifest.json` / Package Manager）。会在 `Library/JungleMCPDeployBackups` 下保存带时间戳的备份，点击 **Restore Last Backup** 可回滚最近一次部署。
 
@@ -141,7 +141,7 @@ python mcp_source.py [--manifest /path/to/manifest.json] [--repo /path/to/unity-
 1. 运行 `deploy-dev.bat`
 2. 输入 Unity package cache 路径（脚本会给出示例）
 3. 输入 server 路径（或使用默认：`%LOCALAPPDATA%\Programs\UnityMCP\JungleMcpServer\src`）
-4. 输入备份位置（或使用默认：`%USERPROFILE%\Desktop\jungle-mcp-backup`）
+4. 输入备份位置（或使用默认：`%USERPROFILE%\Desktop\mcp-for-unity-backup`）
 
 **注意：** Dev deploy 会跳过 `.venv`, `__pycache__`, `.pytest_cache`, `.mypy_cache`, `.git`；减少变动并避免复制虚拟环境。
 

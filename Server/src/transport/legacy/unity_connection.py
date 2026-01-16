@@ -18,7 +18,7 @@ from models.models import MCPResponse, UnityInstanceInfo
 from transport.legacy.stdio_port_registry import stdio_port_registry
 
 
-logger = logging.getLogger("jungle-mcp-server")
+logger = logging.getLogger("mcp-for-unity-server")
 
 # Module-level lock to guard global connection initialization
 _connection_lock = threading.Lock()
@@ -584,7 +584,7 @@ class UnityConnectionPool:
         raise ConnectionError(
             f"Unity instance '{identifier}' not found. "
             f"Available instances: {available_ids}. "
-            f"Check junglemcp://instances resource for all instances."
+            f"Check mcpforunity://instances resource for all instances."
         )
 
     def get_connection(self, instance_identifier: str | None = None) -> UnityConnection:

@@ -87,7 +87,7 @@ Use the Jungle MCP Editor window (Window > Jungle MCP) and open **Advanced Setti
 
 
 - **UV/UVX Path Override**: Point the UI to a specific `uv`/`uvx` executable (e.g., from a custom install) when PATH resolution is wrong. Clear to fall back to auto-discovery.
-- **Server Source Override**: Set a local folder or git URL for the Python server (`uvx --from <url> jungle-mcp`). Clear to use the packaged default.
+- **Server Source Override**: Set a local folder or git URL for the Python server (`uvx --from <url> mcp-for-unity`). Clear to use the packaged default.
 - **Dev Mode (Force fresh server install)**: When enabled, generated `uvx` commands add `--no-cache --refresh` before launching. This is slower, but avoids accidentally running a stale cached build while iterating on `Server/`.
 - **Local Package Deployment**: Pick a local `JungleMCP` folder (must contain `Editor/` and `Runtime/`) and click **Deploy to Project** to copy it over the currently installed package path (from `Packages/manifest.json` / Package Manager). A timestamped backup is stored under `Library/JungleMCPDeployBackups`, and **Restore Last Backup** reverts the last deploy.
 
@@ -135,7 +135,7 @@ Deploys your development code to the actual installation locations for testing.
 1. Run `deploy-dev.bat`
 2. Enter Unity package cache path (example provided)
 3. Enter server path (or use default: `%LOCALAPPDATA%\Programs\UnityMCP\JungleMcpServer\src`)
-4. Enter backup location (or use default: `%USERPROFILE%\Desktop\jungle-mcp-backup`)
+4. Enter backup location (or use default: `%USERPROFILE%\Desktop\mcp-for-unity-backup`)
 
 **Note:** Dev deploy skips `.venv`, `__pycache__`, `.pytest_cache`, `.mypy_cache`, `.git`; reduces churn and avoids copying virtualenvs.
 

@@ -19,13 +19,13 @@ Model Context Protocol server for Unity Editor integration. Control Unity throug
 ### 1. Pull the image
 
 ```bash
-docker pull msanatan/jungle-mcp-server:latest
+docker pull msanatan/mcp-for-unity-server:latest
 ```
 
 ### 2. Run the server
 
 ```bash
-docker run -p 8080:8080 msanatan/jungle-mcp-server:latest
+docker run -p 8080:8080 msanatan/mcp-for-unity-server:latest
 ```
 
 This starts the MCP server on port 8080.
@@ -57,7 +57,7 @@ The server connects to the Unity Editor automatically when both are running. No 
 Example running with environment variables:
 
 ```bash
-docker run -p 8080:8080 -e LOG_LEVEL=DEBUG msanatan/jungle-mcp-server:latest
+docker run -p 8080:8080 -e LOG_LEVEL=DEBUG msanatan/mcp-for-unity-server:latest
 ```
 
 ---

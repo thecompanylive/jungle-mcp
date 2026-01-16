@@ -11,7 +11,7 @@ from core.logging_decorator import log_execution
 from services.registry import get_registered_resources
 from utils.module_discovery import discover_modules
 
-logger = logging.getLogger("jungle-mcp-server")
+logger = logging.getLogger("mcp-for-unity-server")
 
 # Export decorator for easy imports within tools
 __all__ = ['register_all_resources']

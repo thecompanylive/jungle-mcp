@@ -10,7 +10,7 @@ from core.logging_decorator import log_execution
 from utils.module_discovery import discover_modules
 from services.registry import get_registered_tools
 
-logger = logging.getLogger("jungle-mcp-server")
+logger = logging.getLogger("mcp-for-unity-server")
 
 # Export decorator and helpers for easy imports within tools
 __all__ = [

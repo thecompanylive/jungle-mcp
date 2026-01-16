@@ -76,23 +76,23 @@ Jungle MCP 作为桥梁，允许 AI 助手（如 Claude、Cursor）通过本地 
 
   您的大语言模型可以检索以下资源：
 
-* `custom_tools` [`junglemcp://custom-tools`]: 列出活动 Unity 项目可用的自定义工具。
-* `unity_instances` [`junglemcp://instances`]: 列出所有正在运行的 Unity 编辑器实例及其详细信息。
-* `menu_items` [`junglemcp://menu-items`]: Unity 编辑器中所有可用菜单项。
-* `get_tests` [`junglemcp://tests`]: Unity 编辑器中所有可用测试（EditMode + PlayMode）。
-* `get_tests_for_mode` [`junglemcp://tests/{mode}`]: 指定模式（EditMode 或 PlayMode）的测试列表。
-* `gameobject_api` [`junglemcp://scene/gameobject-api`]: GameObject 资源用法说明（先用 `find_gameobjects` 获取 instance ID）。
-* `gameobject` [`junglemcp://scene/gameobject/{instance_id}`]: 读取单个 GameObject 信息（不含完整组件序列化）。
-* `gameobject_components` [`junglemcp://scene/gameobject/{instance_id}/components`]: 读取某 GameObject 的全部组件（支持分页，可选包含属性）。
-* `gameobject_component` [`junglemcp://scene/gameobject/{instance_id}/component/{component_name}`]: 读取某 GameObject 上指定组件的完整属性。
-* `editor_active_tool` [`junglemcp://editor/active-tool`]: 当前活动工具（Move/Rotate/Scale 等）与变换手柄设置。
-* `editor_prefab_stage` [`junglemcp://editor/prefab-stage`]: 当前 Prefab Stage 上下文（若未打开则 isOpen=false）。
-* `editor_selection` [`junglemcp://editor/selection`]: 编辑器当前选中对象的详细信息。
-* `editor_state` [`junglemcp://editor/state`]: 编辑器就绪状态快照（包含建议与 staleness）。
-* `editor_windows` [`junglemcp://editor/windows`]: 当前打开的编辑器窗口列表（标题、类型、位置、焦点）。
-* `project_info` [`junglemcp://project/info`]: 静态项目信息（根路径、Unity 版本、平台）。
-* `project_layers` [`junglemcp://project/layers`]: 项目层（0-31）及名称。
-* `project_tags` [`junglemcp://project/tags`]: 项目 Tag 列表。
+* `custom_tools` [`mcpforunity://custom-tools`]: 列出活动 Unity 项目可用的自定义工具。
+* `unity_instances` [`mcpforunity://instances`]: 列出所有正在运行的 Unity 编辑器实例及其详细信息。
+* `menu_items` [`mcpforunity://menu-items`]: Unity 编辑器中所有可用菜单项。
+* `get_tests` [`mcpforunity://tests`]: Unity 编辑器中所有可用测试（EditMode + PlayMode）。
+* `get_tests_for_mode` [`mcpforunity://tests/{mode}`]: 指定模式（EditMode 或 PlayMode）的测试列表。
+* `gameobject_api` [`mcpforunity://scene/gameobject-api`]: GameObject 资源用法说明（先用 `find_gameobjects` 获取 instance ID）。
+* `gameobject` [`mcpforunity://scene/gameobject/{instance_id}`]: 读取单个 GameObject 信息（不含完整组件序列化）。
+* `gameobject_components` [`mcpforunity://scene/gameobject/{instance_id}/components`]: 读取某 GameObject 的全部组件（支持分页，可选包含属性）。
+* `gameobject_component` [`mcpforunity://scene/gameobject/{instance_id}/component/{component_name}`]: 读取某 GameObject 上指定组件的完整属性。
+* `editor_active_tool` [`mcpforunity://editor/active-tool`]: 当前活动工具（Move/Rotate/Scale 等）与变换手柄设置。
+* `editor_prefab_stage` [`mcpforunity://editor/prefab-stage`]: 当前 Prefab Stage 上下文（若未打开则 isOpen=false）。
+* `editor_selection` [`mcpforunity://editor/selection`]: 编辑器当前选中对象的详细信息。
+* `editor_state` [`mcpforunity://editor/state`]: 编辑器就绪状态快照（包含建议与 staleness）。
+* `editor_windows` [`mcpforunity://editor/windows`]: 当前打开的编辑器窗口列表（标题、类型、位置、焦点）。
+* `project_info` [`mcpforunity://project/info`]: 静态项目信息（根路径、Unity 版本、平台）。
+* `project_layers` [`mcpforunity://project/layers`]: 项目层（0-31）及名称。
+* `project_tags` [`mcpforunity://project/tags`]: 项目 Tag 列表。
 </details>
 
 ---
@@ -203,7 +203,7 @@ HTTP 传输默认启用。Unity 窗口可以为您启动 FastMCP 服务器：
 您也可以从终端自己启动服务器——对 CI 或当您想查看原始日志时很有用：
 
 ```bash
-uvx --from "git+https://github.com/CoplayDev/unity-mcp@v8.6.0#subdirectory=Server" jungle-mcp --transport http --http-url http://localhost:8080
+uvx --from "git+https://github.com/CoplayDev/unity-mcp@v8.6.0#subdirectory=Server" mcp-for-unity --transport http --http-url http://localhost:8080
 ```
 
 在客户端连接时保持进程运行。

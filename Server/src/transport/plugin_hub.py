@@ -27,7 +27,7 @@ from transport.models import (
     SessionDetails,
 )
 
-logger = logging.getLogger("jungle-mcp-server")
+logger = logging.getLogger("mcp-for-unity-server")
 
 
 class PluginDisconnectedError(RuntimeError):
@@ -420,7 +420,7 @@ class PluginHub(WebSocketEndpoint):
             if not target_hash and session_count > 1:
                 raise RuntimeError(
                     "Multiple Unity instances are connected. "
-                    "Call set_active_instance with Name@hash from junglemcp://instances."
+                    "Call set_active_instance with Name@hash from mcpforunity://instances."
                 )
             if wait_started is None:
                 wait_started = time.monotonic()
@@ -441,7 +441,7 @@ class PluginHub(WebSocketEndpoint):
         if session_id is None and not target_hash and session_count > 1:
             raise RuntimeError(
                 "Multiple Unity instances are connected. "
-                "Call set_active_instance with Name@hash from junglemcp://instances."
+                "Call set_active_instance with Name@hash from mcpforunity://instances."
             )
 
         if session_id is None:

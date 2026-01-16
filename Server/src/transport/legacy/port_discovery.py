@@ -22,7 +22,7 @@ import struct
 
 from models.models import UnityInstanceInfo
 
-logger = logging.getLogger("jungle-mcp-server")
+logger = logging.getLogger("mcp-for-unity-server")
 
 
 class PortDiscovery:

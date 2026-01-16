@@ -24,7 +24,7 @@ Install and run directly from PyPI using `uvx`.
 **Run Server (HTTP):**
 
 ```bash
-uvx --from mcpforunityserver jungle-mcp --transport http --http-url http://localhost:8080
+uvx --from mcpforunityserver mcp-for-unity --transport http --http-url http://localhost:8080
 ```
 
 **MCP Client Configuration (HTTP):**
@@ -49,7 +49,7 @@ uvx --from mcpforunityserver jungle-mcp --transport http --http-url http://local
       "args": [
         "--from",
         "mcpforunityserver",
-        "jungle-mcp",
+        "mcp-for-unity",
         "--transport",
         "stdio"
       ]
@@ -70,7 +70,7 @@ Use this to run the latest released version from the repository. Change the vers
       "args": [
         "--from",
         "git+https://github.com/CoplayDev/unity-mcp@v9.0.7#subdirectory=Server",
-        "jungle-mcp",
+        "mcp-for-unity",
         "--transport",
         "stdio"
       ]
@@ -84,7 +84,7 @@ Use this to run the latest released version from the repository. Change the vers
 **Use Pre-built Image:**
 
 ```bash
-docker run -p 8080:8080 msanatan/jungle-mcp-server:latest --transport http --http-url http://0.0.0.0:8080
+docker run -p 8080:8080 msanatan/mcp-for-unity-server:latest --transport http --http-url http://0.0.0.0:8080
 ```
 
 **Build Locally:**

@@ -2,9 +2,9 @@
 Tests for the GameObject resources.
 
 Resources:
-- junglemcp://scene/gameobject/{instance_id}
-- junglemcp://scene/gameobject/{instance_id}/components
-- junglemcp://scene/gameobject/{instance_id}/component/{component_name}
+- mcpforunity://scene/gameobject/{instance_id}
+- mcpforunity://scene/gameobject/{instance_id}/components
+- mcpforunity://scene/gameobject/{instance_id}/component/{component_name}
 """
 import pytest
 
