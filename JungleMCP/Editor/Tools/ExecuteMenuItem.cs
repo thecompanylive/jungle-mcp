@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace Squido.JungleMCP.Editor.Tools
 {
-    [McpForUnityTool("execute_menu_item", AutoRegister = false)]
+    [JungleMcpTool("execute_menu_item", AutoRegister = false)]
     /// <summary>
     /// Tool to execute a Unity Editor menu item by its path.
     /// </summary>

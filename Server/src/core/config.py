@@ -1,5 +1,5 @@
 """
-Configuration settings for the MCP for Unity Server.
+Configuration settings for the Jungle MCP Server.
 This file contains all configurable parameters for the server.
 """
 

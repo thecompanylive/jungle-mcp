@@ -1,9 +1,9 @@
-# MCP for Unity Development Tools
+# Jungle MCP Development Tools
 
 | [English](README-DEV.md) | [简体中文](README-DEV-zh.md) |
 |---------------------------|------------------------------|
 
-Welcome to the MCP for Unity development environment! This directory contains tools and utilities to streamline MCP for Unity core development.
+Welcome to the Jungle MCP development environment! This directory contains tools and utilities to streamline Jungle MCP core development.
 
 ## 🛠️ Development Setup
 
@@ -68,10 +68,10 @@ Coverage configuration is in `Server/pyproject.toml` under `[tool.coverage.*]`.
 
 ### ✅ Development Deployment Scripts
 
-Quick deployment and testing tools for MCP for Unity core changes.
+Quick deployment and testing tools for Jungle MCP core changes.
 **Development Mode Toggle**: Built-in Unity editor development features -> Now operating as Advanced Setting
 **Hot Reload System**: Real-time code updates without Unity restarts  -> Roslyn Runtime_Compilation Custom Tools
-**Plugin Development Kit**: Tools for creating custom MCP for Unity extensions -> Custom Tools
+**Plugin Development Kit**: Tools for creating custom Jungle MCP extensions -> Custom Tools
 
 ### 🔄 Coming Soon
 - **Automated Testing Suite**: Comprehensive testing framework for contributions
@@ -81,15 +81,15 @@ Quick deployment and testing tools for MCP for Unity core changes.
 
 ## Advanced Settings (Editor Window)
 
-Use the MCP for Unity Editor window (Window > MCP for Unity) and open **Advanced Settings** inside the Settings tab to override tooling and deploy local code during development.
+Use the Jungle MCP Editor window (Window > Jungle MCP) and open **Advanced Settings** inside the Settings tab to override tooling and deploy local code during development.
 
 ![Advanced Settings](./images/advanced-setting.png)
 
 
 - **UV/UVX Path Override**: Point the UI to a specific `uv`/`uvx` executable (e.g., from a custom install) when PATH resolution is wrong. Clear to fall back to auto-discovery.
-- **Server Source Override**: Set a local folder or git URL for the Python server (`uvx --from <url> mcp-for-unity`). Clear to use the packaged default.
+- **Server Source Override**: Set a local folder or git URL for the Python server (`uvx --from <url> jungle-mcp`). Clear to use the packaged default.
 - **Dev Mode (Force fresh server install)**: When enabled, generated `uvx` commands add `--no-cache --refresh` before launching. This is slower, but avoids accidentally running a stale cached build while iterating on `Server/`.
-- **Local Package Deployment**: Pick a local `MCPForUnity` folder (must contain `Editor/` and `Runtime/`) and click **Deploy to Project** to copy it over the currently installed package path (from `Packages/manifest.json` / Package Manager). A timestamped backup is stored under `Library/MCPForUnityDeployBackups`, and **Restore Last Backup** reverts the last deploy.
+- **Local Package Deployment**: Pick a local `JungleMCP` folder (must contain `Editor/` and `Runtime/`) and click **Deploy to Project** to copy it over the currently installed package path (from `Packages/manifest.json` / Package Manager). A timestamped backup is stored under `Library/JungleMCPDeployBackups`, and **Restore Last Backup** reverts the last deploy.
 
 Tips:
 - After deploy/restore, Unity will refresh scripts automatically; if in doubt, re-open the MCP window and confirm the target path label in Advanced Settings.
@@ -98,7 +98,7 @@ Tips:
 
 ## Switching MCP package sources quickly
 
-Run this from the unity-mcp repo, not your game's root directory. Use `mcp_source.py` to quickly switch between different MCP for Unity package sources:
+Run this from the unity-mcp repo, not your game's root directory. Use `mcp_source.py` to quickly switch between different Jungle MCP package sources:
 
 **Usage:**
 
@@ -110,13 +110,13 @@ python mcp_source.py [--manifest /path/to/manifest.json] [--repo /path/to/unity-
 
 - **1** Upstream main (CoplayDev/unity-mcp)
 - **2** Remote current branch (origin + branch)
-- **3** Local workspace (file: MCPForUnity)
+- **3** Local workspace (file: JungleMCP)
 
 After switching, open Package Manager and Refresh to re-resolve packages.
 
 ## Development Deployment Scripts
 
-These deployment scripts help you quickly test changes to MCP for Unity core code.
+These deployment scripts help you quickly test changes to Jungle MCP core code.
 
 ## Scripts
 
@@ -134,8 +134,8 @@ Deploys your development code to the actual installation locations for testing.
 
 1. Run `deploy-dev.bat`
 2. Enter Unity package cache path (example provided)
-3. Enter server path (or use default: `%LOCALAPPDATA%\Programs\UnityMCP\UnityMcpServer\src`)
-4. Enter backup location (or use default: `%USERPROFILE%\Desktop\unity-mcp-backup`)
+3. Enter server path (or use default: `%LOCALAPPDATA%\Programs\UnityMCP\JungleMcpServer\src`)
+4. Enter backup location (or use default: `%USERPROFILE%\Desktop\jungle-mcp-backup`)
 
 **Note:** Dev deploy skips `.venv`, `__pycache__`, `.pytest_cache`, `.mypy_cache`, `.git`; reduces churn and avoids copying virtualenvs.
 
@@ -178,7 +178,7 @@ X:\UnityProject\Library\PackageCache\com.coplaydev.unity-mcp@272123cfd97e
 To find it reliably:
 
 1. Open Unity Package Manager
-2. Select "MCP for Unity" package
+2. Select "Jungle MCP" package
 3. Right click the package and choose "Show in Explorer"
 4. That opens the exact cache folder Unity is using for your project
 
@@ -229,7 +229,7 @@ An on-demand stress utility exercises the MCP bridge with multiple concurrent cl
 
 ### What it does
 
-- Starts N TCP clients against the MCP for Unity bridge (default port auto-discovered from `~/.unity-mcp/unity-mcp-status-*.json`).
+- Starts N TCP clients against the Jungle MCP bridge (default port auto-discovered from `~/.unity-mcp/unity-mcp-status-*.json`).
 - Sends lightweight framed `ping` keepalives to maintain concurrency.
 - In parallel, appends a unique marker comment to a target C# file using `manage_script.apply_text_edits` with:
   - `options.refresh = "immediate"` to force an import/compile immediately (triggers domain reload), and
@@ -316,7 +316,7 @@ We provide a CI job to run a Natural Language Editing suite against the Unity te
 
 ### MCP Connection Debugging
 
-- *Enable debug logs* in the MCP for Unity window (inside the Editor) to view connection status, auto-setup results, and MCP client paths. It shows:
+- *Enable debug logs* in the Jungle MCP window (inside the Editor) to view connection status, auto-setup results, and MCP client paths. It shows:
   - bridge startup/port, client connections, strict framing negotiation, and parsed frames
   - auto-config path detection (Windows/macOS/Linux), uv/claude resolution, and surfaced errors
 - In CI, the job tails Unity logs (redacted for serial/license/password/token) and prints socket/status JSON diagnostics if startup fails.
@@ -333,7 +333,7 @@ We provide a CI job to run a Natural Language Editing suite against the Unity te
 ### "Path not found" errors running the .bat file
 
 - Verify Unity package cache path is correct
-- Check that MCP for Unity package is actually installed
+- Check that Jungle MCP package is actually installed
 - Ensure server is installed via MCP client
 
 ### "Permission denied" errors

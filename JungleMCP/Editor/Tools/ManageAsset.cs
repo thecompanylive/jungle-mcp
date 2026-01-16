@@ -23,7 +23,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// <summary>
     /// Handles asset management operations within the Unity project.
     /// </summary>
-    [McpForUnityTool("manage_asset", AutoRegister = false)]
+    [JungleMcpTool("manage_asset", AutoRegister = false)]
     public static class ManageAsset
     {
         // --- Main Handler ---

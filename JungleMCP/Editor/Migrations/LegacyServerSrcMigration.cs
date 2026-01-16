@@ -62,13 +62,13 @@ namespace Squido.JungleMCP.Editor.Migrations
                 if (hasServerSrc)
                 {
                     EditorPrefs.DeleteKey(ServerSrcKey);
-                    McpLog.Info("  ✓ Removed legacy key: MCPForUnity.ServerSrc");
+                    McpLog.Info("  ✓ Removed legacy key: JungleMCP.ServerSrc");
                 }
 
                 if (hasUseEmbedded)
                 {
                     EditorPrefs.DeleteKey(UseEmbeddedKey);
-                    McpLog.Info("  ✓ Removed legacy key: MCPForUnity.UseEmbeddedServer");
+                    McpLog.Info("  ✓ Removed legacy key: JungleMCP.UseEmbeddedServer");
                 }
             }
             catch (Exception ex)

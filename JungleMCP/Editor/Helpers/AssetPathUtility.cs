@@ -45,7 +45,7 @@ namespace Squido.JungleMCP.Editor.Helpers
         }
 
         /// <summary>
-        /// Gets the MCP for Unity package root path.
+        /// Gets the Jungle MCP package root path.
         /// Works for registry Package Manager, local Package Manager, and Asset Store installations.
         /// </summary>
         /// <returns>The package root path (virtual for PM, absolute for Asset Store), or null if not found</returns>
@@ -60,7 +60,7 @@ namespace Squido.JungleMCP.Editor.Helpers
                     return packageInfo.assetPath;
                 }
 
-                // Fallback to AssetDatabase for Asset Store installs (Assets/MCPForUnity)
+                // Fallback to AssetDatabase for Asset Store installs (Assets/JungleMCP)
                 string[] guids = AssetDatabase.FindAssets($"t:Script {nameof(AssetPathUtility)}");
 
                 if (guids.Length == 0)
@@ -91,7 +91,7 @@ namespace Squido.JungleMCP.Editor.Helpers
         }
 
         /// <summary>
-        /// Reads and parses the package.json file for MCP for Unity.
+        /// Reads and parses the package.json file for Jungle MCP.
         /// Handles both Package Manager (registry/local) and Asset Store installations.
         /// </summary>
         /// <returns>JObject containing package.json data, or null if not found or parse failed</returns>
@@ -168,10 +168,10 @@ namespace Squido.JungleMCP.Editor.Helpers
             if (version == "unknown")
             {
                 // Fall back to latest PyPI version so configs remain valid in test scenarios
-                return "mcpforunityserver";
+                return "junglemcpserver";
             }
 
-            return $"mcpforunityserver=={version}";
+            return $"junglemcpserver=={version}";
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Squido.JungleMCP.Editor.Helpers
         {
             string uvxPath = MCPServiceLocator.Paths.GetUvxPath();
             string fromUrl = GetMcpServerPackageSource();
-            string packageName = "mcp-for-unity";
+            string packageName = "jungle-mcp";
 
             return (uvxPath, fromUrl, packageName);
         }

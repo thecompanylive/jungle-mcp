@@ -9,11 +9,11 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
-    /// Handles copying a local MCPForUnity folder into the current project's package location with backup/restore support.
+    /// Handles copying a local JungleMCP folder into the current project's package location with backup/restore support.
     /// </summary>
     public class PackageDeploymentService : IPackageDeploymentService
     {
-        private const string BackupRootFolderName = "MCPForUnityDeployBackups";
+        private const string BackupRootFolderName = "JungleMCPDeployBackups";
 
         public string GetStoredSourcePath()
         {
@@ -91,7 +91,7 @@ namespace Squido.JungleMCP.Editor.Services
             string sourcePath = GetStoredSourcePath();
             if (string.IsNullOrEmpty(sourcePath))
             {
-                return Fail("Select a MCPForUnity folder first.");
+                return Fail("Select a JungleMCP folder first.");
             }
 
             string validationError = ValidateSource(sourcePath, throwOnError: false);
@@ -108,15 +108,15 @@ namespace Squido.JungleMCP.Editor.Services
 
             if (PathsEqual(sourcePath, targetPath))
             {
-                return Fail("Source and target are the same. Choose a different MCPForUnity folder.");
+                return Fail("Source and target are the same. Choose a different JungleMCP folder.");
             }
 
             try
             {
-                EditorUtility.DisplayProgressBar("Deploy MCP for Unity", "Creating backup...", 0.25f);
+                EditorUtility.DisplayProgressBar("Deploy Jungle MCP", "Creating backup...", 0.25f);
                 string backupPath = CreateBackup(targetPath);
 
-                EditorUtility.DisplayProgressBar("Deploy MCP for Unity", "Replacing package contents...", 0.7f);
+                EditorUtility.DisplayProgressBar("Deploy Jungle MCP", "Replacing package contents...", 0.7f);
                 CopyCoreFolders(sourcePath, targetPath);
 
                 EditorPrefs.SetString(EditorPrefKeys.PackageDeployLastBackupPath, backupPath);
@@ -159,7 +159,7 @@ namespace Squido.JungleMCP.Editor.Services
 
             try
             {
-                EditorUtility.DisplayProgressBar("Restore MCP for Unity", "Restoring backup...", 0.5f);
+                EditorUtility.DisplayProgressBar("Restore Jungle MCP", "Restoring backup...", 0.5f);
                 ReplaceDirectory(backupPath, targetPath);
 
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);

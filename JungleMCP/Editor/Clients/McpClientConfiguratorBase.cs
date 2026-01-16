@@ -547,7 +547,7 @@ namespace Squido.JungleMCP.Editor.Clients
             if (!serverExists)
             {
                 client.SetStatus(McpStatus.NotConfigured);
-                McpLog.Info("No MCP for Unity server found - already unregistered.");
+                McpLog.Info("No Jungle MCP server found - already unregistered.");
                 return;
             }
 
@@ -590,7 +590,7 @@ namespace Squido.JungleMCP.Editor.Clients
             string devFlags = AssetPathUtility.ShouldForceUvxRefresh() ? "--no-cache --refresh " : string.Empty;
 
             return "# Register the MCP server with Claude Code:\n" +
-                   $"claude mcp add --transport stdio UnityMCP -- \"{uvxPath}\" {devFlags}--from \"{packageSource}\" mcp-for-unity\n\n" +
+                   $"claude mcp add --transport stdio UnityMCP -- \"{uvxPath}\" {devFlags}--from \"{packageSource}\" jungle-mcp\n\n" +
                    "# Unregister the MCP server:\n" +
                    "claude mcp remove UnityMCP\n\n" +
                    "# List registered servers:\n" +

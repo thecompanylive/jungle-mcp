@@ -8,7 +8,7 @@ namespace Squido.JungleMCP.Editor.Resources.Editor
     /// <summary>
     /// Provides information about the current prefab editing context.
     /// </summary>
-    [McpForUnityResource("get_prefab_stage")]
+    [JungleMcpResource("get_prefab_stage")]
     public static class PrefabStage
     {
         public static object HandleCommand(JObject @params)

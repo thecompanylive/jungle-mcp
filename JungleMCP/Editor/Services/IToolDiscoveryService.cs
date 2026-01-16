@@ -38,7 +38,7 @@ namespace Squido.JungleMCP.Editor.Services
     public interface IToolDiscoveryService
     {
         /// <summary>
-        /// Discovers all tools marked with [McpForUnityTool]
+        /// Discovers all tools marked with [JungleMcpTool]
         /// </summary>
         List<ToolMetadata> DiscoverAllTools();
 

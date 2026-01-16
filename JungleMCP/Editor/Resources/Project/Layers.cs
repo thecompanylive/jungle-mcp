@@ -9,7 +9,7 @@ namespace Squido.JungleMCP.Editor.Resources.Project
     /// <summary>
     /// Provides dictionary of layer indices to layer names.
     /// </summary>
-    [McpForUnityResource("get_layers")]
+    [JungleMcpResource("get_layers")]
     public static class Layers
     {
         private const int TotalLayerCount = 32;

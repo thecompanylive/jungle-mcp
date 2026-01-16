@@ -11,7 +11,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// Executes multiple MCP commands within a single Unity-side handler. Commands are executed sequentially
     /// on the main thread to preserve determinism and Unity API safety.
     /// </summary>
-    [McpForUnityTool("batch_execute", AutoRegister = false)]
+    [JungleMcpTool("batch_execute", AutoRegister = false)]
     public static class BatchExecute
     {
         private const int MaxCommandsPerBatch = 25;

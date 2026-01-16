@@ -109,7 +109,7 @@ namespace Squido.JungleMCP.Editor.Services
         private static string GetLocalHttpServerPidDirectory()
         {
             // Keep it project-scoped and out of version control.
-            return Path.Combine(GetProjectRootPath(), "Library", "MCPForUnity", "RunState");
+            return Path.Combine(GetProjectRootPath(), "Library", "JungleMCP", "RunState");
         }
 
         private static string GetLocalHttpServerPidFilePath(int port)
@@ -273,7 +273,7 @@ namespace Squido.JungleMCP.Editor.Services
                 string uvCommand = BuildUvPathFromUvx(uvxPath);
 
                 // Get the package name
-                string packageName = "mcp-for-unity";
+                string packageName = "jungle-mcp";
 
                 // Run uvx cache clean command
                 string args = $"cache clean {packageName}";
@@ -706,7 +706,7 @@ namespace Squido.JungleMCP.Editor.Services
 
                 // Guardrails:
                 // - Never terminate the Unity Editor process.
-                // - Only terminate processes that look like the MCP server (uv/uvx/python running mcp-for-unity).
+                // - Only terminate processes that look like the MCP server (uv/uvx/python running jungle-mcp).
                 // This prevents accidental termination of unrelated services (including Unity itself).
                 int unityPid = GetCurrentProcessIdSafe();
                 bool stoppedAny = false;
@@ -838,10 +838,10 @@ namespace Squido.JungleMCP.Editor.Services
                         if (TryGetUnixProcessArgs(storedPid, out var storedArgsLowerNow))
                         {
                         // Never kill Unity/Hub.
-                        // Note: "mcp-for-unity" includes "unity", so detect MCP indicators first.
-                        bool storedMentionsMcp = storedArgsLowerNow.Contains("mcp-for-unity")
+                        // Note: "jungle-mcp" includes "unity", so detect MCP indicators first.
+                        bool storedMentionsMcp = storedArgsLowerNow.Contains("jungle-mcp")
                                                  || storedArgsLowerNow.Contains("mcp_for_unity")
-                                                 || storedArgsLowerNow.Contains("mcpforunity");
+                                                 || storedArgsLowerNow.Contains("junglemcp");
                         if (storedArgsLowerNow.Contains("unityhub")
                             || storedArgsLowerNow.Contains("unity hub")
                             || (storedArgsLowerNow.Contains("unity") && !storedMentionsMcp))
@@ -863,8 +863,8 @@ namespace Squido.JungleMCP.Editor.Services
                                     // Older versions didn't store a fingerprint; accept common server indicators.
                                     allowKill = storedArgsLowerNow.Contains("uvicorn")
                                                 || storedArgsLowerNow.Contains("fastmcp")
-                                                || storedArgsLowerNow.Contains("mcpforunity")
-                                                || storedArgsLowerNow.Contains("mcp-for-unity")
+                                                || storedArgsLowerNow.Contains("junglemcp")
+                                                || storedArgsLowerNow.Contains("jungle-mcp")
                                                 || storedArgsLowerNow.Contains("mcp_for_unity")
                                                 || storedArgsLowerNow.Contains("uvx")
                                                 || storedArgsLowerNow.Contains("python");
@@ -911,7 +911,7 @@ namespace Squido.JungleMCP.Editor.Services
                     {
                         if (!quiet)
                         {
-                            McpLog.Warn($"Refusing to stop port {port}: owning PID {pid} does not look like mcp-for-unity.");
+                            McpLog.Warn($"Refusing to stop port {port}: owning PID {pid} does not look like jungle-mcp.");
                         }
                         continue;
                     }
@@ -1110,10 +1110,10 @@ namespace Squido.JungleMCP.Editor.Services
                     // If we can see the command line, validate it's our server
                     if (!string.IsNullOrEmpty(wmicCombined) && wmicCombined.Contains("commandline="))
                     {
-                        bool mentionsMcp = wmicCompact.Contains("mcp-for-unity")
+                        bool mentionsMcp = wmicCompact.Contains("jungle-mcp")
                                            || wmicCompact.Contains("mcp_for_unity")
-                                           || wmicCompact.Contains("mcpforunity")
-                                           || wmicCompact.Contains("mcpforunityserver");
+                                           || wmicCompact.Contains("junglemcp")
+                                           || wmicCompact.Contains("junglemcpserver");
                         bool mentionsTransport = wmicCompact.Contains("--transporthttp") || (wmicCompact.Contains("--transport") && wmicCompact.Contains("http"));
                         bool mentionsUvicorn = wmicCombined.Contains("uvicorn");
 
@@ -1129,7 +1129,7 @@ namespace Squido.JungleMCP.Editor.Services
                 }
 
                 // macOS/Linux: ps -p pid -ww -o comm= -o args=
-                // Use -ww to avoid truncating long command lines (important for reliably spotting 'mcp-for-unity').
+                // Use -ww to avoid truncating long command lines (important for reliably spotting 'jungle-mcp').
                 // Use an absolute ps path to avoid relying on PATH inside the Unity Editor process.
                 string psPath = "/bin/ps";
                 if (!File.Exists(psPath)) psPath = "ps";
@@ -1141,12 +1141,12 @@ namespace Squido.JungleMCP.Editor.Services
                 string sCompact = NormalizeForMatch(raw);
                 if (!string.IsNullOrEmpty(s))
                 {
-                    bool mentionsMcp = sCompact.Contains("mcp-for-unity")
+                    bool mentionsMcp = sCompact.Contains("jungle-mcp")
                                        || sCompact.Contains("mcp_for_unity")
-                                       || sCompact.Contains("mcpforunity");
+                                       || sCompact.Contains("junglemcp");
 
                     // If it explicitly mentions the server package/entrypoint, that is sufficient.
-                    // Note: Check before Unity exclusion since "mcp-for-unity" contains "unity".
+                    // Note: Check before Unity exclusion since "jungle-mcp" contains "unity".
                     if (mentionsMcp)
                     {
                         return true;
@@ -1371,7 +1371,7 @@ namespace Squido.JungleMCP.Editor.Services
 
 #if UNITY_EDITOR_OSX
             // macOS: Avoid AppleScript (automation permission prompts). Use a .command script and open it.
-            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "MCPForUnity", "TerminalScripts");
+            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "JungleMCP", "TerminalScripts");
             Directory.CreateDirectory(scriptsDir);
             string scriptPath = Path.Combine(scriptsDir, "mcp-terminal.command");
             File.WriteAllText(
@@ -1390,7 +1390,7 @@ namespace Squido.JungleMCP.Editor.Services
             };
 #elif UNITY_EDITOR_WIN
             // Windows: Avoid brittle nested-quote escaping by writing a .cmd script and starting it in a new window.
-            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "MCPForUnity", "TerminalScripts");
+            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "JungleMCP", "TerminalScripts");
             Directory.CreateDirectory(scriptsDir);
             string scriptPath = Path.Combine(scriptsDir, "mcp-terminal.cmd");
             File.WriteAllText(

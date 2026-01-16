@@ -10,7 +10,7 @@ namespace Squido.JungleMCP.Editor.Resources.Editor
     /// <summary>
     /// Provides list of all open editor windows.
     /// </summary>
-    [McpForUnityResource("get_windows")]
+    [JungleMcpResource("get_windows")]
     public static class Windows
     {
         public static object HandleCommand(JObject @params)

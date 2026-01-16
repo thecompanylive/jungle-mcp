@@ -8,7 +8,7 @@ namespace Squido.JungleMCP.Editor.Resources.Project
     /// <summary>
     /// Provides list of all tags in the project.
     /// </summary>
-    [McpForUnityResource("get_tags")]
+    [JungleMcpResource("get_tags")]
     public static class Tags
     {
         public static object HandleCommand(JObject @params)

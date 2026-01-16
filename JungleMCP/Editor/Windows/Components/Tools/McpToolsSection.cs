@@ -97,7 +97,7 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Tools
 
             if (!hasTools)
             {
-                AddInfoLabel("No MCP tools found. Add classes decorated with [McpForUnityTool] to expose tools.");
+                AddInfoLabel("No MCP tools found. Add classes decorated with [JungleMcpTool] to expose tools.");
                 UpdateSummary();
                 return;
             }

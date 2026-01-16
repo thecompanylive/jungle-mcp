@@ -12,7 +12,7 @@ class GetMenuItemsResponse(MCPResponse):
 
 
 @mcp_for_unity_resource(
-    uri="mcpforunity://menu-items",
+    uri="junglemcp://menu-items",
     name="menu_items",
     description="Provides a list of all menu items."
 )

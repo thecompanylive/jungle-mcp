@@ -23,17 +23,17 @@ namespace Squido.JungleMCP.Editor.Services
 
             _cachedTools = new Dictionary<string, ToolMetadata>();
 
-            var toolTypes = TypeCache.GetTypesWithAttribute<McpForUnityToolAttribute>();
+            var toolTypes = TypeCache.GetTypesWithAttribute<JungleMcpToolAttribute>();
             foreach (var type in toolTypes)
             {
-                McpForUnityToolAttribute toolAttr;
+                JungleMcpToolAttribute toolAttr;
                 try
                 {
-                    toolAttr = type.GetCustomAttribute<McpForUnityToolAttribute>();
+                    toolAttr = type.GetCustomAttribute<JungleMcpToolAttribute>();
                 }
                 catch (Exception ex)
                 {
-                    McpLog.Warn($"Failed to read [McpForUnityTool] for {type.FullName}: {ex.Message}");
+                    McpLog.Warn($"Failed to read [JungleMcpTool] for {type.FullName}: {ex.Message}");
                     continue;
                 }
 
@@ -99,7 +99,7 @@ namespace Squido.JungleMCP.Editor.Services
             EditorPrefs.SetBool(key, enabled);
         }
 
-        private ToolMetadata ExtractToolMetadata(Type type, McpForUnityToolAttribute toolAttr)
+        private ToolMetadata ExtractToolMetadata(Type type, JungleMcpToolAttribute toolAttr)
         {
             try
             {
@@ -259,12 +259,12 @@ namespace Squido.JungleMCP.Editor.Services
                 return false;
             }
 
-            if (type != null && !string.IsNullOrEmpty(type.Namespace) && type.Namespace.StartsWith("MCPForUnity.Editor.Tools", StringComparison.Ordinal))
+            if (type != null && !string.IsNullOrEmpty(type.Namespace) && type.Namespace.StartsWith("JungleMCP.Editor.Tools", StringComparison.Ordinal))
             {
                 return true;
             }
 
-            if (!string.IsNullOrEmpty(metadata.AssemblyName) && metadata.AssemblyName.Equals("MCPForUnity.Editor", StringComparison.Ordinal))
+            if (!string.IsNullOrEmpty(metadata.AssemblyName) && metadata.AssemblyName.Equals("JungleMCP.Editor", StringComparison.Ordinal))
             {
                 return true;
             }

@@ -18,7 +18,7 @@ from models.models import MCPResponse, UnityInstanceInfo
 from transport.legacy.stdio_port_registry import stdio_port_registry
 
 
-logger = logging.getLogger("mcp-for-unity-server")
+logger = logging.getLogger("jungle-mcp-server")
 
 # Module-level lock to guard global connection initialization
 _connection_lock = threading.Lock()
@@ -90,19 +90,19 @@ class UnityConnection:
                     if 'FRAMING=1' in text:
                         self.use_framing = True
                         logger.debug(
-                            'MCP for Unity handshake received: FRAMING=1 (strict)')
+                            'Jungle MCP handshake received: FRAMING=1 (strict)')
                     else:
                         if require_framing:
                             # Best-effort plain-text advisory for legacy peers
                             with contextlib.suppress(Exception):
                                 self.sock.sendall(
-                                    b'MCP for Unity requires FRAMING=1\n')
+                                    b'Jungle MCP requires FRAMING=1\n')
                             raise ConnectionError(
-                                f'MCP for Unity requires FRAMING=1, got: {text!r}')
+                                f'Jungle MCP requires FRAMING=1, got: {text!r}')
                         else:
                             self.use_framing = False
                             logger.warning(
-                                'MCP for Unity handshake missing FRAMING=1; proceeding in legacy mode by configuration')
+                                'Jungle MCP handshake missing FRAMING=1; proceeding in legacy mode by configuration')
                 finally:
                     self.sock.settimeout(config.connection_timeout)
                 return True
@@ -493,7 +493,7 @@ class UnityConnectionPool:
         """
         if not instances:
             raise ConnectionError(
-                "No Unity Editor instances found. Please ensure Unity is running with MCP for Unity bridge."
+                "No Unity Editor instances found. Please ensure Unity is running with Jungle MCP bridge."
             )
 
         # Use default instance if no identifier provided
@@ -584,7 +584,7 @@ class UnityConnectionPool:
         raise ConnectionError(
             f"Unity instance '{identifier}' not found. "
             f"Available instances: {available_ids}. "
-            f"Check mcpforunity://instances resource for all instances."
+            f"Check junglemcp://instances resource for all instances."
         )
 
     def get_connection(self, instance_identifier: str | None = None) -> UnityConnection:

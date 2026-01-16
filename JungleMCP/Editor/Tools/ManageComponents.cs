@@ -16,7 +16,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// This is a focused tool for component lifecycle operations.
     /// For reading component data, use the unity://scene/gameobject/{id}/components resource.
     /// </summary>
-    [McpForUnityTool("manage_components")]
+    [JungleMcpTool("manage_components")]
     public static class ManageComponents
     {
         /// <summary>

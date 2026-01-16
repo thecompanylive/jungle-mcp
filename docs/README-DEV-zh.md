@@ -1,9 +1,9 @@
-# MCP for Unity 开发工具
+# Jungle MCP 开发工具
 
 | [English](README-DEV.md) | [简体中文](README-DEV-zh.md) |
 |---------------------------|------------------------------|
 
-欢迎来到 MCP for Unity 开发环境！此目录包含简化 MCP for Unity 核心开发的工具和实用程序。
+欢迎来到 Jungle MCP 开发环境！此目录包含简化 Jungle MCP 核心开发的工具和实用程序。
 
 ## 🛠️ 开发环境搭建
 
@@ -70,13 +70,13 @@ xdg-open htmlcov/index.html  # Linux
 
 ### ✅ 开发部署脚本
 
-用于快速部署与测试 MCP for Unity 核心更改的工具。
+用于快速部署与测试 Jungle MCP 核心更改的工具。
 
 **Development Mode Toggle**：内置 Unity 编辑器开发特性（现在作为 Advanced Setting 提供）
 
 **Hot Reload System**：无需重启 Unity 的实时更新（Roslyn Runtime_Compilation Custom Tools）
 
-**Plugin Development Kit**：用于创建 MCP for Unity 扩展的工具（Custom Tools）
+**Plugin Development Kit**：用于创建 Jungle MCP 扩展的工具（Custom Tools）
 
 ### 🔄 即将推出
 
@@ -87,14 +87,14 @@ xdg-open htmlcov/index.html  # Linux
 
 ## Advanced Settings（编辑器窗口）
 
-使用 MCP for Unity 编辑器窗口（Window > MCP for Unity），在 Settings 选项卡内打开 **Advanced Settings**，可以在开发期间覆盖工具路径、切换 server 源、并将本地包部署到项目中。
+使用 Jungle MCP 编辑器窗口（Window > Jungle MCP），在 Settings 选项卡内打开 **Advanced Settings**，可以在开发期间覆盖工具路径、切换 server 源、并将本地包部署到项目中。
 
 ![Advanced Settings](./images/advanced-setting.png)
 
 - **UV/UVX Path Override**：当系统 PATH 解析不正确时，可在 UI 中指定 `uv`/`uvx` 可执行文件路径（例如使用自定义安装）。清空后会回退到自动发现。
-- **Server Source Override**：为 Python server（`uvx --from <url> mcp-for-unity`）设置本地文件夹或 git URL。清空后使用默认打包版本。
+- **Server Source Override**：为 Python server（`uvx --from <url> jungle-mcp`）设置本地文件夹或 git URL。清空后使用默认打包版本。
 - **Dev Mode（强制全新安装 server）**：启用后，生成的 `uvx` 命令会在启动前添加 `--no-cache --refresh`。会更慢，但可避免在迭代 `Server/` 时误用旧缓存构建。
-- **Local Package Deployment**：选择本地 `MCPForUnity` 文件夹（必须包含 `Editor/` 与 `Runtime/`），点击 **Deploy to Project** 后会将其复制到当前已安装的 package 路径（来自 `Packages/manifest.json` / Package Manager）。会在 `Library/MCPForUnityDeployBackups` 下保存带时间戳的备份，点击 **Restore Last Backup** 可回滚最近一次部署。
+- **Local Package Deployment**：选择本地 `JungleMCP` 文件夹（必须包含 `Editor/` 与 `Runtime/`），点击 **Deploy to Project** 后会将其复制到当前已安装的 package 路径（来自 `Packages/manifest.json` / Package Manager）。会在 `Library/JungleMCPDeployBackups` 下保存带时间戳的备份，点击 **Restore Last Backup** 可回滚最近一次部署。
 
 提示：
 
@@ -104,7 +104,7 @@ xdg-open htmlcov/index.html  # Linux
 
 ## 快速切换 MCP 包源
 
-从 unity-mcp 仓库运行，而不是从游戏的根目录。使用 `mcp_source.py` 可以在不同的 MCP for Unity 包源之间快速切换：
+从 unity-mcp 仓库运行，而不是从游戏的根目录。使用 `mcp_source.py` 可以在不同的 Jungle MCP 包源之间快速切换：
 
 **用法：**
 
@@ -116,13 +116,13 @@ python mcp_source.py [--manifest /path/to/manifest.json] [--repo /path/to/unity-
 
 - **1** 上游 main（CoplayDev/unity-mcp）
 - **2** 远程当前分支（origin + branch）
-- **3** 本地工作区（file: MCPForUnity）
+- **3** 本地工作区（file: JungleMCP）
 
 切换后，打开 Package Manager 并 Refresh 以重新解析依赖。
 
 ## Development Deployment Scripts
 
-这些部署脚本帮助你快速测试 MCP for Unity 核心代码的更改。
+这些部署脚本帮助你快速测试 Jungle MCP 核心代码的更改。
 
 ## Scripts
 
@@ -140,8 +140,8 @@ python mcp_source.py [--manifest /path/to/manifest.json] [--repo /path/to/unity-
 
 1. 运行 `deploy-dev.bat`
 2. 输入 Unity package cache 路径（脚本会给出示例）
-3. 输入 server 路径（或使用默认：`%LOCALAPPDATA%\Programs\UnityMCP\UnityMcpServer\src`）
-4. 输入备份位置（或使用默认：`%USERPROFILE%\Desktop\unity-mcp-backup`）
+3. 输入 server 路径（或使用默认：`%LOCALAPPDATA%\Programs\UnityMCP\JungleMcpServer\src`）
+4. 输入备份位置（或使用默认：`%USERPROFILE%\Desktop\jungle-mcp-backup`）
 
 **注意：** Dev deploy 会跳过 `.venv`, `__pycache__`, `.pytest_cache`, `.mypy_cache`, `.git`；减少变动并避免复制虚拟环境。
 
@@ -187,7 +187,7 @@ X:\UnityProject\Library\PackageCache\com.coplaydev.unity-mcp@272123cfd97e
 可靠的查找方式：
 
 1. 打开 Unity Package Manager
-2. 选择 “MCP for Unity” package
+2. 选择 “Jungle MCP” package
 3. 右键 package 并选择 “Show in Explorer”
 4. Unity 会打开该项目实际使用的 cache 文件夹
 
@@ -238,7 +238,7 @@ X:\UnityProject\Library\PackageCache\com.coplaydev.unity-mcp@272123cfd97e
 
 ### 它做什么
 
-- 对 MCP for Unity bridge 启动 N 个 TCP 客户端（默认端口从 `~/.unity-mcp/unity-mcp-status-*.json` 自动发现）。
+- 对 Jungle MCP bridge 启动 N 个 TCP 客户端（默认端口从 `~/.unity-mcp/unity-mcp-status-*.json` 自动发现）。
 - 发送轻量 framed `ping` 维持并发。
 - 同时，使用 `manage_script.apply_text_edits` 对目标 C# 文件在 EOF 追加唯一标记注释，并设置：
   - `options.refresh = "immediate"` 来立即触发 import/compile（会引发 domain reload），以及
@@ -325,7 +325,7 @@ python3 tools/stress_mcp.py \
 
 ### MCP 连接调试
 
-- 在 MCP for Unity 窗口（Editor 内）*启用 debug logs*，可以看到连接状态、auto-setup 结果与 MCP client 路径，包括：
+- 在 Jungle MCP 窗口（Editor 内）*启用 debug logs*，可以看到连接状态、auto-setup 结果与 MCP client 路径，包括：
   - bridge 启动/端口、client 连接、strict framing 协商、解析后的 frame
   - auto-config 路径检测（Windows/macOS/Linux）、uv/claude 解析与错误提示
 - CI 中如启动失败，作业会 tail Unity 日志（serial/license/password/token 已脱敏），并打印 socket/status JSON 诊断。
@@ -343,7 +343,7 @@ python3 tools/stress_mcp.py \
 ### 运行 .bat 时出现 "Path not found"
 
 - 确认 Unity package cache 路径正确
-- 确认 MCP for Unity package 已安装
+- 确认 Jungle MCP package 已安装
 - 确认 server 已通过 MCP client 安装
 
 ### 出现 "Permission denied"

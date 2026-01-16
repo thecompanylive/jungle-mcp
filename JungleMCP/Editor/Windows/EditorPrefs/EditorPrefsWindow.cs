@@ -173,7 +173,7 @@ namespace Squido.JungleMCP.Editor.Windows
             var keys = new List<string>();
             
             // Add some common MCP keys that might not be in EditorPrefKeys
-            keys.Add("MCPForUnity.TestKey");
+            keys.Add("JungleMCP.TestKey");
             
             // Filter to only those that actually exist
             return keys.Where(EditorPrefs.HasKey).ToList();

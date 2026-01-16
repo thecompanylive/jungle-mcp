@@ -212,7 +212,7 @@ def _enrich_advice_and_staleness(state_v2: dict[str, Any]) -> dict[str, Any]:
 
 
 @mcp_for_unity_resource(
-    uri="mcpforunity://editor/state",
+    uri="junglemcp://editor/state",
     name="editor_state",
     description="Canonical editor readiness snapshot. Includes advice and server-computed staleness.",
 )

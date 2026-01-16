@@ -85,7 +85,7 @@ namespace Squido.JungleMCP.Editor.Dependencies.PlatformDetectors
    - Run: curl -LsSf https://astral.sh/uv/install.sh | sh
    - Or download from: https://github.com/astral-sh/uv/releases
 
-3. MCP Server: Will be installed automatically by MCP for Unity
+3. MCP Server: Will be installed automatically by Jungle MCP
 
 Note: Make sure ~/.local/bin is in your PATH for user-local installations.";
         }

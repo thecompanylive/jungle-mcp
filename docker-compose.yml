@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  unity-mcp-server:
+  jungle-mcp-server:
     build:
       context: .
       dockerfile: Server/Dockerfile

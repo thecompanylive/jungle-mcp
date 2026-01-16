@@ -7,7 +7,7 @@ namespace Squido.JungleMCP.Editor.Resources
     /// The class must have a public static HandleCommand(JObject) method.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class McpForUnityResourceAttribute : Attribute
+    public class JungleMcpResourceAttribute : Attribute
     {
         /// <summary>
         /// The resource name used to route requests to this resource.
@@ -20,7 +20,7 @@ namespace Squido.JungleMCP.Editor.Resources
         /// The resource name will be derived from the class name (PascalCase → snake_case).
         /// Example: ManageAsset → manage_asset
         /// </summary>
-        public McpForUnityResourceAttribute()
+        public JungleMcpResourceAttribute()
         {
             ResourceName = null; // Will be auto-generated
         }
@@ -29,7 +29,7 @@ namespace Squido.JungleMCP.Editor.Resources
         /// Create an MCP resource attribute with explicit resource name.
         /// </summary>
         /// <param name="resourceName">The resource name (e.g., "manage_asset")</param>
-        public McpForUnityResourceAttribute(string resourceName)
+        public JungleMcpResourceAttribute(string resourceName)
         {
             ResourceName = resourceName;
         }

@@ -55,7 +55,7 @@ namespace Squido.JungleMCP.Editor.Services
 
                 if (httpLocalSelected)
                 {
-                    // StopLocalHttpServer is already guarded to only terminate processes that look like mcp-for-unity.
+                    // StopLocalHttpServer is already guarded to only terminate processes that look like jungle-mcp.
                     // If it refuses to stop (e.g. URL was edited away from local), fall back to the Unity-managed stop.
                     stopped = MCPServiceLocator.Server.StopLocalHttpServer();
                 }

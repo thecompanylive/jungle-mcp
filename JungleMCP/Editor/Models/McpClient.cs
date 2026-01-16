@@ -32,7 +32,7 @@ namespace Squido.JungleMCP.Editor.Models
                 McpStatus.CommunicationError => "Communication Error",
                 McpStatus.NoResponse => "No Response",
                 McpStatus.UnsupportedOS => "Unsupported OS",
-                McpStatus.MissingConfig => "Missing MCPForUnity Config",
+                McpStatus.MissingConfig => "Missing JungleMCP Config",
                 McpStatus.Error => configStatus.StartsWith("Error:") ? configStatus : "Error",
                 _ => "Unknown",
             };

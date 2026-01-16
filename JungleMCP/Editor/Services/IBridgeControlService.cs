@@ -4,7 +4,7 @@ using Squido.JungleMCP.Editor.Services.Transport;
 namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
-    /// Service for controlling the MCP for Unity Bridge connection
+    /// Service for controlling the Jungle MCP Bridge connection
     /// </summary>
     public interface IBridgeControlService
     {
@@ -29,13 +29,13 @@ namespace Squido.JungleMCP.Editor.Services
         TransportMode? ActiveMode { get; }
 
         /// <summary>
-        /// Starts the MCP for Unity Bridge asynchronously
+        /// Starts the Jungle MCP Bridge asynchronously
         /// </summary>
         /// <returns>True if the bridge started successfully</returns>
         Task<bool> StartAsync();
 
         /// <summary>
-        /// Stops the MCP for Unity Bridge asynchronously
+        /// Stops the Jungle MCP Bridge asynchronously
         /// </summary>
         Task StopAsync();
 

@@ -7,7 +7,7 @@ from pathlib import Path
 import pkgutil
 from typing import Generator
 
-logger = logging.getLogger("mcp-for-unity-server")
+logger = logging.getLogger("jungle-mcp-server")
 
 
 def discover_modules(base_dir: Path, package_name: str) -> Generator[str, None, None]:

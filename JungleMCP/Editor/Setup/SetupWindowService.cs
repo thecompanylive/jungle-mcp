@@ -21,7 +21,7 @@ namespace Squido.JungleMCP.Editor.Setup
         // Use SessionState to persist "checked this editor session" across domain reloads.
         // SessionState survives assembly reloads within the same Editor session, which prevents
         // the setup window from reappearing after code reloads / playmode transitions.
-        private const string SessionCheckedKey = "MCPForUnity.SetupWindowCheckedThisEditorSession";
+        private const string SessionCheckedKey = "JungleMCP.SetupWindowCheckedThisEditorSession";
 
         static SetupWindowService()
         {

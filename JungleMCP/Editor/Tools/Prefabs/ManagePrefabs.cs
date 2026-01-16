@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace Squido.JungleMCP.Editor.Tools.Prefabs
 {
-    [McpForUnityTool("manage_prefabs", AutoRegister = false)]
+    [JungleMcpTool("manage_prefabs", AutoRegister = false)]
     /// <summary>
     /// Tool to manage Unity Prefab stages and create prefabs from GameObjects.
     /// </summary>

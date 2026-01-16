@@ -22,7 +22,7 @@ namespace Squido.JungleMCP.Editor.Tools.Vfx
     /// - TrailRenderer (motion trails)
     /// - More to come based on demand and feedback!
     /// </summary>
-    [McpForUnityTool("manage_vfx", AutoRegister = false)]
+    [JungleMcpTool("manage_vfx", AutoRegister = false)]
     public static class ManageVFX
     {
         public static object HandleCommand(JObject @params)

@@ -54,8 +54,8 @@ namespace Squido.JungleMCP.Editor.Services
         private const long MinPersistIntervalMs = 1000; // Throttle persistence to reduce overhead
 
         // SessionState survives domain reloads within the same Unity Editor session.
-        private const string SessionKeyJobs = "MCPForUnity.TestJobsV1";
-        private const string SessionKeyCurrentJobId = "MCPForUnity.CurrentTestJobIdV1";
+        private const string SessionKeyJobs = "JungleMCP.TestJobsV1";
+        private const string SessionKeyCurrentJobId = "JungleMCP.CurrentTestJobIdV1";
 
         private static readonly object LockObj = new();
         private static readonly Dictionary<string, TestJob> Jobs = new();

@@ -29,7 +29,7 @@ async def test_normalizes_lsp_and_index_ranges(monkeypatch):
     }]
     await apply(
         DummyContext(),
-        uri="mcpforunity://path/Assets/Scripts/F.cs",
+        uri="junglemcp://path/Assets/Scripts/F.cs",
         edits=edits,
         precondition_sha256="x",
     )
@@ -56,7 +56,7 @@ async def test_normalizes_lsp_and_index_ranges(monkeypatch):
     )
     await apply(
         DummyContext(),
-        uri="mcpforunity://path/Assets/Scripts/F.cs",
+        uri="junglemcp://path/Assets/Scripts/F.cs",
         edits=edits,
         precondition_sha256="x",
     )
@@ -85,7 +85,7 @@ async def test_noop_evidence_shape(monkeypatch):
 
     resp = await apply(
         DummyContext(),
-        uri="mcpforunity://path/Assets/Scripts/F.cs",
+        uri="junglemcp://path/Assets/Scripts/F.cs",
         edits=[
             {"startLine": 1, "startCol": 1, "endLine": 1, "endCol": 1, "newText": ""}
         ],
@@ -126,7 +126,7 @@ async def test_atomic_multi_span_and_relaxed(monkeypatch):
     ]
     resp = await apply_text(
         DummyContext(),
-        uri="mcpforunity://path/Assets/Scripts/C.cs",
+        uri="junglemcp://path/Assets/Scripts/C.cs",
         edits=edits,
         precondition_sha256="sha",
         options={"validate": "relaxed", "applyMode": "atomic"},

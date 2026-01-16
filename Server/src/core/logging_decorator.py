@@ -3,7 +3,7 @@ import inspect
 import logging
 from typing import Callable, Any
 
-logger = logging.getLogger("mcp-for-unity-server")
+logger = logging.getLogger("jungle-mcp-server")
 
 
 def log_execution(name: str, type_label: str):

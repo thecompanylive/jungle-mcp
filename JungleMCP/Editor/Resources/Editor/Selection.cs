@@ -9,7 +9,7 @@ namespace Squido.JungleMCP.Editor.Resources.Editor
     /// <summary>
     /// Provides detailed information about the current editor selection.
     /// </summary>
-    [McpForUnityResource("get_selection")]
+    [JungleMcpResource("get_selection")]
     public static class Selection
     {
         public static object HandleCommand(JObject @params)

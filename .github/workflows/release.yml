@@ -34,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           BUMP="${{ inputs.version_bump }}"
-          CURRENT_VERSION=$(jq -r '.version' "MCPForUnity/package.json")
+          CURRENT_VERSION=$(jq -r '.version' "JungleMCP/package.json")
           echo "Current version: $CURRENT_VERSION"
 
           IFS='.' read -r MA MI PA <<< "$CURRENT_VERSION"
@@ -75,9 +75,9 @@ jobs:
         run: |
           set -euo pipefail
 
-          echo "Updating MCPForUnity/package.json to $NEW_VERSION"
-          jq ".version = \"${NEW_VERSION}\"" MCPForUnity/package.json > MCPForUnity/package.json.tmp
-          mv MCPForUnity/package.json.tmp MCPForUnity/package.json
+          echo "Updating JungleMCP/package.json to $NEW_VERSION"
+          jq ".version = \"${NEW_VERSION}\"" JungleMCP/package.json > JungleMCP/package.json.tmp
+          mv JungleMCP/package.json.tmp JungleMCP/package.json
 
           echo "Updating Server/pyproject.toml to $NEW_VERSION"
           sed -i '0,/^version = ".*"/s//version = "'"$NEW_VERSION"'"/' "Server/pyproject.toml"
@@ -93,7 +93,7 @@ jobs:
           set -euo pipefail
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add MCPForUnity/package.json "Server/pyproject.toml" Server/README.md
+          git add JungleMCP/package.json "Server/pyproject.toml" Server/README.md
           if git diff --cached --quiet; then
             echo "No version changes to commit."
           else
@@ -160,7 +160,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/mcpforunityserver
+      url: https://pypi.org/p/junglemcpserver
     permissions:
       contents: read
       id-token: write

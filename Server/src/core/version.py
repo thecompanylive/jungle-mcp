@@ -1,5 +1,5 @@
 """
-Package version utilities for MCP for Unity Server.
+Package version utilities for Jungle MCP Server.
 """
 
 from importlib import metadata
@@ -7,7 +7,7 @@ from pathlib import Path
 
 import tomli
 
-PACKAGE_NAME = "mcpforunityserver"
+PACKAGE_NAME = "junglemcpserver"
 
 
 def _version_from_local_pyproject() -> str:
@@ -33,7 +33,7 @@ def _version_from_local_pyproject() -> str:
         version = project_table.get("version") or poetry_table.get("version")
         if version:
             return version
-    raise FileNotFoundError("pyproject.toml not found for mcpforunityserver")
+    raise FileNotFoundError("pyproject.toml not found for junglemcpserver")
 
 
 def get_package_version() -> str:

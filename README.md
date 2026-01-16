@@ -1,4 +1,4 @@
-<img width="676" height="380" alt="MCP for Unity" src="docs/images/logo.png" />
+<img width="676" height="380" alt="Jungle MCP" src="docs/images/logo.png" />
 
 | [English](README.md) | [简体中文](README-zh.md) |
 |----------------------|---------------------------------|
@@ -8,7 +8,7 @@
 [![Discord](https://img.shields.io/badge/discord-join-red.svg?logo=discord&logoColor=white)](https://discord.gg/y4p8KfzrN4)
 [![](https://img.shields.io/badge/Website-Visit-purple)](https://www.coplay.dev/?ref=unity-mcp)
 [![](https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=blue 'Unity')](https://unity.com/releases/editor/archive)
-[![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Get%20Package-FF6A00?style=flat&logo=unity&logoColor=white)](https://assetstore.unity.com/packages/tools/generative-ai/mcp-for-unity-ai-driven-development-329908)
+[![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Get%20Package-FF6A00?style=flat&logo=unity&logoColor=white)](https://assetstore.unity.com/packages/tools/generative-ai/jungle-mcp-ai-driven-development-329908)
 [![python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![](https://badge.mcpx.dev?status=on 'MCP Enabled')](https://modelcontextprotocol.io/introduction)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/CoplayDev/unity-mcp)
@@ -17,15 +17,15 @@
 
 **Create your Unity apps with LLMs!**
 
-MCP for Unity acts as a bridge, allowing AI assistants (Claude, Cursor, Antigravity, VS Code, etc) to interact directly with your Unity Editor via a local **MCP (Model Context Protocol) Client**. Give your LLM tools to manage assets, control scenes, edit scripts, and automate tasks within Unity.
+Jungle MCP acts as a bridge, allowing AI assistants (Claude, Cursor, Antigravity, VS Code, etc) to interact directly with your Unity Editor via a local **MCP (Model Context Protocol) Client**. Give your LLM tools to manage assets, control scenes, edit scripts, and automate tasks within Unity.
 
-<img alt="MCP for Unity building a scene" src="docs/images/building_scene.gif">
+<img alt="Jungle MCP building a scene" src="docs/images/building_scene.gif">
 
 ---
 
 ### 💬 Join Our [Discord](https://discord.gg/y4p8KfzrN4)
 
-**Get help, share ideas, and collaborate with other MCP for Unity developers!**  
+**Get help, share ideas, and collaborate with other Jungle MCP developers!**  
 
 ---
 
@@ -78,32 +78,32 @@ MCP for Unity acts as a bridge, allowing AI assistants (Claude, Cursor, Antigrav
 
   Your LLM can retrieve the following resources:
 
-* `custom_tools` [`mcpforunity://custom-tools`]: Lists custom tools available for the active Unity project.
-* `unity_instances` [`mcpforunity://instances`]: Lists all running Unity Editor instances with details (name, path, hash, status, session).
-* `menu_items` [`mcpforunity://menu-items`]: All available menu items in the Unity Editor.
-* `get_tests` [`mcpforunity://tests`]: All available tests (EditMode + PlayMode) in the Unity Editor.
-* `get_tests_for_mode` [`mcpforunity://tests/{mode}`]: All available tests for a specific mode (EditMode or PlayMode).
-* `gameobject_api` [`mcpforunity://scene/gameobject-api`]: Documentation for GameObject resources and how to use `find_gameobjects` tool.
-* `gameobject` [`mcpforunity://scene/gameobject/{instance_id}`]: Read-only access to GameObject data (name, tag, transform, components, children).
-* `gameobject_components` [`mcpforunity://scene/gameobject/{instance_id}/components`]: Read-only access to all components on a GameObject with full property serialization.
-* `gameobject_component` [`mcpforunity://scene/gameobject/{instance_id}/component/{component_name}`]: Read-only access to a specific component's properties.
-* `editor_active_tool` [`mcpforunity://editor/active-tool`]: Currently active editor tool (Move, Rotate, Scale, etc.) and transform handle settings.
-* `editor_prefab_stage` [`mcpforunity://editor/prefab-stage`]: Current prefab editing context if a prefab is open in isolation mode.
-* `editor_selection` [`mcpforunity://editor/selection`]: Detailed information about currently selected objects in the editor.
-* `editor_state` [`mcpforunity://editor/state`]: Editor readiness snapshot with advice and staleness info.
-* `editor_windows` [`mcpforunity://editor/windows`]: All currently open editor windows with titles, types, positions, and focus state.
-* `project_info` [`mcpforunity://project/info`]: Static project information (root path, Unity version, platform).
-* `project_layers` [`mcpforunity://project/layers`]: All layers defined in TagManager with their indices (0-31).
-* `project_tags` [`mcpforunity://project/tags`]: All tags defined in TagManager.
+* `custom_tools` [`junglemcp://custom-tools`]: Lists custom tools available for the active Unity project.
+* `unity_instances` [`junglemcp://instances`]: Lists all running Unity Editor instances with details (name, path, hash, status, session).
+* `menu_items` [`junglemcp://menu-items`]: All available menu items in the Unity Editor.
+* `get_tests` [`junglemcp://tests`]: All available tests (EditMode + PlayMode) in the Unity Editor.
+* `get_tests_for_mode` [`junglemcp://tests/{mode}`]: All available tests for a specific mode (EditMode or PlayMode).
+* `gameobject_api` [`junglemcp://scene/gameobject-api`]: Documentation for GameObject resources and how to use `find_gameobjects` tool.
+* `gameobject` [`junglemcp://scene/gameobject/{instance_id}`]: Read-only access to GameObject data (name, tag, transform, components, children).
+* `gameobject_components` [`junglemcp://scene/gameobject/{instance_id}/components`]: Read-only access to all components on a GameObject with full property serialization.
+* `gameobject_component` [`junglemcp://scene/gameobject/{instance_id}/component/{component_name}`]: Read-only access to a specific component's properties.
+* `editor_active_tool` [`junglemcp://editor/active-tool`]: Currently active editor tool (Move, Rotate, Scale, etc.) and transform handle settings.
+* `editor_prefab_stage` [`junglemcp://editor/prefab-stage`]: Current prefab editing context if a prefab is open in isolation mode.
+* `editor_selection` [`junglemcp://editor/selection`]: Detailed information about currently selected objects in the editor.
+* `editor_state` [`junglemcp://editor/state`]: Editor readiness snapshot with advice and staleness info.
+* `editor_windows` [`junglemcp://editor/windows`]: All currently open editor windows with titles, types, positions, and focus state.
+* `project_info` [`junglemcp://project/info`]: Static project information (root path, Unity version, platform).
+* `project_layers` [`junglemcp://project/layers`]: All layers defined in TagManager with their indices (0-31).
+* `project_tags` [`junglemcp://project/tags`]: All tags defined in TagManager.
 </details>
 ---
 
 ## How It Works 
 
-MCP for Unity connects your tools using two components:
+Jungle MCP connects your tools using two components:
 
-1. **MCP for Unity Bridge:** A Unity package running inside the Editor. (Installed via Package Manager).
-2. **MCP for Unity Server:** A Python server that runs locally (from a terminal window) and speaks HTTP/JSON-RPC to your MCP client. The Unity window launches it for you in HTTP mode by default; stdio is still available if you switch transports.
+1. **Jungle MCP Bridge:** A Unity package running inside the Editor. (Installed via Package Manager).
+2. **Jungle MCP Server:** A Python server that runs locally (from a terminal window) and speaks HTTP/JSON-RPC to your MCP client. The Unity window launches it for you in HTTP mode by default; stdio is still available if you switch transports.
 
 <img width="562" height="121" alt="image" src="https://github.com/user-attachments/assets/9abf9c66-70d1-4b82-9587-658e0d45dc3e" />
 
@@ -193,7 +193,7 @@ https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#v9.0.3
 
 HTTP transport is enabled out of the box. The Unity window can launch the FastMCP server for you:
 
-1. Open `Window > MCP for Unity`.
+1. Open `Window > Jungle MCP`.
 2. Make sure the **Transport** dropdown is set to `HTTP Local` (default) and the **HTTP URL** is what you want (defaults to `http://localhost:8080`).
 3. Click **Start Server**. Unity spawns a new operating-system terminal running `uv ... server.py --transport http`.
 4. Keep that terminal window open while you work; closing it stops the server. Use the **Stop Session** button in the Unity window if you need to tear it down cleanly.
@@ -217,15 +217,15 @@ For **Claude Desktop** Users, try using our manually scrapped Unity_Skills by do
 
 **Option A: Configure Buttons (Recommended for Claude/Cursor/VSC Copilot)**
 
-1. In Unity, go to `Window > MCP for Unity`.
+1. In Unity, go to `Window > Jungle MCP`.
 2. Select your Client/IDE from the dropdown.
 3. Click the `Configure` Button.  (Or the `Configure All Detected Clients` button will try to configure every client it finds, but takes longer.)
 4. Look for a green status indicator 🟢 and "Connected ✓". *(This writes the HTTP `url` pointing at the server you launched in Step 2.)* 
 
 <details><summary><strong>Client-specific troubleshooting</strong></summary>
 
-  - **VSCode**: uses `Code/User/mcp.json` with top-level `servers.unityMCP`, `"type": "http"`, and the URL from Step 2. On Windows, MCP for Unity still prefers an absolute `uv.exe` path when you switch back to stdio.
-  - **Cursor / Windsurf** [(**help link**)](https://github.com/CoplayDev/unity-mcp/wiki/1.-Fix-Unity-MCP-and-Cursor,-VSCode-&-Windsurf): if `uv` is missing, the MCP for Unity window shows "uv Not Found" with a quick [HELP] link and a "Choose `uv` Install Location" button.
+  - **VSCode**: uses `Code/User/mcp.json` with top-level `servers.unityMCP`, `"type": "http"`, and the URL from Step 2. On Windows, Jungle MCP still prefers an absolute `uv.exe` path when you switch back to stdio.
+  - **Cursor / Windsurf** [(**help link**)](https://github.com/CoplayDev/unity-mcp/wiki/1.-Fix-Unity-MCP-and-Cursor,-VSCode-&-Windsurf): if `uv` is missing, the Jungle MCP window shows "uv Not Found" with a quick [HELP] link and a "Choose `uv` Install Location" button.
   - **Claude Code** [(**help link**)](https://github.com/CoplayDev/unity-mcp/wiki/2.-Fix-Unity-MCP-and-Claude-Code): if `claude` isn't found, the window shows "Claude Not Found" with [HELP] and a "Choose Claude Location" button. Unregister now updates the UI immediately.</details>
 
 
@@ -357,7 +357,7 @@ Replace `YOUR_USERNAME` and `AppSupport` path segments as needed for your platfo
 
 ## Usage ▶️
 
-1. **Open your Unity Project** and verify the HTTP server is running (Window > MCP for Unity > Start Local HTTP Server). The indicator should show "Session Active" once the server is up.
+1. **Open your Unity Project** and verify the HTTP server is running (Window > Jungle MCP > Start Local HTTP Server). The indicator should show "Session Active" once the server is up.
     
 2. **Start your MCP Client** (Claude, Cursor, etc.). It connects to the HTTP endpoint configured in Step 3—no extra terminals will be spawned by the client.
     
@@ -381,7 +381,7 @@ When performing multiple operations, use the `batch_execute` tool instead of cal
 
 ### Working with Multiple Unity Instances
 
-MCP for Unity supports multiple Unity Editor instances simultaneously. Each instance is isolated per MCP client session.
+Jungle MCP supports multiple Unity Editor instances simultaneously. Each instance is isolated per MCP client session.
 
 **To direct tool calls to a specific instance:**
 
@@ -411,7 +411,7 @@ See [README-DEV.md](docs/README-DEV.md) for complete development setup and workf
 
 ### Adding Custom Tools
 
-MCP for Unity uses a Python MCP Server tied with Unity's C# scripts for tools. If you'd like to extend the functionality with your own tools, learn how to do so in **[CUSTOM_TOOLS.md](docs/CUSTOM_TOOLS.md)**.
+Jungle MCP uses a Python MCP Server tied with Unity's C# scripts for tools. If you'd like to extend the functionality with your own tools, learn how to do so in **[CUSTOM_TOOLS.md](docs/CUSTOM_TOOLS.md)**.
 
 ### How to Contribute
 
@@ -431,16 +431,16 @@ MCP for Unity uses a Python MCP Server tied with Unity's C# scripts for tools. I
 <summary><strong>Click to view common issues and fixes...</strong></summary>
 
 - **Focus Permission Request (macOS/Windows/Linux):**
-    - When running PlayMode tests with Unity in the background, MCP for Unity may temporarily switch focus to Unity to prevent OS-level throttling from stalling tests.
+    - When running PlayMode tests with Unity in the background, Jungle MCP may temporarily switch focus to Unity to prevent OS-level throttling from stalling tests.
     - On **macOS**, you may be prompted to grant accessibility/automation permissions for your terminal or IDE to control window focus.
     - This is normal behavior to ensure tests complete reliably when Unity is not the active window.
 
 - **Unity Bridge Not Running/Connecting:**
     - Ensure Unity Editor is open.
-    - Check the status window: Window > MCP for Unity.
+    - Check the status window: Window > Jungle MCP.
     - Restart Unity.
 - **MCP Client Not Connecting / Server Not Starting:**
-    - Make sure the local HTTP server is running (Window > MCP for Unity > Start Server). Keep the spawned terminal window open.
+    - Make sure the local HTTP server is running (Window > Jungle MCP > Start Server). Keep the spawned terminal window open.
     - **Verify Server Path:** Double-check the --directory path in your MCP Client's JSON config. It must exactly match the installation location:
       - **Windows:** `%USERPROFILE%\AppData\Local\UnityMCP\UnityMcpServer\src`
       - **macOS:** `~/Library/AppSupport/UnityMCP/UnityMcpServer\src` 
@@ -473,10 +473,10 @@ MIT License. See [LICENSE](LICENSE) file.
 ## Unity AI Tools by Coplay
 
 Coplay offers 2 AI tools for Unity
-- **MCP for Unity** is available freely under the MIT license.
-- **Coplay** is a premium Unity AI assistant that sits within Unity and is more than the MCP for Unity.
+- **Jungle MCP** is available freely under the MIT license.
+- **Coplay** is a premium Unity AI assistant that sits within Unity and is more than the Jungle MCP.
 
-(These tools have different tech stacks. See this blog post [comparing Coplay to MCP for Unity](https://www.coplay.dev/blog/comparing-coplay-and-unity-mcp).)
+(These tools have different tech stacks. See this blog post [comparing Coplay to Jungle MCP](https://www.coplay.dev/blog/comparing-coplay-and-unity-mcp).)
 
 <img alt="Coplay" src="docs/images/coplay-logo.png" />
 

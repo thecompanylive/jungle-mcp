@@ -56,7 +56,7 @@ async def set_active_instance(
         return {
             "success": False,
             "error": "Instance identifier is required. "
-                     "Use mcpforunity://instances to copy a Name@hash or provide a hash prefix."
+                     "Use junglemcp://instances to copy a Name@hash or provide a hash prefix."
         }
     resolved = None
     if "@" in value:
@@ -65,7 +65,7 @@ async def set_active_instance(
             return {
                 "success": False,
                 "error": f"Instance '{value}' not found. "
-                "Use mcpforunity://instances to copy an exact Name@hash."
+                "Use junglemcp://instances to copy an exact Name@hash."
             }
     else:
         lookup = value.lower()
@@ -80,7 +80,7 @@ async def set_active_instance(
             return {
                 "success": False,
                 "error": f"Instance hash '{value}' does not match any running Unity editors. "
-                "Use mcpforunity://instances to confirm the available hashes."
+                "Use junglemcp://instances to confirm the available hashes."
             }
         if len(matches) > 1:
             matching_ids = ", ".join(
@@ -89,7 +89,7 @@ async def set_active_instance(
             return {
                 "success": False,
                 "error": f"Instance hash '{value}' is ambiguous ({matching_ids}). "
-                "Provide the full Name@hash from mcpforunity://instances."
+                "Provide the full Name@hash from junglemcp://instances."
             }
         resolved = matches[0]
 

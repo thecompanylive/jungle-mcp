@@ -62,7 +62,7 @@ def backup_dir(src: Path, backup_root: Path) -> Path:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Prepare MCPForUnity for Asset Store upload.")
+        description="Prepare JungleMCP for Asset Store upload.")
     parser.add_argument(
         "--repo-root",
         default=str(REPO_ROOT_DEFAULT),
@@ -76,7 +76,7 @@ def main() -> int:
     parser.add_argument(
         "--backup",
         action="store_true",
-        help="Backup existing Assets/MCPForUnity before replacing.",
+        help="Backup existing Assets/JungleMCP before replacing.",
     )
     parser.add_argument(
         "--dry-run",
@@ -89,31 +89,31 @@ def main() -> int:
     asset_project = Path(args.asset_project).expanduser().resolve(
     ) if args.asset_project else (repo_root / "TestProjects" / "AssetStoreUploads")
 
-    source_mcp = repo_root / "MCPForUnity"
+    source_mcp = repo_root / "JungleMCP"
     if not source_mcp.is_dir():
         raise RuntimeError(
-            f"Source MCPForUnity folder not found: {source_mcp}")
+            f"Source JungleMCP folder not found: {source_mcp}")
 
     assets_dir = asset_project / "Assets"
     if not assets_dir.is_dir():
         raise RuntimeError(f"Assets folder not found: {assets_dir}")
 
-    dest_mcp = assets_dir / "MCPForUnity"
+    dest_mcp = assets_dir / "JungleMCP"
 
     if args.dry_run:
         print("[dry-run] Validated paths. No changes applied.")
-        print("[dry-run] Would stage a temporary copy of MCPForUnity and apply Asset Store edits there.")
+        print("[dry-run] Would stage a temporary copy of JungleMCP and apply Asset Store edits there.")
         print(
             f"[dry-run] Would replace:\n- {dest_mcp}\n  with\n- {source_mcp}")
         return 0
 
-    # 1) Stage a temporary copy of MCPForUnity and apply Asset Store-specific edits there.
-    with tempfile.TemporaryDirectory(prefix="mcpforunity_assetstore_") as tmpdir:
-        staged_mcp = Path(tmpdir) / "MCPForUnity"
+    # 1) Stage a temporary copy of JungleMCP and apply Asset Store-specific edits there.
+    with tempfile.TemporaryDirectory(prefix="junglemcp_assetstore_") as tmpdir:
+        staged_mcp = Path(tmpdir) / "JungleMCP"
         shutil.copytree(source_mcp, staged_mcp)
 
         setup_service = staged_mcp / "Editor" / "Setup" / "SetupWindowService.cs"
-        menu_file = staged_mcp / "Editor" / "MenuItems" / "MCPForUnityMenu.cs"
+        menu_file = staged_mcp / "Editor" / "MenuItems" / "JungleMCPMenu.cs"
         http_util = staged_mcp / "Editor" / "Helpers" / "HttpEndpointUtility.cs"
         connection_section = staged_mcp / "Editor" / "Windows" / \
             "Components" / "Connection" / "McpConnectionSection.cs"
@@ -139,7 +139,7 @@ def main() -> int:
             'transportDropdown.Init(TransportProtocol.HTTPRemote);',
         )
 
-        # 2) Replace Assets/MCPForUnity in the target project
+        # 2) Replace Assets/JungleMCP in the target project
         if dest_mcp.exists():
             if args.backup:
                 backup_root = asset_project / "AssetStoreBackups"

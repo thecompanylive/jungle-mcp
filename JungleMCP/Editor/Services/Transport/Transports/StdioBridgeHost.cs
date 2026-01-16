@@ -320,7 +320,7 @@ namespace Squido.JungleMCP.Editor.Services.Transport.Transports
                             // Before switching ports, give the old one a brief chance to release if it looks like ours
                             try
                             {
-                                if (PortManager.IsPortUsedByMCPForUnity(oldPort))
+                                if (PortManager.IsPortUsedByJungleMCP(oldPort))
                                 {
                                     const int waitStepMs = 100;
                                     int waited = 0;

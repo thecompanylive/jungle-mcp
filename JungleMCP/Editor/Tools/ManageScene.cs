@@ -16,7 +16,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// <summary>
     /// Handles scene management operations like loading, saving, creating, and querying hierarchy.
     /// </summary>
-    [McpForUnityTool("manage_scene", AutoRegister = false)]
+    [JungleMcpTool("manage_scene", AutoRegister = false)]
     public static class ManageScene
     {
         private sealed class SceneCommand

@@ -130,7 +130,7 @@ namespace Squido.JungleMCP.Editor.Windows.Components.ClientConfig
                 McpStatus.CommunicationError => "Communication Error",
                 McpStatus.NoResponse => "No Response",
                 McpStatus.UnsupportedOS => "Unsupported OS",
-                McpStatus.MissingConfig => "Missing MCPForUnity Config",
+                McpStatus.MissingConfig => "Missing JungleMCP Config",
                 McpStatus.Error => "Error",
                 _ => "Unknown",
             };

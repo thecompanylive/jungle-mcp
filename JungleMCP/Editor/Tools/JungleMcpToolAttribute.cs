@@ -6,7 +6,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// Marks a class as an MCP tool handler
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class McpForUnityToolAttribute : Attribute
+    public class JungleMcpToolAttribute : Attribute
     {
         /// <summary>
         /// Tool name (if null, derived from class name)
@@ -58,7 +58,7 @@ namespace Squido.JungleMCP.Editor.Tools
         /// The command name will be derived from the class name (PascalCase → snake_case).
         /// Example: ManageAsset → manage_asset
         /// </summary>
-        public McpForUnityToolAttribute()
+        public JungleMcpToolAttribute()
         {
             Name = null; // Will be auto-generated
         }
@@ -67,7 +67,7 @@ namespace Squido.JungleMCP.Editor.Tools
         /// Create an MCP tool attribute with explicit command name.
         /// </summary>
         /// <param name="name">The command name (e.g., "manage_asset")</param>
-        public McpForUnityToolAttribute(string name = null)
+        public JungleMcpToolAttribute(string name = null)
         {
             Name = name;
         }

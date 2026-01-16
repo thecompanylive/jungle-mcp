@@ -1,7 +1,7 @@
 [project]
-name = "mcpforunityserver"
+name = "junglemcpserver"
 version = "9.0.7"
-description = "MCP for Unity Server: A Unity package for Unity Editor integration via the Model Context Protocol (MCP)."
+description = "Jungle MCP Server: A Unity package for Unity Editor integration via the Model Context Protocol (MCP)."
 readme = "README.md"
 license = "MIT"
 authors = [
@@ -50,7 +50,7 @@ Repository = "https://github.com/CoplayDev/unity-mcp.git"
 Issues = "https://github.com/CoplayDev/unity-mcp/issues"
 
 [project.scripts]
-mcp-for-unity = "main:main"
+jungle-mcp = "main:main"
 
 [build-system]
 requires = ["setuptools>=64.0.0", "wheel"]

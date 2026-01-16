@@ -17,7 +17,7 @@ from transport.legacy.unity_connection import (
 )
 from transport.plugin_hub import PluginHub
 
-logger = logging.getLogger("mcp-for-unity-server")
+logger = logging.getLogger("jungle-mcp-server")
 
 _DEFAULT_POLL_INTERVAL = 1.0
 _MAX_POLL_SECONDS = 600

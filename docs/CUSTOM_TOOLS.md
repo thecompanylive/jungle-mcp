@@ -1,6 +1,6 @@
-# Adding Custom Tools to MCP for Unity
+# Adding Custom Tools to Jungle MCP
 
-MCP for Unity makes it easy to extend your AI assistant with custom capabilities. Using C# attributes and reflection, the system automatically discovers and registers your tools—no manual configuration needed.
+Jungle MCP makes it easy to extend your AI assistant with custom capabilities. Using C# attributes and reflection, the system automatically discovers and registers your tools—no manual configuration needed.
 
 This guide will walk you through creating your own tools, from simple synchronous operations to complex long-running tasks that survive Unity's domain reloads.
 
@@ -15,19 +15,19 @@ Let's get you up and running with your first custom tool.
 First, create a C# file in any `Editor/` folder within your Unity project. **The Editor folder is crucial**—we scan Editor assemblies for tools, so placing your code elsewhere means it won't be discovered.
 
 Each tool is a static class with two key ingredients:
-1. The `[McpForUnityTool]` attribute that tells the system "Hey, I'm a tool!"
+1. The `[JungleMcpTool]` attribute that tells the system "Hey, I'm a tool!"
 2. A `HandleCommand(JObject)` method that does the actual work
 
 You can also define a nested `Parameters` class with `[ToolParameter]` attributes. This gives your AI assistant helpful descriptions and lets it know which parameters are required.
 
 ```csharp
 using Newtonsoft.Json.Linq;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Tools;
+using JungleMCP.Editor.Helpers;
+using JungleMCP.Editor.Tools;
 
 namespace MyProject.Editor.CustomTools
 {
-    [McpForUnityTool("my_custom_tool")]
+    [JungleMcpTool("my_custom_tool")]
     public static class MyCustomTool
     {
         public class Parameters
@@ -71,7 +71,7 @@ Once you've created your tool, you'll need to let your AI assistant know about i
 
 **The easiest approach:** Disconnect and reconnect to the MCP server in your client. This forces a fresh tool discovery.
 
-**If that doesn't work:** Some clients (like Windsurf) may need you to remove and reconfigure the MCP for Unity server entirely. It's a bit more work, but it guarantees your new tools will appear.
+**If that doesn't work:** Some clients (like Windsurf) may need you to remove and reconfigure the Jungle MCP server entirely. It's a bit more work, but it guarantees your new tools will appear.
 
 ## Complete Example: Screenshot Tool
 
@@ -81,12 +81,12 @@ Once you've created your tool, you'll need to let your AI assistant know about i
 using System.IO;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using MCPForUnity.Editor.Tools;
-using MCPForUnity.Editor.Helpers;
+using JungleMCP.Editor.Tools;
+using JungleMCP.Editor.Helpers;
 
 namespace MyProject.Editor.CustomTools
 {
-    [McpForUnityTool(
+    [JungleMcpTool(
         name: "capture_screenshot",
         Description = "Capture screenshots in Unity, saving them as PNGs"
     )]
@@ -179,7 +179,7 @@ Here's how it works: Your tool starts the work and returns a "pending" signal. B
 Mark your tool with `RequiresPolling = true` and specify a `PollAction` (typically `"status"`):
 
 ```csharp
-[McpForUnityTool(RequiresPolling = true, PollAction = "status")]
+[JungleMcpTool(RequiresPolling = true, PollAction = "status")]
 ```
 
 ### The Three Key Ingredients
@@ -196,10 +196,10 @@ Mark your tool with `RequiresPolling = true` and specify a `PollAction` (typical
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Tools;
+using JungleMCP.Editor.Helpers;
+using JungleMCP.Editor.Tools;
 
-[McpForUnityTool(
+[JungleMcpTool(
     "bake_lightmaps",
     Description = "Simulated async lightmap bake with polling",
     RequiresPolling = true,

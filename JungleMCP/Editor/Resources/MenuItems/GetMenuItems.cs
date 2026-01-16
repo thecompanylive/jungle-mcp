@@ -10,7 +10,7 @@ namespace Squido.JungleMCP.Editor.Resources.MenuItems
     /// <summary>
     /// Provides a simple read-only resource that returns Unity menu items.
     /// </summary>
-    [McpForUnityResource("get_menu_items")]
+    [JungleMcpResource("get_menu_items")]
     public static class GetMenuItems
     {
         private static List<string> _cached;

@@ -1,4 +1,4 @@
-# MCP for Unity Server
+# Jungle MCP Server
 
 [![MCP](https://badge.mcpx.dev?status=on 'MCP Enabled')](https://modelcontextprotocol.io/introduction)
 [![python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
@@ -24,7 +24,7 @@ Install and run directly from PyPI using `uvx`.
 **Run Server (HTTP):**
 
 ```bash
-uvx --from mcpforunityserver mcp-for-unity --transport http --http-url http://localhost:8080
+uvx --from junglemcpserver jungle-mcp --transport http --http-url http://localhost:8080
 ```
 
 **MCP Client Configuration (HTTP):**
@@ -48,8 +48,8 @@ uvx --from mcpforunityserver mcp-for-unity --transport http --http-url http://lo
       "command": "uvx",
       "args": [
         "--from",
-        "mcpforunityserver",
-        "mcp-for-unity",
+        "junglemcpserver",
+        "jungle-mcp",
         "--transport",
         "stdio"
       ]
@@ -70,7 +70,7 @@ Use this to run the latest released version from the repository. Change the vers
       "args": [
         "--from",
         "git+https://github.com/CoplayDev/unity-mcp@v9.0.7#subdirectory=Server",
-        "mcp-for-unity",
+        "jungle-mcp",
         "--transport",
         "stdio"
       ]
@@ -84,7 +84,7 @@ Use this to run the latest released version from the repository. Change the vers
 **Use Pre-built Image:**
 
 ```bash
-docker run -p 8080:8080 msanatan/mcp-for-unity-server:latest --transport http --http-url http://0.0.0.0:8080
+docker run -p 8080:8080 msanatan/jungle-mcp-server:latest --transport http --http-url http://0.0.0.0:8080
 ```
 
 **Build Locally:**

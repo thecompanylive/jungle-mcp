@@ -12,7 +12,7 @@ namespace Squido.JungleMCP.Editor.Resources.Tests
     /// Provides access to Unity tests from the Test Framework.
     /// This is a read-only resource that can be queried by MCP clients.
     /// </summary>
-    [McpForUnityResource("get_tests")]
+    [JungleMcpResource("get_tests")]
     public static class GetTests
     {
         public static async Task<object> HandleCommand(JObject @params)
@@ -40,7 +40,7 @@ namespace Squido.JungleMCP.Editor.Resources.Tests
     /// Provides access to Unity tests for a specific mode (EditMode or PlayMode).
     /// This is a read-only resource that can be queried by MCP clients.
     /// </summary>
-    [McpForUnityResource("get_tests_for_mode")]
+    [JungleMcpResource("get_tests_for_mode")]
     public static class GetTestsForMode
     {
         public static async Task<object> HandleCommand(JObject @params)

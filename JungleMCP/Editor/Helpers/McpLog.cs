@@ -6,10 +6,10 @@ namespace Squido.JungleMCP.Editor.Helpers
 {
     internal static class McpLog
     {
-        private const string InfoPrefix = "<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>:";
-        private const string DebugPrefix = "<b><color=#6AA84F>MCP-FOR-UNITY</color></b>:";
-        private const string WarnPrefix = "<b><color=#cc7a00>MCP-FOR-UNITY</color></b>:";
-        private const string ErrorPrefix = "<b><color=#cc3333>MCP-FOR-UNITY</color></b>:";
+        private const string InfoPrefix = "<b><color=#2EA3FF>JUNGLE-MCP</color></b>:";
+        private const string DebugPrefix = "<b><color=#6AA84F>JUNGLE-MCP</color></b>:";
+        private const string WarnPrefix = "<b><color=#cc7a00>JUNGLE-MCP</color></b>:";
+        private const string ErrorPrefix = "<b><color=#cc3333>JUNGLE-MCP</color></b>:";
 
         private static volatile bool _debugEnabled = ReadDebugPreference();
 

@@ -11,7 +11,7 @@ from fastmcp.server.middleware import Middleware, MiddlewareContext
 
 from transport.plugin_hub import PluginHub
 
-logger = logging.getLogger("mcp-for-unity-server")
+logger = logging.getLogger("jungle-mcp-server")
 
 # Store a global reference to the middleware instance so tools can interact
 # with it to set or clear the active unity instance.

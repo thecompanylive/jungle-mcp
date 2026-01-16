@@ -93,7 +93,7 @@ namespace Squido.JungleMCP.Editor.Dependencies.PlatformDetectors
    - Run: powershell -ExecutionPolicy ByPass -c ""irm https://astral.sh/uv/install.ps1 | iex""
    - Or download from: https://github.com/astral-sh/uv/releases
 
-3. MCP Server: Will be installed automatically by MCP for Unity Bridge";
+3. MCP Server: Will be installed automatically by Jungle MCP Bridge";
         }
 
         private bool TryFindPythonViaUv(out string version, out string fullPath)

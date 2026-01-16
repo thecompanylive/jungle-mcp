@@ -22,7 +22,7 @@ namespace Squido.JungleMCP.Editor.Clients.Configurators
         public override IList<string> GetInstallationSteps() => new List<string>
         {
             "Open your project in Claude Code",
-            "Click Configure in MCP for Unity (or manually edit ~/.claude.json)",
+            "Click Configure in Jungle MCP (or manually edit ~/.claude.json)",
             "The MCP server will be added to the global mcpServers section",
             "Restart Claude Code to apply changes"
         };

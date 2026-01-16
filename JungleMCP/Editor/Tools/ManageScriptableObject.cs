@@ -17,7 +17,7 @@ namespace Squido.JungleMCP.Editor.Tools
     ///
     /// Patching is performed via SerializedObject/SerializedProperty paths (Unity-native), not reflection.
     /// </summary>
-    [McpForUnityTool("manage_scriptable_object", AutoRegister = false)]
+    [JungleMcpTool("manage_scriptable_object", AutoRegister = false)]
     public static class ManageScriptableObject
     {
         private const string CodeCompilingOrReloading = "compiling_or_reloading";

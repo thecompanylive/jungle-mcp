@@ -10,7 +10,7 @@ namespace Squido.JungleMCP.Editor.Resources.Project
     /// <summary>
     /// Provides static project configuration information.
     /// </summary>
-    [McpForUnityResource("get_project_info")]
+    [JungleMcpResource("get_project_info")]
     public static class ProjectInfo
     {
         public static object HandleCommand(JObject @params)

@@ -8,7 +8,7 @@ namespace Squido.JungleMCP.Editor.Resources.Editor
     /// <summary>
     /// Provides dynamic editor state information that changes frequently.
     /// </summary>
-    [McpForUnityResource("get_editor_state")]
+    [JungleMcpResource("get_editor_state")]
     public static class EditorState
     {
         public static object HandleCommand(JObject @params)

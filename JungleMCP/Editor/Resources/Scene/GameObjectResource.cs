@@ -14,7 +14,7 @@ namespace Squido.JungleMCP.Editor.Resources.Scene
     /// 
     /// URI: unity://scene/gameobject/{instanceID}
     /// </summary>
-    [McpForUnityResource("get_gameobject")]
+    [JungleMcpResource("get_gameobject")]
     public static class GameObjectResource
     {
         public static object HandleCommand(JObject @params)
@@ -124,7 +124,7 @@ namespace Squido.JungleMCP.Editor.Resources.Scene
     /// 
     /// URI: unity://scene/gameobject/{instanceID}/components
     /// </summary>
-    [McpForUnityResource("get_gameobject_components")]
+    [JungleMcpResource("get_gameobject_components")]
     public static class GameObjectComponentsResource
     {
         public static object HandleCommand(JObject @params)
@@ -210,7 +210,7 @@ namespace Squido.JungleMCP.Editor.Resources.Scene
     /// 
     /// URI: unity://scene/gameobject/{instanceID}/component/{componentName}
     /// </summary>
-    [McpForUnityResource("get_gameobject_component")]
+    [JungleMcpResource("get_gameobject_component")]
     public static class GameObjectComponentResource
     {
         public static object HandleCommand(JObject @params)

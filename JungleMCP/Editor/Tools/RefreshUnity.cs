@@ -13,7 +13,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// Explicitly refreshes Unity's asset database and optionally requests a script compilation.
     /// This is side-effectful and should be treated as a tool.
     /// </summary>
-    [McpForUnityTool("refresh_unity", AutoRegister = false)]
+    [JungleMcpTool("refresh_unity", AutoRegister = false)]
     public static class RefreshUnity
     {
         private const int DefaultWaitTimeoutSeconds = 60;

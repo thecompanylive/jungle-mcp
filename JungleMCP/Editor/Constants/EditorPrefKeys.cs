@@ -1,7 +1,7 @@
 namespace Squido.JungleMCP.Editor.Constants
 {
     /// <summary>
-    /// Centralized list of EditorPrefs keys used by the MCP for Unity package.
+    /// Centralized list of EditorPrefs keys used by the Jungle MCP package.
     /// Keeping them in one place avoids typos and simplifies migrations.
     /// </summary>
     internal static class EditorPrefKeys

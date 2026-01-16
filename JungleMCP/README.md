@@ -1,16 +1,16 @@
-# MCP for Unity — Editor Plugin Guide
+# Jungle MCP — Editor Plugin Guide
 
-Use this guide to configure and run MCP for Unity inside the Unity Editor. Installation is covered elsewhere; this document focuses on the Editor window, client configuration, and troubleshooting.
+Use this guide to configure and run Jungle MCP inside the Unity Editor. Installation is covered elsewhere; this document focuses on the Editor window, client configuration, and troubleshooting.
 
 ## Open the window
-- Unity menu: Window > MCP for Unity
+- Unity menu: Window > Jungle MCP
 
 The window has four areas: Server Status, Unity Bridge, MCP Client Configuration, and Script Validation.
 
 ---
 
 ## Quick start
-1. Open Window > MCP for Unity.
+1. Open Window > Jungle MCP.
 2. Click “Auto-Setup”.
 3. If prompted:
    - Select the packaged server folder (`Server`) if you want to run the bundled implementation.
@@ -52,12 +52,12 @@ The window has four areas: Server Status, Unity Bridge, MCP Client Configuration
   - Cursor / VS Code / Windsurf:
     - Auto Configure: Writes/updates your config to launch the server via `uvx` with the current package version:
       - Command: uvx (or your overridden path)
-      - Args: --from <git-url> mcp-for-unity
+      - Args: --from <git-url> jungle-mcp
     - Manual Setup: Opens a window with a pre-filled JSON snippet to copy/paste into your client config.
     - Choose UV Install Location: If uv/uvx isn’t on PATH, select the executable.
     - A compact “Config:” line shows the resolved config file name once uv/server are detected.
   - Claude Code:
-    - Register with Claude Code / Unregister MCP for Unity with Claude Code.
+    - Register with Claude Code / Unregister Jungle MCP with Claude Code.
     - If the CLI isn’t found, click “Choose Claude Install Location”.
     - The window displays the resolved Claude CLI path when detected.
 
@@ -79,14 +79,14 @@ Notes:
 
 ## Troubleshooting
 - Python or `uv` not found:
-  - Help: [Fix MCP for Unity with Cursor, VS Code & Windsurf](https://github.com/CoplayDev/unity-mcp/wiki/1.-Fix-Unity-MCP-and-Cursor,-VSCode-&-Windsurf)
+  - Help: [Fix Jungle MCP with Cursor, VS Code & Windsurf](https://github.com/CoplayDev/unity-mcp/wiki/1.-Fix-Unity-MCP-and-Cursor,-VSCode-&-Windsurf)
 - Claude CLI not found:
-  - Help: [Fix MCP for Unity with Claude Code](https://github.com/CoplayDev/unity-mcp/wiki/2.-Fix-Unity-MCP-and-Claude-Code)
+  - Help: [Fix Jungle MCP with Claude Code](https://github.com/CoplayDev/unity-mcp/wiki/2.-Fix-Unity-MCP-and-Claude-Code)
 
 ---
 
 ## Tips
-- Use Cmd+Shift+M (macOS) / Ctrl+Shift+M (Windows, Linux) to toggle the MCP for Unity window.
+- Use Cmd+Shift+M (macOS) / Ctrl+Shift+M (Windows, Linux) to toggle the Jungle MCP window.
 - Enable “Show Debug Logs” in the header for more details in the Console when diagnosing issues.
 
 ---

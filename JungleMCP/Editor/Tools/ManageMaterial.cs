@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Squido.JungleMCP.Editor.Tools
 {
-    [McpForUnityTool("manage_material", AutoRegister = false)]
+    [JungleMcpTool("manage_material", AutoRegister = false)]
     public static class ManageMaterial
     {
         public static object HandleCommand(JObject @params)

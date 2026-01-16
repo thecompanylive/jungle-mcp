@@ -49,7 +49,7 @@
                     </ui:VisualElement>
 
                     <ui:Label text="Local Package Deployment:" class="advanced-label" style="margin-top: 12px;" />
-                    <ui:Label text="Copy a MCPForUnity folder into this project's package location." class="help-text" />
+                    <ui:Label text="Copy a JungleMCP folder into this project's package location." class="help-text" />
                     <ui:VisualElement class="override-row">
                         <ui:Label text="MCP For Unity Source Folder:" class="override-label" />
                     </ui:VisualElement>

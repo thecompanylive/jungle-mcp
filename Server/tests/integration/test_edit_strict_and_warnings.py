@@ -24,7 +24,7 @@ async def test_explicit_zero_based_normalized_warning(monkeypatch):
               "endLine": 0, "endCol": 0, "newText": "//x"}]
     resp = await apply_edits(
         DummyContext(),
-        uri="mcpforunity://path/Assets/Scripts/F.cs",
+        uri="junglemcp://path/Assets/Scripts/F.cs",
         edits=edits,
         precondition_sha256="sha",
     )
@@ -57,7 +57,7 @@ async def test_strict_zero_based_error(monkeypatch):
               "endLine": 0, "endCol": 0, "newText": "//x"}]
     resp = await apply_edits(
         DummyContext(),
-        uri="mcpforunity://path/Assets/Scripts/F.cs",
+        uri="junglemcp://path/Assets/Scripts/F.cs",
         edits=edits,
         precondition_sha256="sha",
         strict=True,

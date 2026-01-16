@@ -12,7 +12,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// <summary>
     /// Handles CRUD operations for shader files within the Unity project.
     /// </summary>
-    [McpForUnityTool("manage_shader", AutoRegister = false)]
+    [JungleMcpTool("manage_shader", AutoRegister = false)]
     public static class ManageShader
     {
         /// <summary>

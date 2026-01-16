@@ -13,7 +13,7 @@ namespace Squido.JungleMCP.Editor.Tools
     /// This is a focused search tool that returns lightweight results (IDs only).
     /// For detailed GameObject data, use the unity://scene/gameobject/{id} resource.
     /// </summary>
-    [McpForUnityTool("find_gameobjects")]
+    [JungleMcpTool("find_gameobjects")]
     public static class FindGameObjects
     {
         /// <summary>

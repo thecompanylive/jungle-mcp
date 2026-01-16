@@ -8,7 +8,7 @@ namespace Squido.JungleMCP.Editor.Resources.Editor
     /// <summary>
     /// Provides information about the currently active editor tool.
     /// </summary>
-    [McpForUnityResource("get_active_tool")]
+    [JungleMcpResource("get_active_tool")]
     public static class ActiveTool
     {
         public static object HandleCommand(JObject @params)

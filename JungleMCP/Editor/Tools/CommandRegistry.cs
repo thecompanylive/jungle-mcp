@@ -41,7 +41,7 @@ namespace Squido.JungleMCP.Editor.Tools
 
         /// <summary>
         /// Initialize and auto-discover all tools and resources marked with
-        /// [McpForUnityTool] or [McpForUnityResource]
+        /// [JungleMcpTool] or [JungleMcpResource]
         /// </summary>
         public static void Initialize()
         {
@@ -65,7 +65,7 @@ namespace Squido.JungleMCP.Editor.Tools
         }
 
         /// <summary>
-        /// Auto-discover all types with [McpForUnityTool] or [McpForUnityResource] attributes
+        /// Auto-discover all types with [JungleMcpTool] or [JungleMcpResource] attributes
         /// </summary>
         private static void AutoDiscoverCommands()
         {
@@ -81,7 +81,7 @@ namespace Squido.JungleMCP.Editor.Tools
                     .ToList();
 
                 // Discover tools
-                var toolTypes = allTypes.Where(t => t.GetCustomAttribute<McpForUnityToolAttribute>() != null);
+                var toolTypes = allTypes.Where(t => t.GetCustomAttribute<JungleMcpToolAttribute>() != null);
                 int toolCount = 0;
                 foreach (var type in toolTypes)
                 {
@@ -90,7 +90,7 @@ namespace Squido.JungleMCP.Editor.Tools
                 }
 
                 // Discover resources
-                var resourceTypes = allTypes.Where(t => t.GetCustomAttribute<McpForUnityResourceAttribute>() != null);
+                var resourceTypes = allTypes.Where(t => t.GetCustomAttribute<JungleMcpResourceAttribute>() != null);
                 int resourceCount = 0;
                 foreach (var type in resourceTypes)
                 {
@@ -118,12 +118,12 @@ namespace Squido.JungleMCP.Editor.Tools
             // Get command name from appropriate attribute
             if (isResource)
             {
-                var resourceAttr = type.GetCustomAttribute<McpForUnityResourceAttribute>();
+                var resourceAttr = type.GetCustomAttribute<JungleMcpResourceAttribute>();
                 commandName = resourceAttr.ResourceName;
             }
             else
             {
-                var toolAttr = type.GetCustomAttribute<McpForUnityToolAttribute>();
+                var toolAttr = type.GetCustomAttribute<JungleMcpToolAttribute>();
                 commandName = toolAttr.CommandName;
             }
 
@@ -154,7 +154,7 @@ namespace Squido.JungleMCP.Editor.Tools
             if (method == null)
             {
                 McpLog.Warn(
-                    $"MCP {typeLabel} {type.Name} is marked with [McpForUnity{(isResource ? "Resource" : "Tool")}] " +
+                    $"MCP {typeLabel} {type.Name} is marked with [JungleMcp{(isResource ? "Resource" : "Tool")}] " +
                     $"but has no public static HandleCommand(JObject) method"
                 );
                 return false;

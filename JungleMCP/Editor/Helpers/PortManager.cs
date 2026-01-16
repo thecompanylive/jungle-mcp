@@ -13,7 +13,7 @@ using UnityEngine;
 namespace Squido.JungleMCP.Editor.Helpers
 {
     /// <summary>
-    /// Manages dynamic port allocation and persistent storage for MCP for Unity
+    /// Manages dynamic port allocation and persistent storage for Jungle MCP
     /// </summary>
     public static class PortManager
     {
@@ -157,21 +157,21 @@ namespace Squido.JungleMCP.Editor.Helpers
         }
 
         /// <summary>
-        /// Check if a port is currently being used by MCP for Unity
+        /// Check if a port is currently being used by Jungle MCP
         /// This helps avoid unnecessary port changes when Unity itself is using the port
         /// </summary>
         /// <param name="port">Port to check</param>
-        /// <returns>True if port appears to be used by MCP for Unity</returns>
-        public static bool IsPortUsedByMCPForUnity(int port)
+        /// <returns>True if port appears to be used by Jungle MCP</returns>
+        public static bool IsPortUsedByJungleMCP(int port)
         {
             try
             {
-                // Try to make a quick connection to see if it's an MCP for Unity server
+                // Try to make a quick connection to see if it's an Jungle MCP server
                 using var client = new TcpClient();
                 var connectTask = client.ConnectAsync(IPAddress.Loopback, port);
                 if (connectTask.Wait(100)) // 100ms timeout
                 {
-                    // If connection succeeded, it's likely the MCP for Unity server
+                    // If connection succeeded, it's likely the Jungle MCP server
                     return client.Connected;
                 }
                 return false;
@@ -199,7 +199,7 @@ namespace Squido.JungleMCP.Editor.Helpers
                 }
 
                 // If the port is in use by an MCP instance, continue waiting briefly
-                if (!IsPortUsedByMCPForUnity(port))
+                if (!IsPortUsedByJungleMCP(port))
                 {
                     // In use by something else; don't keep waiting
                     return false;

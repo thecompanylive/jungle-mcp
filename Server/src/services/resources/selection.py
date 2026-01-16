@@ -39,7 +39,7 @@ class SelectionResponse(MCPResponse):
 
 
 @mcp_for_unity_resource(
-    uri="mcpforunity://editor/selection",
+    uri="junglemcp://editor/selection",
     name="editor_selection",
     description="Detailed information about currently selected objects in the editor, including GameObjects, assets, and their properties."
 )

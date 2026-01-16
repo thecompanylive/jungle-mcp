@@ -61,7 +61,7 @@ logging.basicConfig(
     stream=None,  # None -> defaults to sys.stderr; avoid stdout used by MCP stdio
     force=True    # Ensure our handler replaces any prior stdout handlers
 )
-logger = logging.getLogger("mcp-for-unity-server")
+logger = logging.getLogger("jungle-mcp-server")
 
 # Also write logs to a rotating file so logs are available when launched via stdio
 try:
@@ -99,7 +99,7 @@ custom_tool_service: CustomToolService | None = None
 async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
     """Handle server startup and shutdown."""
     global _unity_connection_pool
-    logger.info("MCP for Unity Server starting up")
+    logger.info("Jungle MCP Server starting up")
 
     # Register custom tool management endpoints with FastMCP
     # Routes are declared globally below after FastMCP initialization
@@ -121,7 +121,7 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
         PluginHub.configure(_plugin_registry, loop)
 
     server_version = get_package_version()
-    logger.info(f"MCP for Unity Server version: {server_version}")
+    logger.info(f"Jungle MCP Server version: {server_version}")
 
     try:
         skip_connect = os.environ.get(
@@ -163,19 +163,19 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
     finally:
         if _unity_connection_pool:
             _unity_connection_pool.disconnect_all()
-        logger.info("MCP for Unity Server shut down")
+        logger.info("Jungle MCP Server shut down")
 
 # Initialize MCP server
 mcp = FastMCP(
-    name="mcp-for-unity-server",
+    name="jungle-mcp-server",
     lifespan=server_lifespan,
     instructions="""
 This server provides tools to interact with the Unity Game Engine Editor.
 
-I have a dynamic tool system. Always check the mcpforunity://custom-tools resource first to see what special capabilities are available for the current project.
+I have a dynamic tool system. Always check the junglemcp://custom-tools resource first to see what special capabilities are available for the current project.
 
 Targeting Unity instances:
-- Use the resource mcpforunity://instances to list active Unity sessions (Name@hash).
+- Use the resource junglemcp://instances to list active Unity sessions (Name@hash).
 - When multiple instances are connected, call set_active_instance with the exact Name@hash before using tools/resources. The server will error if multiple are connected and no active instance is set.
 
 Important Workflows:
@@ -229,7 +229,7 @@ async def health_http(_: Request) -> JSONResponse:
     return JSONResponse({
         "status": "healthy",
         "timestamp": time.time(),
-        "message": "MCP for Unity server is running"
+        "message": "Jungle MCP server is running"
     })
 
 
@@ -264,7 +264,7 @@ register_all_resources(mcp)
 def main():
     """Entry point for uvx and console scripts."""
     parser = argparse.ArgumentParser(
-        description="MCP for Unity Server",
+        description="Jungle MCP Server",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Environment Variables:
