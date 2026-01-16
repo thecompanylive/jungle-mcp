@@ -1,4 +1,4 @@
-<img width="676" height="380" alt="MCP for Unity" src="docs/images/logo.png" />
+<img width="676" height="380" alt="Jungle MCP" src="docs/images/logo.png" />
 
 | [English](README.md) | [简体中文](README-zh.md) |
 |----------------------|---------------------------------|
@@ -8,7 +8,7 @@
 [![Discord](https://img.shields.io/badge/discord-join-red.svg?logo=discord&logoColor=white)](https://discord.gg/y4p8KfzrN4)
 [![](https://img.shields.io/badge/Website-Visit-purple)](https://www.coplay.dev/?ref=unity-mcp)
 [![](https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=blue 'Unity')](https://unity.com/releases/editor/archive)
-[![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Get%20Package-FF6A00?style=flat&logo=unity&logoColor=white)](https://assetstore.unity.com/packages/tools/generative-ai/mcp-for-unity-ai-driven-development-329908)
+[![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Get%20Package-FF6A00?style=flat&logo=unity&logoColor=white)](https://assetstore.unity.com/packages/tools/generative-ai/jungle-mcp-ai-driven-development-329908)
 [![python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![](https://badge.mcpx.dev?status=on 'MCP Enabled')](https://modelcontextprotocol.io/introduction)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/CoplayDev/unity-mcp)
@@ -17,13 +17,13 @@
 
 **使用大语言模型创建您的 Unity 应用！**
 
-MCP for Unity 作为桥梁，允许 AI 助手（如 Claude、Cursor）通过本地 **MCP（模型上下文协议）客户端** 直接与您的 Unity 编辑器交互。为您的大语言模型提供管理资源、控制场景、编辑脚本和自动化 Unity 任务的工具。
+Jungle MCP 作为桥梁，允许 AI 助手（如 Claude、Cursor）通过本地 **MCP（模型上下文协议）客户端** 直接与您的 Unity 编辑器交互。为您的大语言模型提供管理资源、控制场景、编辑脚本和自动化 Unity 任务的工具。
 
-<img alt="MCP for Unity building a scene" src="docs/images/building_scene.gif">
+<img alt="Jungle MCP building a scene" src="docs/images/building_scene.gif">
 
 ### 💬 加入我们的 [Discord](https://discord.gg/y4p8KfzrN4)
 
-**获得帮助、分享想法，与其他 MCP for Unity 开发者协作！**
+**获得帮助、分享想法，与其他 Jungle MCP 开发者协作！**
 
 ---
 
@@ -99,10 +99,10 @@ MCP for Unity 作为桥梁，允许 AI 助手（如 Claude、Cursor）通过本�
 
 ## 工作原理
 
-MCP for Unity 使用两个组件连接您的工具：
+Jungle MCP 使用两个组件连接您的工具：
 
-1. **MCP for Unity Bridge：** 在编辑器内运行的 Unity 包。（通过包管理器安装）。
-2. **MCP for Unity Server：** 本地运行的 Python 服务器（从终端窗口运行），通过 HTTP/JSON-RPC 与您的 MCP 客户端通信。Unity 窗口默认以 HTTP 模式为您启动它；如果您切换传输方式，stdio 仍然可用。
+1. **Jungle MCP Bridge：** 在编辑器内运行的 Unity 包。（通过包管理器安装）。
+2. **Jungle MCP Server：** 本地运行的 Python 服务器（从终端窗口运行），通过 HTTP/JSON-RPC 与您的 MCP 客户端通信。Unity 窗口默认以 HTTP 模式为您启动它；如果您切换传输方式，stdio 仍然可用。
 
 <img width="562" height="121" alt="image" src="https://github.com/user-attachments/assets/9abf9c66-70d1-4b82-9587-658e0d45dc3e" />
 
@@ -158,7 +158,7 @@ MCP for Unity 使用两个组件连接您的工具：
 
 #### 通过 Unity Asset Store 安装
 
-1. 在浏览器中打开：https://assetstore.unity.com/packages/tools/generative-ai/mcp-for-unity-ai-driven-development-329908
+1. 在浏览器中打开：https://assetstore.unity.com/packages/tools/generative-ai/jungle-mcp-ai-driven-development-329908
 2. 点击 `Add to My Assets`。
 3. 在 Unity 编辑器中，前往 `Window > Package Manager`。
 4. 将该资源下载并导入到你的项目中
@@ -191,7 +191,7 @@ https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#v8.6.0
 
 HTTP 传输默认启用。Unity 窗口可以为您启动 FastMCP 服务器：
 
-1. 打开 `Window > MCP for Unity`。
+1. 打开 `Window > Jungle MCP`。
 2. 确保 **Transport** 下拉菜单设置为 `HTTP Local`（默认），并将 **HTTP URL** 设置为你想要的地址（默认为 `http://localhost:8080`）。
 3. 点击 **Start Server**。Unity 会生成一个新的系统终端窗口，运行 `uv ... server.py --transport http`。
 4. 在你工作时保持该终端窗口打开；关闭它会停止服务器。如果你需要干净地关闭它，请使用 Unity 窗口中的 **Stop Session** 按钮。
@@ -215,15 +215,15 @@ uvx --from "git+https://github.com/CoplayDev/unity-mcp@v8.6.0#subdirectory=Serve
 
 **选项 A：配置按钮（推荐用于 Claude/Cursor/VSC Copilot）**
 
-1. 在 Unity 中，前往 `Window > MCP for Unity`。
+1. 在 Unity 中，前往 `Window > Jungle MCP`。
 2. 从下拉菜单选择你的 Client/IDE。
 3. 点击 `Configure` 按钮。（或点击 `Configure All Detected Clients` 自动尝试配置所有检测到的客户端，但会更慢。）
 4. 寻找绿色状态指示器 🟢 和 "Connected ✓"。*（这会写入指向你在步骤 2 中启动的服务器的 HTTP `url`）。*
 
 <details><summary><strong>客户端特定故障排除</strong></summary>
 
-  - **VSCode**：使用 `Code/User/mcp.json` 和顶级 `servers.unityMCP`、`"type": "http"` 以及步骤 2 中的 URL。在 Windows 上，当您切换回 stdio 时，MCP for Unity 仍然偏好绝对 `uv.exe` 路径。
-  - **Cursor / Windsurf** [(**帮助链接**)](https://github.com/CoplayDev/unity-mcp/wiki/1.-Fix-Unity-MCP-and-Cursor,-VSCode-&-Windsurf)：如果缺少 `uv`，MCP for Unity 窗口会显示"uv Not Found"和快速 [HELP] 链接以及"Choose `uv` Install Location"按钮。
+  - **VSCode**：使用 `Code/User/mcp.json` 和顶级 `servers.unityMCP`、`"type": "http"` 以及步骤 2 中的 URL。在 Windows 上，当您切换回 stdio 时，Jungle MCP 仍然偏好绝对 `uv.exe` 路径。
+  - **Cursor / Windsurf** [(**帮助链接**)](https://github.com/CoplayDev/unity-mcp/wiki/1.-Fix-Unity-MCP-and-Cursor,-VSCode-&-Windsurf)：如果缺少 `uv`，Jungle MCP 窗口会显示"uv Not Found"和快速 [HELP] 链接以及"Choose `uv` Install Location"按钮。
   - **Claude Code** [(**帮助链接**)](https://github.com/CoplayDev/unity-mcp/wiki/2.-Fix-Unity-MCP-and-Claude-Code)：如果找不到 `claude`，窗口会显示"Claude Not Found"和 [HELP] 以及"Choose Claude Location"按钮。注销现在会立即更新 UI。
 </details>
 
@@ -355,7 +355,7 @@ claude mcp add --scope user UnityMCP -- "C:/Users/USERNAME/AppData/Local/Microso
 
 ## 使用方法 ▶️
 
-1. **打开你的 Unity 项目** 并确认 HTTP 服务器正在运行（Window > MCP for Unity > Start Server）。服务器启动后，指示器应显示 "Session Active"。
+1. **打开你的 Unity 项目** 并确认 HTTP 服务器正在运行（Window > Jungle MCP > Start Server）。服务器启动后，指示器应显示 "Session Active"。
     
 2. **启动您的 MCP 客户端**（Claude、Cursor 等）。它连接到步骤 3 中配置的 HTTP 端点——客户端不会生成额外的终端。
     
@@ -377,7 +377,7 @@ claude mcp add --scope user UnityMCP -- "C:/Users/USERNAME/AppData/Local/Microso
 
 ### 使用多个 Unity 实例
 
-MCP for Unity 同时支持多个 Unity 编辑器实例。每个实例在每个 MCP 客户端会话中是隔离的。
+Jungle MCP 同时支持多个 Unity 编辑器实例。每个实例在每个 MCP 客户端会话中是隔离的。
 
 **要将工具调用定向到特定实例：**
 
@@ -407,7 +407,7 @@ MCP for Unity 同时支持多个 Unity 编辑器实例。每个实例在每个 M
 
 ### 添加自定义工具
 
-MCP for Unity 使用与 Unity 的 C# 脚本绑定的 Python MCP 服务器来实现工具功能。如果您想使用自己的工具扩展功能，请参阅 **[CUSTOM_TOOLS.md](docs/CUSTOM_TOOLS.md)** 了解如何操作。
+Jungle MCP 使用与 Unity 的 C# 脚本绑定的 Python MCP 服务器来实现工具功能。如果您想使用自己的工具扩展功能，请参阅 **[CUSTOM_TOOLS.md](docs/CUSTOM_TOOLS.md)** 了解如何操作。
 
 ### 如何贡献
 
@@ -428,10 +428,10 @@ MCP for Unity 使用与 Unity 的 C# 脚本绑定的 Python MCP 服务器来实�
 
 - **Unity Bridge 未运行/连接：**
     - 确保 Unity 编辑器已打开。
-    - 检查状态窗口：Window > MCP for Unity。
+    - 检查状态窗口：Window > Jungle MCP。
     - 重启 Unity。
 - **MCP 客户端未连接/服务器未启动：**
-    - 确保本地 HTTP 服务器正在运行（Window > MCP for Unity > Start Server）。保持生成的终端窗口打开。
+    - 确保本地 HTTP 服务器正在运行（Window > Jungle MCP > Start Server）。保持生成的终端窗口打开。
     - **验证服务器路径：** 双重检查您的 MCP 客户端 JSON 配置中的 --directory 路径。它必须完全匹配安装位置：
       - **Windows：** `%USERPROFILE%\AppData\Local\UnityMCP\UnityMcpServer\src`
       - **macOS：** `~/Library/AppSupport/UnityMCP/UnityMcpServer\src` 
@@ -464,10 +464,10 @@ MIT 许可证。查看 [LICENSE](LICENSE) 文件。
 ## Unity AI 工具由 Coplay 提供
 
 Coplay 提供 2 个 Unity AI 工具
-- **MCP for Unity** 在 MIT 许可证下免费提供。
-- **Coplay** 是一个高级 Unity AI 助手，位于 Unity 内部，功能比 MCP for Unity 更多。
+- **Jungle MCP** 在 MIT 许可证下免费提供。
+- **Coplay** 是一个高级 Unity AI 助手，位于 Unity 内部，功能比 Jungle MCP 更多。
 
-（这些工具有不同的技术栈。查看这篇博客文章[比较 Coplay 和 MCP for Unity](https://www.coplay.dev/blog/comparing-coplay-and-unity-mcp)。）
+（这些工具有不同的技术栈。查看这篇博客文章[比较 Coplay 和 Jungle MCP](https://www.coplay.dev/blog/comparing-coplay-and-unity-mcp)。）
 
 <img alt="Coplay" src="docs/images/coplay-logo.png" />
 

@@ -99,7 +99,7 @@ custom_tool_service: CustomToolService | None = None
 async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
     """Handle server startup and shutdown."""
     global _unity_connection_pool
-    logger.info("MCP for Unity Server starting up")
+    logger.info("Jungle MCP Server starting up")
 
     # Register custom tool management endpoints with FastMCP
     # Routes are declared globally below after FastMCP initialization
@@ -121,7 +121,7 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
         PluginHub.configure(_plugin_registry, loop)
 
     server_version = get_package_version()
-    logger.info(f"MCP for Unity Server version: {server_version}")
+    logger.info(f"Jungle MCP Server version: {server_version}")
 
     try:
         skip_connect = os.environ.get(
@@ -163,7 +163,7 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
     finally:
         if _unity_connection_pool:
             _unity_connection_pool.disconnect_all()
-        logger.info("MCP for Unity Server shut down")
+        logger.info("Jungle MCP Server shut down")
 
 # Initialize MCP server
 mcp = FastMCP(
@@ -229,7 +229,7 @@ async def health_http(_: Request) -> JSONResponse:
     return JSONResponse({
         "status": "healthy",
         "timestamp": time.time(),
-        "message": "MCP for Unity server is running"
+        "message": "Jungle MCP server is running"
     })
 
 
@@ -264,7 +264,7 @@ register_all_resources(mcp)
 def main():
     """Entry point for uvx and console scripts."""
     parser = argparse.ArgumentParser(
-        description="MCP for Unity Server",
+        description="Jungle MCP Server",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Environment Variables:

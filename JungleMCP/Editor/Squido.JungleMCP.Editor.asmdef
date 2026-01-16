@@ -1,0 +1,20 @@
+{
+    "name": "Squido.JungleMCP.Editor",
+    "rootNamespace": "Squido.JungleMCP.Editor",
+    "references": [
+        "Squido.JungleMCP"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

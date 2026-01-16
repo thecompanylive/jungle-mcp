@@ -1,0 +1,53 @@
+using Squido.JungleMCP.Editor.Constants;
+using UnityEditor;
+using UnityEngine;
+
+namespace Squido.JungleMCP.Editor.Helpers
+{
+    internal static class McpLog
+    {
+        private const string InfoPrefix = "<b><color=#2EA3FF>JUNGLE-MCP</color></b>:";
+        private const string DebugPrefix = "<b><color=#6AA84F>JUNGLE-MCP</color></b>:";
+        private const string WarnPrefix = "<b><color=#cc7a00>JUNGLE-MCP</color></b>:";
+        private const string ErrorPrefix = "<b><color=#cc3333>JUNGLE-MCP</color></b>:";
+
+        private static volatile bool _debugEnabled = ReadDebugPreference();
+
+        private static bool IsDebugEnabled() => _debugEnabled;
+
+        private static bool ReadDebugPreference()
+        {
+            try { return EditorPrefs.GetBool(EditorPrefKeys.DebugLogs, false); }
+            catch { return false; }
+        }
+
+        public static void SetDebugLoggingEnabled(bool enabled)
+        {
+            _debugEnabled = enabled;
+            try { EditorPrefs.SetBool(EditorPrefKeys.DebugLogs, enabled); }
+            catch { }
+        }
+
+        public static void Debug(string message)
+        {
+            if (!IsDebugEnabled()) return;
+            UnityEngine.Debug.Log($"{DebugPrefix} {message}");
+        }
+
+        public static void Info(string message, bool always = true)
+        {
+            if (!always && !IsDebugEnabled()) return;
+            UnityEngine.Debug.Log($"{InfoPrefix} {message}");
+        }
+
+        public static void Warn(string message)
+        {
+            UnityEngine.Debug.LogWarning($"{WarnPrefix} {message}");
+        }
+
+        public static void Error(string message)
+        {
+            UnityEngine.Debug.LogError($"{ErrorPrefix} {message}");
+        }
+    }
+}

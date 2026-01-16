@@ -1,0 +1,42 @@
+using System;
+using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
+using UnityEditor.SceneManagement;
+
+namespace Squido.JungleMCP.Editor.Resources.Editor
+{
+    /// <summary>
+    /// Provides information about the current prefab editing context.
+    /// </summary>
+    [JungleMcpResource("get_prefab_stage")]
+    public static class PrefabStage
+    {
+        public static object HandleCommand(JObject @params)
+        {
+            try
+            {
+                var stage = PrefabStageUtility.GetCurrentPrefabStage();
+
+                if (stage == null)
+                {
+                    return new SuccessResponse("No prefab stage is currently open.", new { isOpen = false });
+                }
+
+                var stageInfo = new
+                {
+                    isOpen = true,
+                    assetPath = stage.assetPath,
+                    prefabRootName = stage.prefabContentsRoot?.name,
+                    mode = stage.mode.ToString(),
+                    isDirty = stage.scene.isDirty
+                };
+
+                return new SuccessResponse("Prefab stage info retrieved.", stageInfo);
+            }
+            catch (Exception e)
+            {
+                return new ErrorResponse($"Error getting prefab stage info: {e.Message}");
+            }
+        }
+    }
+}

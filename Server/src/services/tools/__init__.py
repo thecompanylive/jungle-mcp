@@ -26,7 +26,7 @@ def register_all_tools(mcp: FastMCP):
     Any .py file in this directory or subdirectories with @mcp_for_unity_tool decorated
     functions will be automatically registered.
     """
-    logger.info("Auto-discovering MCP for Unity Server tools...")
+    logger.info("Auto-discovering Jungle MCP Server tools...")
     # Dynamic import of all modules in this directory
     tools_dir = Path(__file__).parent
 

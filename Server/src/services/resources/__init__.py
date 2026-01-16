@@ -24,7 +24,7 @@ def register_all_resources(mcp: FastMCP):
     Any .py file in this directory or subdirectories with @mcp_for_unity_resource decorated
     functions will be automatically registered.
     """
-    logger.info("Auto-discovering MCP for Unity Server resources...")
+    logger.info("Auto-discovering Jungle MCP Server resources...")
     # Dynamic import of all modules in this directory
     resources_dir = Path(__file__).parent
 

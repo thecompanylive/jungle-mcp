@@ -1,4 +1,4 @@
-# MCP for Unity v6 - New Editor Window
+# Jungle MCP v6 - New Editor Window
 
 > **UI Toolkit-based window with service-oriented architecture**
 
@@ -116,7 +116,7 @@ string mcpServerPath = MCPServiceLocator.Paths.GetMcpServerPath();
 
 ### IBridgeControlService
 
-**Purpose:** Manages MCP for Unity Bridge lifecycle and health verification
+**Purpose:** Manages Jungle MCP Bridge lifecycle and health verification
 
 **Key Methods:**
 - `Start()` / `Stop()` - Bridge lifecycle management
@@ -197,7 +197,7 @@ paths.SetUvPathOverride("/custom/path/to/uv");
 
 **Services:**
 ```text
-MCPForUnity/Editor/Services/
+JungleMCP/Editor/Services/
 ├── IBridgeControlService.cs          # Bridge lifecycle interface
 ├── BridgeControlService.cs           # Bridge lifecycle implementation
 ├── IClientConfigurationService.cs    # Client config interface
@@ -209,16 +209,16 @@ MCPForUnity/Editor/Services/
 
 **Helpers:**
 ```text
-MCPForUnity/Editor/Helpers/
+JungleMCP/Editor/Helpers/
 └── AssetPathUtility.cs              # Package path detection & package.json parsing
 ```
 
 **UI:**
 ```text
-MCPForUnity/Editor/Windows/
-├── MCPForUnityEditorWindowNew.cs    # Main window (~850 lines)
-├── MCPForUnityEditorWindowNew.uxml  # UI Toolkit layout
-└── MCPForUnityEditorWindowNew.uss   # UI Toolkit styles
+JungleMCP/Editor/Windows/
+├── JungleMCPEditorWindowNew.cs    # Main window (~850 lines)
+├── JungleMCPEditorWindowNew.uxml  # UI Toolkit layout
+└── JungleMCPEditorWindowNew.uss   # UI Toolkit styles
 ```
 
 **CI/CD:**

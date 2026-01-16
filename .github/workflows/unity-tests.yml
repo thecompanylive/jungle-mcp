@@ -6,7 +6,7 @@ on:
     branches: ["**"]
     paths:
       - TestProjects/UnityMCPTests/**
-      - MCPForUnity/Editor/**
+      - JungleMCP/Editor/**
       - .github/workflows/unity-tests.yml
 
 jobs:

@@ -2,13 +2,13 @@
 setlocal enabledelayedexpansion
 
 echo ===============================================
-echo MCP for Unity Development Deployment Script
+echo Jungle MCP Development Deployment Script
 echo ===============================================
 echo.
 
 :: Configuration
 set "SCRIPT_DIR=%~dp0"
-set "BRIDGE_SOURCE=%SCRIPT_DIR%MCPForUnity"
+set "BRIDGE_SOURCE=%SCRIPT_DIR%JungleMCP"
 set "SERVER_SOURCE=%SCRIPT_DIR%Server"
 set "DEFAULT_BACKUP_DIR=%USERPROFILE%\Desktop\unity-mcp-backup"
 set "DEFAULT_SERVER_PATH=%LOCALAPPDATA%\UnityMCP\UnityMcpServer\src"

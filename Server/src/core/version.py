@@ -1,5 +1,5 @@
 """
-Package version utilities for MCP for Unity Server.
+Package version utilities for Jungle MCP Server.
 """
 
 from importlib import metadata

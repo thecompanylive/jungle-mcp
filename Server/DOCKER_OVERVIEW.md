@@ -1,4 +1,4 @@
-# MCP for Unity Server (Docker Image)
+# Jungle MCP Server (Docker Image)
 
 [![MCP](https://badge.mcpx.dev?status=on 'MCP Enabled')](https://modelcontextprotocol.io/introduction)
 [![License](https://img.shields.io/badge/License-MIT-red.svg 'MIT License')](https://opensource.org/licenses/MIT)

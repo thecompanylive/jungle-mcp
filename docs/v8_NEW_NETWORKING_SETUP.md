@@ -12,7 +12,7 @@ This project has 3 components:
 - MCP Server
 - Unity Editor plugin
 
-![3 components of MCP for Unity](./images/networking-architecture.png)
+![3 components of Jungle MCP](./images/networking-architecture.png)
 
 The MCP clients (e.g., Cursor, VS Code, Windsurf, Claude Code) are how users interact with our systems. They communicate with the MCP server by sending commands. The MCP commands communicates with our Unity plugin, which gives reports on the action it completed (for function tools) or gives it data (for resources).
 
@@ -24,7 +24,7 @@ MCP servers support communicating over [stdio or via Streamable HTTP](https://mo
 
 ### Stdio Architecture
 
-MCP for Unity communicates via stdio. Particularly, the MCP server and the MCP client use stdio to communicate. The MCP server and the Unity plugin editor communicate via a locally opened port, typically 6400, but users can change it to any port.
+Jungle MCP communicates via stdio. Particularly, the MCP server and the MCP client use stdio to communicate. The MCP server and the Unity plugin editor communicate via a locally opened port, typically 6400, but users can change it to any port.
 
 Why can't the Unity plugin communicate to the server via stdio like the MCP client? When we create MCP configs that use `uvx`, MCP clients run the command in an *internal subprocess*, and communicate with the MCP server via stdio (think pipes in the OS e.g. `ls -l | grep "example.txt"`).
 
@@ -39,7 +39,7 @@ When the user sends a prompt:
 3. The MCP server sends the command, and the Unity plugin responds via port 6400
 4. The MCP server parses the response and returns JSON to the MCP client via stdio
 
-In this new version of MCP for Unity, our MCP server supports both the stdio and HTTP protocols. 
+In this new version of Jungle MCP, our MCP server supports both the stdio and HTTP protocols. 
 
 ### HTTP Architecture
 
@@ -56,7 +56,7 @@ When the user sends a prompt:
 3. The Unity plugin sends a response via WebSockets to the MCP server
 4. The MCP server parses the response and returns JSON to the MCP client via Server-Sent Events
 
-MCP for Unity previously only supported local connections with MCP clients via stdio. Now, we continue to support local stdio connections, but additionally support local HTTP connections and remote HTTP connections.
+Jungle MCP previously only supported local connections with MCP clients via stdio. Now, we continue to support local stdio connections, but additionally support local HTTP connections and remote HTTP connections.
 
 ## Why add HTTP support?
 
@@ -71,7 +71,7 @@ Let's discuss both technical and political reasons:
 - HTTP opens up easier ways to communicate with the MCP server w/o using the MCP protocol
   - For example, this version supports custom tools that only require C# code (see [CUSTOM_TOOLS.md](./CUSTOM_TOOLS.md) for more info). This was easy to implement because we added a special endpoint to handle tool registration
 - Our MCP server can now be hosted by various MCP marketplaces, they typically require an HTTP server because they host it remotely.
-- We can distribute the plugin with a remote URL, so users would not need to install Python or `uv` installed to use MCP for Unity.
+- We can distribute the plugin with a remote URL, so users would not need to install Python or `uv` installed to use Jungle MCP.
   - This is a contentious issue. Who should host the server, particularly for an open source, community centered project? For now, Coplay will host the server as it is the sponsor of this project. This remote URL would not be the default for users who install via Git or OpenUPM, but it will become the default for users who install via the Unity Asset Store, where we can't submit the plugin if it requires Python/`uv` to be installed.
   - Not having to setup Python and `uv` has benefits to non-asset store users, but I think to avoid maintaining this server, we'll explore running the MCP server inside the Unity plugin as a background process using the [official MCP C# SDK](https://github.com/modelcontextprotocol/csharp-sdk).
 
@@ -103,13 +103,13 @@ You're wondering if every function tool needs to use the `send_command_for_insta
 
 ### Unity Plugin
 
-Let's start with how things worked before this change. The `MCPForUnityBridge` was a monolith of all networking logic. As we began to develop a service architecture, we created the `BridgeControlService` to wrap the `MCPForUnityBridge` class, to make the migration to the new architecture easier.
+Let's start with how things worked before this change. The `JungleMCPBridge` was a monolith of all networking logic. As we began to develop a service architecture, we created the `BridgeControlService` to wrap the `JungleMCPBridge` class, to make the migration to the new architecture easier.
 
-The `BridgeControlService` called functions in the `MCPForUnityBridge`, which managed the state and processing for TCP communication.
+The `BridgeControlService` called functions in the `JungleMCPBridge`, which managed the state and processing for TCP communication.
 
 In this version `BridgeControlService` wraps around the `TransportManager`, it doesn't have hardcoded logic specific to stdio. The `TransportManager` object manages the state of the network and delegates the actual networking logic to the appropriate transport client - either WebSocket or stdio. The `TransportManager` interacts with objects that implement the `IMcpTransportClient` interface.
 
-The legacy `McpForUnityBridge` was renamed and moved to `StdioBridgeHost`. The `StdioTransportClient` class is a thin wrapper over the `StdioBridgeHost` class, that implements the `IMcpTransportClient` interface. All the logic for the WebSocket connection is in the `WebSocketTransportClient` class.
+The legacy `JungleMcpBridge` was renamed and moved to `StdioBridgeHost`. The `StdioTransportClient` class is a thin wrapper over the `StdioBridgeHost` class, that implements the `IMcpTransportClient` interface. All the logic for the WebSocket connection is in the `WebSocketTransportClient` class.
 
 ### MCP Configs
 
@@ -117,7 +117,7 @@ The legacy `McpForUnityBridge` was renamed and moved to `StdioBridgeHost`. The `
 
 Since we support both HTTP and stdio connections, we had to do some work around the MCP config builders. The major change was reworking how stdio connections were constructed to use `uvx` with the remote package instead of the locally bundled server and `uv`, HTTP configs are much simpler.
 
-The remote git URL we use to get the package is versioned, which added some complications. We frequently make changes to the `main` branch of this repo, some are breaking (the last version before this was v7, which was a major breaking change as well). We don't control how users update their MCP for Unity package. So if we point to the main branch, their plugin could be talking to an incompatible version of the server.
+The remote git URL we use to get the package is versioned, which added some complications. We frequently make changes to the `main` branch of this repo, some are breaking (the last version before this was v7, which was a major breaking change as well). We don't control how users update their Jungle MCP package. So if we point to the main branch, their plugin could be talking to an incompatible version of the server.
 
 To address this, we have a process to auto-update stdio configurations. The `StdIoVersionMigration` class runs when the plugin is loaded. It checks a new editor pref that stores the last version we upgraded clients to. If the plugin was updated, the package version will mismatch the editor pref's version, and we'll cycle through a user's configured MCP clients and re-configure them.
 
@@ -131,7 +131,7 @@ Relevant commits:
 
 The new HTTP config and the new stdio config using `uvx` is a departure from the previous MCP configs which have `uv` and a path to `server.py`. No matter the protocol, all users would have to update their MCP configs. Not all users are on Discord where we can reach them, and not all our Discord users read our messages in any case. Forcing users to update their configs after updating is something they can easily ignore or forget.
 
-So we added the `LegacyServerSrcMigration` class. It looks for the `MCPForUnity.UseEmbeddedServer` editor pref, which was used in earlier versions. If this pref exists, we will reconfigure all of a user's MCP clients (defaulting to HTTP) at startup. The editor pref is then deleted, so this config update only happens once.
+So we added the `LegacyServerSrcMigration` class. It looks for the `JungleMCP.UseEmbeddedServer` editor pref, which was used in earlier versions. If this pref exists, we will reconfigure all of a user's MCP clients (defaulting to HTTP) at startup. The editor pref is then deleted, so this config update only happens once.
 
 Relevant commits:
 
@@ -174,11 +174,11 @@ Relevant commits:
 
 Custom tools were revamped once more, this time they're reached the simplest version that we wanted them to have - custom tools are written entirely in C# - no Python required. How does it work?
 
-Like before, we do reflection on the `McpForUnityToolAttribute`. However, this time the attribute now accepts a `name`, `description`, and `AutoRegister`. The `AutoRegister` boolean is true by default, but for our core tools it's false, as they don't have their tool details nor parameters defined in C# as yet.
+Like before, we do reflection on the `JungleMcpToolAttribute`. However, this time the attribute now accepts a `name`, `description`, and `AutoRegister`. The `AutoRegister` boolean is true by default, but for our core tools it's false, as they don't have their tool details nor parameters defined in C# as yet.
 
 Parameters are defined using the `ToolParameterAttribute`, which contains `Name`, `Description`, `Required`, and `DefaultValue` properties. 
 
-The `ToolDiscoveryService` class uses reflection to find all classes with `McpForUnityToolAttribute`. It does the same for `ToolParameterAttribute`. With that data, it constructs a `ToolMetadata` object. These tools are stored in-memory in a dictionary that maps tool names with their metadata.
+The `ToolDiscoveryService` class uses reflection to find all classes with `JungleMcpToolAttribute`. It does the same for `ToolParameterAttribute`. With that data, it constructs a `ToolMetadata` object. These tools are stored in-memory in a dictionary that maps tool names with their metadata.
 
 When we initiate a websocket connection, after successfully registering and retrieving a session ID, we call the `SendRegisterToolsAsync` function. This function sends a JSON payload to the server with all the tools that were found in the `ToolDiscoveryService`.
 
@@ -212,7 +212,7 @@ Relevant commits:
 
 ### Window logic has been split into separate classes
 
-The main `MCPForUnityEditorWindow.cs` class, and the releated uxml and uss files, were getting quite long. We had a similar problem with the last immediate UI version of it. To keep it maintanable, we split the logic into 3 separate view classes: Settings, Connection andn ClientConfig. They correspond to the 3 visual sections the window has.
+The main `JungleMCPEditorWindow.cs` class, and the releated uxml and uss files, were getting quite long. We had a similar problem with the last immediate UI version of it. To keep it maintanable, we split the logic into 3 separate view classes: Settings, Connection andn ClientConfig. They correspond to the 3 visual sections the window has.
 
 Each section has its own C#, uxml and uss files, but we use a common uss file for shared styles.
 
@@ -242,9 +242,9 @@ Relevant commits:
 
 ### Miscellaneous
 
-- The shortcut (Cmd+Shift+M on macOS, Ctrl+Shift+M on Windows/Linux) can now be used to open and close the MCP for Unity window.
+- The shortcut (Cmd+Shift+M on macOS, Ctrl+Shift+M on Windows/Linux) can now be used to open and close the Jungle MCP window.
 - The `McpLog` object now has a `Debug` function, which only logs when the user selects "Show debug logs" in the settings.
-- All `EditorPrefs` are defined in `MCPForUnity/Editor/Constants/EditorPrefKeys.cs`. At a glance, we can see all the settings we have available.
+- All `EditorPrefs` are defined in `JungleMCP/Editor/Constants/EditorPrefKeys.cs`. At a glance, we can see all the settings we have available.
 
 ## Future plans
 

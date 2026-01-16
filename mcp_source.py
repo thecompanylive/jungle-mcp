@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generic helper to switch the MCP for Unity package source in a Unity project's
+Generic helper to switch the Jungle MCP package source in a Unity project's
 Packages/manifest.json.  This is useful for switching between upstream and local repos while working on the MCP.
 
 Usage:
@@ -9,7 +9,7 @@ Usage:
 Choices:
   1) Upstream main (CoplayDev/unity-mcp)
   2) Your remote current branch (derived from `origin` and current branch)
-  3) Local repo workspace (file: URL to MCPForUnity in your checkout)
+  3) Local repo workspace (file: URL to JungleMCP in your checkout)
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 PKG_NAME = "com.coplaydev.unity-mcp"
-BRIDGE_SUBPATH = "MCPForUnity"
+BRIDGE_SUBPATH = "JungleMCP"
 
 
 def run_git(repo: pathlib.Path, *args: str) -> str:
@@ -91,7 +91,7 @@ def write_json(path: pathlib.Path, data: dict) -> None:
 
 
 def build_options(repo_root: pathlib.Path, branch: str, origin_https: str):
-    upstream = "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity"
+    upstream = "https://github.com/CoplayDev/unity-mcp.git?path=/JungleMCP"
     # Ensure origin is https
     origin = origin_https
     # If origin is a local file path or non-https, try to coerce to https github if possible
@@ -111,7 +111,7 @@ def build_options(repo_root: pathlib.Path, branch: str, origin_https: str):
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        description="Switch MCP for Unity package source")
+        description="Switch Jungle MCP package source")
     p.add_argument("--manifest", help="Path to Packages/manifest.json")
     p.add_argument(
         "--repo", help="Path to unity-mcp repo root (for local file option)")

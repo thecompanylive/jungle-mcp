@@ -1,7 +1,7 @@
 """
 Tool wrapper for managing ScriptableObject assets via Unity MCP.
 
-Unity-side handler: MCPForUnity.Editor.Tools.ManageScriptableObject
+Unity-side handler: JungleMCP.Editor.Tools.ManageScriptableObject
 Command name: "manage_scriptable_object"
 Actions:
   - create: create an SO asset (optionally with patches)

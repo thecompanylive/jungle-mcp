@@ -6,7 +6,7 @@ It covers:
 
 - **Typical JSON-file clients** (Cursor, VSCode GitHub Copilot, VSCode Insiders, Windsurf, Kiro, Trae, Antigravity, etc.).
 - **Special clients** like **Claude CLI** and **Codex** that require custom logic.
-- **How to add a new configurator class** so it shows up automatically in the MCP for Unity window.
+- **How to add a new configurator class** so it shows up automatically in the Jungle MCP window.
 
 ## Quick example: JSON-file configurator
 
@@ -16,9 +16,9 @@ For most clients you just need a small class like this:
 using System;
 using System.Collections.Generic;
 using System.IO;
-using MCPForUnity.Editor.Models;
+using JungleMCP.Editor.Models;
 
-namespace MCPForUnity.Editor.Clients.Configurators
+namespace JungleMCP.Editor.Clients.Configurators
 {
     public class MyClientConfigurator : JsonFileMcpConfigurator
     {
@@ -35,7 +35,7 @@ namespace MCPForUnity.Editor.Clients.Configurators
         {
             "Open My Client and go to MCP settings",
             "Open or create the mcp.json file at the path above",
-            "Click Configure in MCP for Unity (or paste the manual JSON snippet)",
+            "Click Configure in Jungle MCP (or paste the manual JSON snippet)",
             "Restart My Client"
         };
     }
@@ -48,11 +48,11 @@ namespace MCPForUnity.Editor.Clients.Configurators
 
 At a high level:
 
-- **`IMcpClientConfigurator`** (`MCPForUnity/Editor/Clients/IMcpClientConfigurator.cs`)
+- **`IMcpClientConfigurator`** (`JungleMCP/Editor/Clients/IMcpClientConfigurator.cs`)
   - Contract for all MCP client configurators.
   - Handles status detection, auto-configure, manual snippet, and installation steps.
 
-- **Base classes** (`MCPForUnity/Editor/Clients/McpClientConfiguratorBase.cs`)
+- **Base classes** (`JungleMCP/Editor/Clients/McpClientConfiguratorBase.cs`)
   - **`McpClientConfiguratorBase`**
     - Common properties and helpers.
   - **`JsonFileMcpConfigurator`**
@@ -63,7 +63,7 @@ At a high level:
   - **`ClaudeCliMcpConfigurator`**
     - For CLI-driven clients like Claude Code (register/unregister via CLI, not JSON files).
 
-- **`McpClient` model** (`MCPForUnity/Editor/Models/McpClient.cs`)
+- **`McpClient` model** (`JungleMCP/Editor/Models/McpClient.cs`)
   - Holds the per-client configuration:
     - `name`
     - `windowsConfigPath`, `macConfigPath`, `linuxConfigPath`
@@ -181,7 +181,7 @@ This is the most common scenario: your MCP client uses a JSON file to configure 
 Create a new file under:
 
 ```text
-MCPForUnity/Editor/Clients/Configurators
+JungleMCP/Editor/Clients/Configurators
 ```
 
 Name it something like:
@@ -193,7 +193,7 @@ MyClientConfigurator.cs
 Inside, follow the existing pattern (e.g. `CursorConfigurator`, `WindsurfConfigurator`, `KiroConfigurator`):
 
 - **Namespace** must be:
-  - `MCPForUnity.Editor.Clients.Configurators`
+  - `JungleMCP.Editor.Clients.Configurators`
 - **Class**:
   - `public class MyClientConfigurator : JsonFileMcpConfigurator`
 - **Constructor**:
@@ -241,7 +241,7 @@ Only override these methods if your client has constraints that cannot be expres
 
 After adding your configurator class:
 
-1. Open Unity and the **MCP for Unity** window.
+1. Open Unity and the **Jungle MCP** window.
 2. Your client should appear in the list, sorted by display name (`McpClient.name`).
 3. Use **Check Status** to verify:
    - Missing config files show as `Not Configured`.
@@ -288,4 +288,4 @@ Use this only if the client exposes an official CLI for managing MCP servers.
 - **Special cases** like Codex (TOML) and Claude Code (CLI) have dedicated base classes.
 - **No manual registration** is needed: `McpClientRegistry` auto-discovers all configurators with a public parameterless constructor.
 
-Following these patterns keeps all MCP client integrations consistent and lets users configure everything from the MCP for Unity window with minimal friction.
+Following these patterns keeps all MCP client integrations consistent and lets users configure everything from the Jungle MCP window with minimal friction.
