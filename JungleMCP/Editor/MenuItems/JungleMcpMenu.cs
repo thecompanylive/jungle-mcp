@@ -25,7 +25,7 @@ namespace Squido.JungleMCP.Editor.MenuItems
             SetupWindowService.ShowSetupWindow();
         }
 
-        [MenuItem("Tools/Squido/Jungle MCP/Edit EditorPrefs", priority = 3)]
+        [MenuItem("internal:Tools/Squido/Jungle MCP/Edit EditorPrefs", priority = 3)]
         public static void ShowEditorPrefsWindow()
         {
             EditorPrefsWindow.ShowWindow();

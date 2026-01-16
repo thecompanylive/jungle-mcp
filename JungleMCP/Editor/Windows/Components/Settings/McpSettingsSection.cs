@@ -229,7 +229,7 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Settings
             {
                 versionLabel.text = $"\u2191 v{currentVersion} (Update available: v{updateCheck.LatestVersion})";
                 versionLabel.style.color = new Color(1f, 0.7f, 0f);
-                versionLabel.tooltip = $"Version {updateCheck.LatestVersion} is available. Update via Package Manager.\n\nGit URL: https://github.com/CoplayDev/unity-mcp.git?path=/JungleMCP";
+                versionLabel.tooltip = $"Version {updateCheck.LatestVersion} is available. Update via Package Manager.\n\nGit URL: https://github.com/thecompanylive/jungle-mcp.git?path=/JungleMCP";
             }
             else
             {
