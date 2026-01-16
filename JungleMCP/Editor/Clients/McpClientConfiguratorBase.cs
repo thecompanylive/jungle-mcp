@@ -590,7 +590,7 @@ namespace Squido.JungleMCP.Editor.Clients
             string devFlags = AssetPathUtility.ShouldForceUvxRefresh() ? "--no-cache --refresh " : string.Empty;
 
             return "# Register the MCP server with Claude Code:\n" +
-                   $"claude mcp add --transport stdio UnityMCP -- \"{uvxPath}\" {devFlags}--from \"{packageSource}\" jungle-mcp\n\n" +
+                   $"claude mcp add --transport stdio UnityMCP -- \"{uvxPath}\" {devFlags}--from \"{packageSource}\" mcp-for-unity\n\n" +
                    "# Unregister the MCP server:\n" +
                    "claude mcp remove UnityMCP\n\n" +
                    "# List registered servers:\n" +

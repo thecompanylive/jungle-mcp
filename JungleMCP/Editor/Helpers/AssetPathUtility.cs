@@ -189,7 +189,7 @@ namespace Squido.JungleMCP.Editor.Helpers
         {
             string uvxPath = MCPServiceLocator.Paths.GetUvxPath();
             string fromUrl = GetMcpServerPackageSource();
-            string packageName = "jungle-mcp";
+            string packageName = "mcp-for-unity";
 
             return (uvxPath, fromUrl, packageName);
         }
