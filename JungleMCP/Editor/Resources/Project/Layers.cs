@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Resources.Project
+namespace Squido.JungleMCP.Editor.Resources.Project
 {
     /// <summary>
     /// Provides dictionary of layer indices to layer names.

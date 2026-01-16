@@ -1,8 +1,8 @@
 using System;
-using MCPForUnity.Editor.Constants;
+using Squido.JungleMCP.Editor.Constants;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     /// <summary>
     /// Helper methods for managing HTTP endpoint URLs used by the MCP bridge.

@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Clients.Configurators;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Models;
+using Squido.JungleMCP.Editor.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Clients.Configurators;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Models;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     public static class ConfigJsonBuilder
     {

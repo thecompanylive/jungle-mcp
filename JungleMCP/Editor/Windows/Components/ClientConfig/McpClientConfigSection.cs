@@ -5,19 +5,19 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Clients;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Models;
-using MCPForUnity.Editor.Services;
+using Squido.JungleMCP.Editor.Clients;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Models;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace MCPForUnity.Editor.Windows.Components.ClientConfig
+namespace Squido.JungleMCP.Editor.Windows.Components.ClientConfig
 {
     /// <summary>
-    /// Controller for the Client Configuration section of the MCP For Unity editor window.
+    /// Controller for the Client Configuration section of the Jungle MCP editor window.
     /// Handles client selection, configuration, status display, and manual configuration details.
     /// </summary>
     public class McpClientConfigSection

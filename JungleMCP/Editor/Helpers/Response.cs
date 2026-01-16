@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     public interface IMcpResponse
     {

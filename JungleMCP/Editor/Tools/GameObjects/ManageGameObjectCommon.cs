@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Tools;
+using Squido.JungleMCP.Editor.Tools;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MCPForUnity.Editor.Tools.GameObjects
+namespace Squido.JungleMCP.Editor.Tools.GameObjects
 {
     internal static class ManageGameObjectCommon
     {

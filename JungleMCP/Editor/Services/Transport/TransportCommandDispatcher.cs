@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Models;
-using MCPForUnity.Editor.Tools;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Models;
+using Squido.JungleMCP.Editor.Tools;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Services.Transport
+namespace Squido.JungleMCP.Editor.Services.Transport
 {
     /// <summary>
     /// Centralised command execution pipeline shared by all transport implementations.

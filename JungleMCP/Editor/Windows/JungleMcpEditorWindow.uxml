@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:VisualElement name="root-container" class="root-layout">
-        <ui:Label text="MCP For Unity" name="title" class="title" />
+        <ui:Label text="Jungle MCP" name="title" class="title" />
         <uie:Toolbar name="tab-toolbar" class="tab-toolbar">
             <uie:ToolbarToggle name="settings-tab" text="Settings" value="true" />
             <uie:ToolbarToggle name="tools-tab" text="Tools" />

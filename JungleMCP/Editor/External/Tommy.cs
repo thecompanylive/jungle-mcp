@@ -35,7 +35,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MCPForUnity.External.Tommy
+namespace Squido.JungleMCP.External.Tommy
 {
     #region TOML Nodes
 

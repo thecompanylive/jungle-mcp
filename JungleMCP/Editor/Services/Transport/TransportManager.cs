@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services.Transport.Transports;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services.Transport.Transports;
 
-namespace MCPForUnity.Editor.Services.Transport
+namespace Squido.JungleMCP.Editor.Services.Transport
 {
     /// <summary>
     /// Coordinates the active transport client and exposes lifecycle helpers.

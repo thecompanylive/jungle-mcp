@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 using System.Linq;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Tools.Vfx
+namespace Squido.JungleMCP.Editor.Tools.Vfx
 {
     internal static class ParticleRead
     {

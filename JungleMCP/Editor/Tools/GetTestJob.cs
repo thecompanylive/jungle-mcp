@@ -1,9 +1,9 @@
 using System;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services;
 
-namespace MCPForUnity.Editor.Tools
+namespace Squido.JungleMCP.Editor.Tools
 {
     /// <summary>
     /// Poll a previously started async test job by job_id.

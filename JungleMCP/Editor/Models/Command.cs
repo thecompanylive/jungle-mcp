@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace MCPForUnity.Editor.Models
+namespace Squido.JungleMCP.Editor.Models
 {
     /// <summary>
     /// Represents a command received from the MCP client

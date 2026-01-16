@@ -1,18 +1,17 @@
 using System;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
-using MCPForUnity.Editor.Services.Transport;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services;
+using Squido.JungleMCP.Editor.Services.Transport;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace MCPForUnity.Editor.Windows.Components.Connection
+namespace Squido.JungleMCP.Editor.Windows.Components.Connection
 {
     /// <summary>
-    /// Controller for the Connection section of the MCP For Unity editor window.
+    /// Controller for the Connection section of the Jungle MCP editor window.
     /// Handles transport protocol, HTTP/stdio configuration, connection status, and health checks.
     /// </summary>
     public class McpConnectionSection

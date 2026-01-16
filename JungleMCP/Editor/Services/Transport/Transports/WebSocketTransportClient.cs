@@ -6,15 +6,15 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
-using MCPForUnity.Editor.Services.Transport;
+using Squido.JungleMCP.Editor.Services;
+using Squido.JungleMCP.Editor.Services.Transport;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Services.Transport.Transports
+namespace Squido.JungleMCP.Editor.Services.Transport.Transports
 {
     /// <summary>
     /// Maintains a persistent WebSocket connection to the MCP server plugin hub.

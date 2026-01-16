@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Tools;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Tools;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     public class ToolDiscoveryService : IToolDiscoveryService
     {

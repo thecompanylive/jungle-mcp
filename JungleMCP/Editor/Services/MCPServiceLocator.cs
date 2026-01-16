@@ -1,9 +1,9 @@
 using System;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services.Transport;
-using MCPForUnity.Editor.Services.Transport.Transports;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services.Transport.Transports;
+using Squido.JungleMCP.Editor.Services.Transport;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Service locator for accessing MCP services without dependency injection

@@ -1,6 +1,6 @@
-using MCPForUnity.Editor.Models;
+using Squido.JungleMCP.Editor.Models;
 
-namespace MCPForUnity.Editor.Clients
+namespace Squido.JungleMCP.Editor.Clients
 {
     /// <summary>
     /// Contract for MCP client configurators. Each client is responsible for

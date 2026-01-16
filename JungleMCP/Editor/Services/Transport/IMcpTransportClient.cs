@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace MCPForUnity.Editor.Services.Transport
+namespace Squido.JungleMCP.Editor.Services.Transport
 {
     /// <summary>
     /// Abstraction for MCP transport implementations (e.g. WebSocket push, stdio).

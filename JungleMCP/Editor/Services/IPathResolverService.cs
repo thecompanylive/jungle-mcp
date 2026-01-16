@@ -1,4 +1,4 @@
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Service for resolving paths to required tools and supporting user overrides

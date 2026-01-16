@@ -1,13 +1,13 @@
 using System;
 using System.IO;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Services;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     /// <summary>
     /// Provides common utility methods for working with Unity asset paths.

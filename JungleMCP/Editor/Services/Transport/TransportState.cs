@@ -1,4 +1,4 @@
-namespace MCPForUnity.Editor.Services.Transport
+namespace Squido.JungleMCP.Editor.Services.Transport
 {
     /// <summary>
     /// Lightweight snapshot of a transport's runtime status for editor UI and diagnostics.

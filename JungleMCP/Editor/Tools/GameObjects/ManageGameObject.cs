@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MCPForUnity.Editor.Helpers; // For Response class
+// For Response class
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MCPForUnity.Editor.Tools.GameObjects
+namespace Squido.JungleMCP.Editor.Tools.GameObjects
 {
     /// <summary>
     /// Handles GameObject manipulation within the current scene (CRUD, find, components).

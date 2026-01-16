@@ -1,13 +1,13 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Resources.Tests;
-using MCPForUnity.Editor.Services;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Resources.Tests;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor.TestTools.TestRunner.Api;
 
-namespace MCPForUnity.Editor.Tools
+namespace Squido.JungleMCP.Editor.Tools
 {
     /// <summary>
     /// Starts a Unity Test Runner run asynchronously and returns a job id immediately.

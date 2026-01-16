@@ -1,9 +1,9 @@
 using System;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Services.Transport.Transports;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Services.Transport.Transports;
 using UnityEditor;
 
-namespace MCPForUnity.Editor
+namespace Squido.JungleMCP.Editor
 {
     public static class McpCiBoot
     {

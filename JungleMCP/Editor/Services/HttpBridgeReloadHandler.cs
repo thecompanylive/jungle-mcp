@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services.Transport;
-using MCPForUnity.Editor.Windows;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services.Transport;
+using Squido.JungleMCP.Editor.Windows;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Ensures HTTP transports resume after domain reloads similar to the legacy stdio bridge.
@@ -108,7 +108,7 @@ namespace MCPForUnity.Editor.Services
                         }
                         else
                         {
-                            MCPForUnityEditorWindow.RequestHealthVerification();
+                            JungleMcpEditorWindow.RequestHealthVerification();
                         }
                     }, TaskScheduler.Default);
                     return;
@@ -132,7 +132,7 @@ namespace MCPForUnity.Editor.Services
                     }
                     else
                     {
-                        MCPForUnityEditorWindow.RequestHealthVerification();
+                        JungleMcpEditorWindow.RequestHealthVerification();
                     }
                 }
                 catch (Exception ex)

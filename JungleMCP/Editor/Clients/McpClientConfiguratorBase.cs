@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Models;
-using MCPForUnity.Editor.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Models;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Clients
+namespace Squido.JungleMCP.Editor.Clients
 {
     /// <summary>Shared base class for MCP configurators.</summary>
     public abstract class McpClientConfiguratorBase : IMcpClientConfigurator

@@ -1,10 +1,10 @@
 using System;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEditorInternal; // Required for tag management
 
-namespace MCPForUnity.Editor.Tools
+namespace Squido.JungleMCP.Editor.Tools
 {
     /// <summary>
     /// Handles editor control actions including play mode control, tool selection,

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MCPForUnity.Editor.Clients;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Models;
+using Squido.JungleMCP.Editor.Models;
+using Squido.JungleMCP.Editor.Clients;
+using Squido.JungleMCP.Editor.Helpers;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Implementation of client configuration service

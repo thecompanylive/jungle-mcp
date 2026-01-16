@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Tools.Vfx
+namespace Squido.JungleMCP.Editor.Tools.Vfx
 {
     internal static class LineCreate
     {

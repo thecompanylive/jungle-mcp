@@ -1,8 +1,8 @@
 using System;
-using MCPForUnity.Editor.Windows;
+using Squido.JungleMCP.Editor.Windows;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Service for managing the EditorPrefs window

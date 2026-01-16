@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MCPForUnity.Editor.Models
+namespace Squido.JungleMCP.Editor.Models
 {
     public class McpClient
     {

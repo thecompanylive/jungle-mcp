@@ -1,4 +1,4 @@
-namespace MCPForUnity.Editor.Models
+namespace Squido.JungleMCP.Editor.Models
 {
     // Enum representing the various status states for MCP clients
     public enum McpStatus

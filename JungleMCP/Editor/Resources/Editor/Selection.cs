@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Resources.Editor
+namespace Squido.JungleMCP.Editor.Resources.Editor
 {
     /// <summary>
     /// Provides detailed information about the current editor selection.

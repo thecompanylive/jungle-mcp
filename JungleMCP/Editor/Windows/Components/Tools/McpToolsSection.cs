@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
-using MCPForUnity.Editor.Tools;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services;
+using Squido.JungleMCP.Editor.Tools;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace MCPForUnity.Editor.Windows.Components.Tools
+namespace Squido.JungleMCP.Editor.Windows.Components.Tools
 {
     /// <summary>
-    /// Controller for the Tools section inside the MCP For Unity editor window.
+    /// Controller for the Tools section inside the Jungle MCP editor window.
     /// Provides discovery, filtering, and per-tool enablement toggles.
     /// </summary>
     public class McpToolsSection

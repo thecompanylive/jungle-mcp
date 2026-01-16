@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor.TestTools.TestRunner.Api;
 
-namespace MCPForUnity.Editor.Resources.Tests
+namespace Squido.JungleMCP.Editor.Resources.Tests
 {
     /// <summary>
     /// Provides access to Unity tests from the Test Framework.

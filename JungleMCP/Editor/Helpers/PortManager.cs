@@ -5,12 +5,12 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using MCPForUnity.Editor.Constants;
 using Newtonsoft.Json;
+using Squido.JungleMCP.Editor.Constants;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     /// <summary>
     /// Manages dynamic port allocation and persistent storage for MCP for Unity

@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Services;
-using MCPForUnity.External.Tommy;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Services;
+using Squido.JungleMCP.External.Tommy;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     /// <summary>
     /// Codex CLI specific configuration helpers. Handles TOML snippet
@@ -33,7 +33,7 @@ namespace MCPForUnity.Editor.Helpers
             var unityMCP = new TomlTable();
 
             // Check transport preference
-            bool useHttpTransport = EditorPrefs.GetBool(MCPForUnity.Editor.Constants.EditorPrefKeys.UseHttpTransport, true);
+            bool useHttpTransport = EditorPrefs.GetBool(EditorPrefKeys.UseHttpTransport, true);
 
             if (useHttpTransport)
             {
@@ -87,7 +87,7 @@ namespace MCPForUnity.Editor.Helpers
             // Parse existing TOML or create new root table
             var root = TryParseToml(existingToml) ?? new TomlTable();
 
-            bool useHttpTransport = EditorPrefs.GetBool(MCPForUnity.Editor.Constants.EditorPrefKeys.UseHttpTransport, true);
+            bool useHttpTransport = EditorPrefs.GetBool(EditorPrefKeys.UseHttpTransport, true);
 
             // Ensure mcp_servers table exists
             if (!root.TryGetNode("mcp_servers", out var mcpServersNode) || !(mcpServersNode is TomlTable))
@@ -185,7 +185,7 @@ namespace MCPForUnity.Editor.Helpers
             var unityMCP = new TomlTable();
 
             // Check transport preference
-            bool useHttpTransport = EditorPrefs.GetBool(MCPForUnity.Editor.Constants.EditorPrefKeys.UseHttpTransport, true);
+            bool useHttpTransport = EditorPrefs.GetBool(EditorPrefKeys.UseHttpTransport, true);
 
             if (useHttpTransport)
             {

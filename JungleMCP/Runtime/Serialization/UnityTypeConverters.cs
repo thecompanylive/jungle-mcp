@@ -2,11 +2,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor; // Required for AssetDatabase and EditorUtility
-#endif
 
-namespace MCPForUnity.Runtime.Serialization
+namespace Squido.JungleMCP.Serialization
 {
     public class Vector3Converter : JsonConverter<Vector3>
     {

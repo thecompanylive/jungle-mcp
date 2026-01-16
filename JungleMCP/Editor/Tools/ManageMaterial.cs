@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Tools
+namespace Squido.JungleMCP.Editor.Tools
 {
     [McpForUnityTool("manage_material", AutoRegister = false)]
     public static class ManageMaterial

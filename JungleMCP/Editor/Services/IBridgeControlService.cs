@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Services.Transport;
+using Squido.JungleMCP.Editor.Services.Transport;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Service for controlling the MCP for Unity Bridge connection

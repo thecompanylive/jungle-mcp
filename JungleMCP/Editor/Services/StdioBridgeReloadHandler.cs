@@ -1,11 +1,12 @@
 using System;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services.Transport;
-using MCPForUnity.Editor.Services.Transport.Transports;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services.Transport;
+using Squido.JungleMCP.Editor.Services.Transport.Transports;
+using Squido.JungleMCP.Editor.Windows;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Ensures the legacy stdio bridge resumes after domain reloads, mirroring the HTTP handler.
@@ -109,7 +110,7 @@ namespace MCPForUnity.Editor.Services
                     return;
                 }
 
-                MCPForUnity.Editor.Windows.MCPForUnityEditorWindow.RequestHealthVerification();
+                JungleMcpEditorWindow.RequestHealthVerification();
             }, System.Threading.Tasks.TaskScheduler.Default);
         }
     }

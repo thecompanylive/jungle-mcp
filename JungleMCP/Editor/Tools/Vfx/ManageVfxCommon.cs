@@ -1,8 +1,8 @@
 using Newtonsoft.Json.Linq;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Tools.Vfx
+namespace Squido.JungleMCP.Editor.Tools.Vfx
 {
     internal static class ManageVfxCommon
     {

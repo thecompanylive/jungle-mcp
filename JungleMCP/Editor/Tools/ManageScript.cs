@@ -6,10 +6,10 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
 using System.Threading;
 using System.Security.Cryptography;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
 
 #if USE_ROSLYN
 using Microsoft.CodeAnalysis;
@@ -22,7 +22,7 @@ using UnityEditor.Compilation;
 #endif
 
 
-namespace MCPForUnity.Editor.Tools
+namespace Squido.JungleMCP.Editor.Tools
 {
     /// <summary>
     /// Handles CRUD operations for C# scripts within the Unity project.

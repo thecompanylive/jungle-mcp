@@ -1,11 +1,11 @@
 using System;
 using System.Net;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Service for checking package updates from GitHub

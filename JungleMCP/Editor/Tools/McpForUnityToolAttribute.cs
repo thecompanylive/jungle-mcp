@@ -1,6 +1,6 @@
 using System;
 
-namespace MCPForUnity.Editor.Tools
+namespace Squido.JungleMCP.Editor.Tools
 {
     /// <summary>
     /// Marks a class as an MCP tool handler

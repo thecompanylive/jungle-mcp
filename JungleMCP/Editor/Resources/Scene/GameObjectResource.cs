@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Resources.Scene
+namespace Squido.JungleMCP.Editor.Resources.Scene
 {
     /// <summary>
     /// Resource handler for reading GameObject data.

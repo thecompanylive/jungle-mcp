@@ -1,13 +1,13 @@
 using System;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Dependencies;
-using MCPForUnity.Editor.Dependencies.Models;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Windows;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Dependencies;
+using Squido.JungleMCP.Editor.Dependencies.Models;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Windows;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Setup
+namespace Squido.JungleMCP.Editor.Setup
 {
     /// <summary>
     /// Handles automatic triggering of the MCP setup window and exposes menu entry points
@@ -81,7 +81,7 @@ namespace MCPForUnity.Editor.Setup
             try
             {
                 dependencyResult ??= DependencyManager.CheckAllDependencies();
-                MCPSetupWindow.ShowWindow(dependencyResult);
+                McpSetupWindow.ShowWindow(dependencyResult);
             }
             catch (Exception ex)
             {

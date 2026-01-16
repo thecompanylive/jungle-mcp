@@ -1,11 +1,11 @@
 using System;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Migrations
+namespace Squido.JungleMCP.Editor.Migrations
 {
     /// <summary>
     /// Detects legacy embedded-server preferences and migrates configs to the new uvx/stdio path once.

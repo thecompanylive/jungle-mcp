@@ -1,22 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
-using MCPForUnity.Editor.Windows.Components.ClientConfig;
-using MCPForUnity.Editor.Windows.Components.Connection;
-using MCPForUnity.Editor.Windows.Components.Settings;
-using MCPForUnity.Editor.Windows.Components.Tools;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services;
+using Squido.JungleMCP.Editor.Windows.Components.ClientConfig;
+using Squido.JungleMCP.Editor.Windows.Components.Connection;
+using Squido.JungleMCP.Editor.Windows.Components.Settings;
+using Squido.JungleMCP.Editor.Windows.Components.Tools;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace MCPForUnity.Editor.Windows
+namespace Squido.JungleMCP.Editor.Windows
 {
-    public class MCPForUnityEditorWindow : EditorWindow
+    public class JungleMcpEditorWindow : EditorWindow
     {
         // Section controllers
         private McpSettingsSection settingsSection;
@@ -29,7 +28,7 @@ namespace MCPForUnity.Editor.Windows
         private VisualElement settingsPanel;
         private VisualElement toolsPanel;
 
-        private static readonly HashSet<MCPForUnityEditorWindow> OpenWindows = new();
+        private static readonly HashSet<JungleMcpEditorWindow> OpenWindows = new();
         private bool guiCreated = false;
         private bool toolsLoaded = false;
         private double lastRefreshTime = 0;
@@ -52,7 +51,7 @@ namespace MCPForUnity.Editor.Windows
 
         public static void ShowWindow()
         {
-            var window = GetWindow<MCPForUnityEditorWindow>("MCP For Unity");
+            var window = GetWindow<JungleMcpEditorWindow>("Jungle MCP");
             window.minSize = new Vector2(500, 600);
         }
 
@@ -68,7 +67,7 @@ namespace MCPForUnity.Editor.Windows
                 return;
 
             // Copy to array to avoid modifying the collection while iterating
-            var arr = new MCPForUnityEditorWindow[OpenWindows.Count];
+            var arr = new JungleMcpEditorWindow[OpenWindows.Count];
             OpenWindows.CopyTo(arr);
             foreach (var window in arr)
             {
@@ -93,13 +92,13 @@ namespace MCPForUnity.Editor.Windows
 
             // Load main window UXML
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
-                $"{basePath}/Editor/Windows/MCPForUnityEditorWindow.uxml"
+                $"{basePath}/Editor/Windows/JungleMcpEditorWindow.uxml"
             );
 
             if (visualTree == null)
             {
                 McpLog.Error(
-                    $"Failed to load UXML at: {basePath}/Editor/Windows/MCPForUnityEditorWindow.uxml"
+                    $"Failed to load UXML at: {basePath}/Editor/Windows/JungleMcpEditorWindow.uxml"
                 );
                 return;
             }
@@ -108,7 +107,7 @@ namespace MCPForUnity.Editor.Windows
 
             // Load main window USS
             var mainStyleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(
-                $"{basePath}/Editor/Windows/MCPForUnityEditorWindow.uss"
+                $"{basePath}/Editor/Windows/JungleMcpEditorWindow.uss"
             );
             if (mainStyleSheet != null)
             {

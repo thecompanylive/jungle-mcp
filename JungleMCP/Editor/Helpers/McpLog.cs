@@ -1,8 +1,8 @@
-using MCPForUnity.Editor.Constants;
+using Squido.JungleMCP.Editor.Constants;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     internal static class McpLog
     {

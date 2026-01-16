@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Helpers;
 
-namespace MCPForUnity.Editor.Tools.Vfx
+namespace Squido.JungleMCP.Editor.Tools.Vfx
 {
     internal static class ParticleWrite
     {

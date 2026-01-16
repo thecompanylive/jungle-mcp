@@ -1,6 +1,6 @@
 using System;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Default implementation of platform detection service

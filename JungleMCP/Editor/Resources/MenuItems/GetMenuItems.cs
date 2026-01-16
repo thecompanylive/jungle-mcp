@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Resources.MenuItems
+namespace Squido.JungleMCP.Editor.Resources.MenuItems
 {
     /// <summary>
     /// Provides a simple read-only resource that returns Unity menu items.

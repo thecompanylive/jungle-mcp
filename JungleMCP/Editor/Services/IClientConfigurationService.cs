@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using MCPForUnity.Editor.Clients;
-using MCPForUnity.Editor.Models;
+using Squido.JungleMCP.Editor.Models;
+using Squido.JungleMCP.Editor.Clients;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Service for configuring MCP clients

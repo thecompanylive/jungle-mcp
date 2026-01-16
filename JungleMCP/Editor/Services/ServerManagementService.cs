@@ -6,12 +6,12 @@ using System.Globalization;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Service for managing MCP server lifecycle

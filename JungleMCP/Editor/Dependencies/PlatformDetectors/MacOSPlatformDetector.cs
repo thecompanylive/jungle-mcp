@@ -2,10 +2,10 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
-using MCPForUnity.Editor.Dependencies.Models;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Dependencies.Models;
 
-namespace MCPForUnity.Editor.Dependencies.PlatformDetectors
+namespace Squido.JungleMCP.Editor.Dependencies.PlatformDetectors
 {
     /// <summary>
     /// macOS-specific dependency detection

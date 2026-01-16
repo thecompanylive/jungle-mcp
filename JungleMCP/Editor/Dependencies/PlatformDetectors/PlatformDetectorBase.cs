@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
-using MCPForUnity.Editor.Dependencies.Models;
+using Squido.JungleMCP.Editor.Dependencies.Models;
 
-namespace MCPForUnity.Editor.Dependencies.PlatformDetectors
+namespace Squido.JungleMCP.Editor.Dependencies.PlatformDetectors
 {
     /// <summary>
     /// Base class for platform-specific dependency detection

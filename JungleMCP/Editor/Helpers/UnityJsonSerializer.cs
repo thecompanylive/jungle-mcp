@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using MCPForUnity.Runtime.Serialization;
+using Squido.JungleMCP.Serialization;
 
-namespace MCPForUnity.Editor.Helpers
+namespace Squido.JungleMCP.Editor.Helpers
 {
     /// <summary>
     /// Shared JsonSerializer with Unity type converters.

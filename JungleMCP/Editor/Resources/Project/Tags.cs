@@ -1,9 +1,9 @@
 using System;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditorInternal;
 
-namespace MCPForUnity.Editor.Resources.Project
+namespace Squido.JungleMCP.Editor.Resources.Project
 {
     /// <summary>
     /// Provides list of all tags in the project.

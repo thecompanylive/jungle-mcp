@@ -1,16 +1,20 @@
 {
-    "name": "MCPForUnity.Runtime",
-    "rootNamespace": "MCPForUnity.Runtime",
+    "name": "Squido.JungleMCP.Editor",
+    "rootNamespace": "Squido.JungleMCP.Editor",
     "references": [
-        "Newtonsoft.Json"
+        "Squido.JungleMCP"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
-    "precompiledReferences": [],
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
-} 
+}

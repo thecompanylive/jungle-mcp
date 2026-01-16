@@ -5,12 +5,12 @@
 
 using System;
 using System.Reflection;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEditor.TestTools.TestRunner.Api;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Services
+namespace Squido.JungleMCP.Editor.Services
 {
     /// <summary>
     /// Automatically sets the editor to "No Throttling" mode during test runs.

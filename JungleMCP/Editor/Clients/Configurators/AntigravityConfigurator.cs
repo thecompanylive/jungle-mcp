@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Models;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Models;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Clients.Configurators
+namespace Squido.JungleMCP.Editor.Clients.Configurators
 {
     public class AntigravityConfigurator : JsonFileMcpConfigurator
     {

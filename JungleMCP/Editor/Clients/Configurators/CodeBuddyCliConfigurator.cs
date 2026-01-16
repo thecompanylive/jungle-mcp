@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using MCPForUnity.Editor.Models;
+using Squido.JungleMCP.Editor.Models;
 
-namespace MCPForUnity.Editor.Clients.Configurators
+namespace Squido.JungleMCP.Editor.Clients.Configurators
 {
     /// <summary>
     /// Configures the CodeBuddy CLI (~/.codebuddy.json) MCP settings.

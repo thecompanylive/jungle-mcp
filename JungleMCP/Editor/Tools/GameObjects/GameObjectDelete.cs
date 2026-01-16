@@ -1,11 +1,11 @@
 #nullable disable
 using System.Collections.Generic;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Tools.GameObjects
+namespace Squido.JungleMCP.Editor.Tools.GameObjects
 {
     internal static class GameObjectDelete
     {

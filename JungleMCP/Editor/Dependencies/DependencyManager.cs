@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using MCPForUnity.Editor.Dependencies.Models;
-using MCPForUnity.Editor.Dependencies.PlatformDetectors;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Dependencies.Models;
+using Squido.JungleMCP.Editor.Dependencies.PlatformDetectors;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Dependencies
+namespace Squido.JungleMCP.Editor.Dependencies
 {
     /// <summary>
     /// Main orchestrator for dependency validation and management

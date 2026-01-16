@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Resources.Editor
+namespace Squido.JungleMCP.Editor.Resources.Editor
 {
     /// <summary>
     /// Provides list of all open editor windows.

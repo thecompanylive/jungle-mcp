@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEngine;
 using UnityEditor;
 
@@ -12,7 +12,7 @@ using UnityEditor;
 using UnityEngine.VFX;
 #endif
 
-namespace MCPForUnity.Editor.Tools.Vfx
+namespace Squido.JungleMCP.Editor.Tools.Vfx
 {
     /// <summary>
     /// Tool for managing Unity VFX components:

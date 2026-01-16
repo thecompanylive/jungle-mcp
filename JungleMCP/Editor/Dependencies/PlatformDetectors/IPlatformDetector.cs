@@ -1,6 +1,6 @@
-using MCPForUnity.Editor.Dependencies.Models;
+using Squido.JungleMCP.Editor.Dependencies.Models;
 
-namespace MCPForUnity.Editor.Dependencies.PlatformDetectors
+namespace Squido.JungleMCP.Editor.Dependencies.PlatformDetectors
 {
     /// <summary>
     /// Interface for platform-specific dependency detection

@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Helpers;
 
-namespace MCPForUnity.Editor.Services.Transport.Transports
+namespace Squido.JungleMCP.Editor.Services.Transport.Transports
 {
     /// <summary>
     /// Adapts the existing TCP bridge into the transport abstraction.

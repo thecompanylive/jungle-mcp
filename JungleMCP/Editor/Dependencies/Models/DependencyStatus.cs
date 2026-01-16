@@ -1,6 +1,6 @@
 using System;
 
-namespace MCPForUnity.Editor.Dependencies.Models
+namespace Squido.JungleMCP.Editor.Dependencies.Models
 {
     /// <summary>
     /// Represents the status of a dependency check

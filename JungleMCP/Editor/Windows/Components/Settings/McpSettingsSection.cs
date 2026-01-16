@@ -1,18 +1,18 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Services;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace MCPForUnity.Editor.Windows.Components.Settings
+namespace Squido.JungleMCP.Editor.Windows.Components.Settings
 {
     /// <summary>
-    /// Controller for the Settings section of the MCP For Unity editor window.
+    /// Controller for the Settings section of the Jungle MCP window.
     /// Handles version display, debug logs, validation level, and advanced path overrides.
     /// </summary>
     public class McpSettingsSection

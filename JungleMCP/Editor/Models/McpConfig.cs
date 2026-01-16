@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace MCPForUnity.Editor.Models
+namespace Squido.JungleMCP.Editor.Models
 {
     [Serializable]
     public class McpConfig

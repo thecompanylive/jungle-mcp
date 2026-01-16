@@ -1,9 +1,9 @@
 using System;
-using MCPForUnity.Editor.Helpers;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 
-namespace MCPForUnity.Editor.Resources.Editor
+namespace Squido.JungleMCP.Editor.Resources.Editor
 {
     /// <summary>
     /// Provides information about the currently active editor tool.

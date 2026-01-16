@@ -1,16 +1,16 @@
 using System;
 using System.IO;
 using System.Linq;
-using MCPForUnity.Editor.Clients;
-using MCPForUnity.Editor.Constants;
-using MCPForUnity.Editor.Helpers;
-using MCPForUnity.Editor.Models;
-using MCPForUnity.Editor.Services;
 using Newtonsoft.Json.Linq;
+using Squido.JungleMCP.Editor.Clients;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Models;
+using Squido.JungleMCP.Editor.Services;
 using UnityEditor;
 using UnityEngine;
 
-namespace MCPForUnity.Editor.Migrations
+namespace Squido.JungleMCP.Editor.Migrations
 {
     /// <summary>
     /// Keeps stdio MCP clients in sync with the current package version by rewriting their configs when the package updates.

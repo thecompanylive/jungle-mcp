@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MCPForUnity.Editor.Helpers;
+using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
-using UnityEngine;
 
-namespace MCPForUnity.Editor.Clients
+namespace Squido.JungleMCP.Editor.Clients
 {
     /// <summary>
     /// Central registry that auto-discovers configurators via TypeCache.
