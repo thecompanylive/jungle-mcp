@@ -50,7 +50,7 @@ Repository = "https://github.com/CoplayDev/unity-mcp.git"
 Issues = "https://github.com/CoplayDev/unity-mcp/issues"
 
 [project.scripts]
-jungle-mcp = "main:main"
+mcp-for-unity = "main:main"
 
 [build-system]
 requires = ["setuptools>=64.0.0", "wheel"]
