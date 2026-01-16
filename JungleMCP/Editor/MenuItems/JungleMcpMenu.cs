@@ -6,7 +6,7 @@ namespace Squido.JungleMCP.Editor.MenuItems
 {
     public static class JungleMcpMenu
     {
-        [MenuItem("Tools/Squido/Jungle MPC/Toggle MCP Window %#m", priority = 1)]
+        [MenuItem("Tools/Squido/Jungle MCP/Toggle MCP Window %#m", priority = 1)]
         public static void ToggleMCPWindow()
         {
             if (JungleMcpEditorWindow.HasAnyOpenWindow())
@@ -19,13 +19,13 @@ namespace Squido.JungleMCP.Editor.MenuItems
             }
         }
 
-        [MenuItem("Tools/Squido/Jungle MPC/Local Setup Window", priority = 2)]
+        [MenuItem("Tools/Squido/Jungle MCP/Local Setup Window", priority = 2)]
         public static void ShowSetupWindow()
         {
             SetupWindowService.ShowSetupWindow();
         }
 
-        [MenuItem("Tools/Squido/Jungle MPC/Edit EditorPrefs", priority = 3)]
+        [MenuItem("Tools/Squido/Jungle MCP/Edit EditorPrefs", priority = 3)]
         public static void ShowEditorPrefsWindow()
         {
             EditorPrefsWindow.ShowWindow();
