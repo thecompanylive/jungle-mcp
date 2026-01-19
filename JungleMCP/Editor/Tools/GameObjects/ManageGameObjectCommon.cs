@@ -1,10 +1,11 @@
 #nullable disable
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Squido.JungleMCP.Editor.Tools;
-using Newtonsoft.Json.Linq;
 using Squido.JungleMCP.Editor.Helpers;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -83,11 +84,34 @@ namespace Squido.JungleMCP.Editor.Tools.GameObjects
                     break;
 
                 case "by_path":
-                    Transform foundTransform = rootSearchObject
-                        ? rootSearchObject.transform.Find(searchTerm)
-                        : GameObject.Find(searchTerm)?.transform;
-                    if (foundTransform != null)
-                        results.Add(foundTransform.gameObject);
+                    if (rootSearchObject != null)
+                    {
+                        Transform foundTransform = rootSearchObject.transform.Find(searchTerm);
+                        if (foundTransform != null)
+                            results.Add(foundTransform.gameObject);
+                    }
+                    else
+                    {
+                        var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+                        if (prefabStage != null || searchInactive)
+                        {
+                            // In Prefab Stage, GameObject.Find() doesn't work, need to search manually
+                            var allObjects = GetAllSceneObjects(searchInactive);
+                            foreach (var go in allObjects)
+                            {
+                                if (GameObjectLookup.MatchesPath(go, searchTerm))
+                                {
+                                    results.Add(go);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var found = GameObject.Find(searchTerm);
+                            if (found != null)
+                                results.Add(found);
+                        }
+                    }
                     break;
 
                 case "by_tag":
@@ -154,7 +178,12 @@ namespace Squido.JungleMCP.Editor.Tools.GameObjects
                         }
                     }
 
-                    GameObject objByPath = GameObject.Find(searchTerm);
+                    // Try path search - in Prefab Stage, GameObject.Find() doesn't work
+                    var allObjectsForPath = GetAllSceneObjects(true);
+                    GameObject objByPath = allObjectsForPath.FirstOrDefault(go =>
+                    {
+                        return GameObjectLookup.MatchesPath(go, searchTerm);
+                    });
                     if (objByPath != null)
                     {
                         results.Add(objByPath);
@@ -180,16 +209,8 @@ namespace Squido.JungleMCP.Editor.Tools.GameObjects
 
         private static IEnumerable<GameObject> GetAllSceneObjects(bool includeInactive)
         {
-            var rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-            var allObjects = new List<GameObject>();
-            foreach (var root in rootObjects)
-            {
-                allObjects.AddRange(
-                    root.GetComponentsInChildren<Transform>(includeInactive)
-                        .Select(t => t.gameObject)
-                );
-            }
-            return allObjects;
+            // Delegate to GameObjectLookup to avoid code duplication and ensure consistent behavior
+            return GameObjectLookup.GetAllSceneObjects(includeInactive);
         }
 
         private static Type FindType(string typeName)
