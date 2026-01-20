@@ -5,6 +5,7 @@ using System.Reflection;
 using Squido.JungleMCP.Serialization; // For Converters
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace Squido.JungleMCP.Editor.Helpers
