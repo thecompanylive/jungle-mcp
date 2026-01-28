@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Squido.JungleMCP.Serialization;
+using Squido.JungleMCP.Runtime.Serialization;
 
 namespace Squido.JungleMCP.Editor.Helpers
 {

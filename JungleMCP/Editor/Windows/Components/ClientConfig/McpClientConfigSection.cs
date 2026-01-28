@@ -17,7 +17,7 @@ using UnityEngine.UIElements;
 namespace Squido.JungleMCP.Editor.Windows.Components.ClientConfig
 {
     /// <summary>
-    /// Controller for the Client Configuration section of the MCP For Unity editor window.
+    /// Controller for the Client Configuration section of the Jungle MCP editor window.
     /// Handles client selection, configuration, status display, and manual configuration details.
     /// </summary>
     public class McpClientConfigSection
@@ -130,7 +130,7 @@ namespace Squido.JungleMCP.Editor.Windows.Components.ClientConfig
                 McpStatus.CommunicationError => "Communication Error",
                 McpStatus.NoResponse => "No Response",
                 McpStatus.UnsupportedOS => "Unsupported OS",
-                McpStatus.MissingConfig => "Missing MCPForUnity Config",
+                McpStatus.MissingConfig => "Missing JungleMCP Config",
                 McpStatus.Error => "Error",
                 _ => "Unknown",
             };

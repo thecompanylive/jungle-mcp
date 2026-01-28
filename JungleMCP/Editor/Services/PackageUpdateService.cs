@@ -14,7 +14,7 @@ namespace Squido.JungleMCP.Editor.Services
     {
         private const string LastCheckDateKey = EditorPrefKeys.LastUpdateCheck;
         private const string CachedVersionKey = EditorPrefKeys.LatestKnownVersion;
-        private const string PackageJsonUrl = "https://raw.githubusercontent.com/CoplayDev/unity-mcp/main/MCPForUnity/package.json";
+        private const string PackageJsonUrl = "https://raw.githubusercontent.com/thecompanylive/jungle-mcp/main/JungleMCP/package.json";
 
         /// <inheritdoc/>
         public UpdateCheckResult CheckForUpdate(string currentVersion)
@@ -142,7 +142,7 @@ namespace Squido.JungleMCP.Editor.Services
 
                 using (var client = new WebClient())
                 {
-                    client.Headers.Add("User-Agent", "Unity-MCPForUnity-UpdateChecker");
+                    client.Headers.Add("User-Agent", "Unity-JungleMCP-UpdateChecker");
                     string jsonContent = client.DownloadString(PackageJsonUrl);
 
                     var packageJson = JObject.Parse(jsonContent);

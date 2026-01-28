@@ -841,7 +841,7 @@ namespace Squido.JungleMCP.Editor.Services
                         // Note: "mcp-for-unity" includes "unity", so detect MCP indicators first.
                         bool storedMentionsMcp = storedArgsLowerNow.Contains("mcp-for-unity")
                                                  || storedArgsLowerNow.Contains("mcp_for_unity")
-                                                 || storedArgsLowerNow.Contains("mcpforunity");
+                                                 || storedArgsLowerNow.Contains("junglemcp");
                         if (storedArgsLowerNow.Contains("unityhub")
                             || storedArgsLowerNow.Contains("unity hub")
                             || (storedArgsLowerNow.Contains("unity") && !storedMentionsMcp))
@@ -863,7 +863,7 @@ namespace Squido.JungleMCP.Editor.Services
                                     // Older versions didn't store a fingerprint; accept common server indicators.
                                     allowKill = storedArgsLowerNow.Contains("uvicorn")
                                                 || storedArgsLowerNow.Contains("fastmcp")
-                                                || storedArgsLowerNow.Contains("mcpforunity")
+                                                || storedArgsLowerNow.Contains("junglemcp")
                                                 || storedArgsLowerNow.Contains("mcp-for-unity")
                                                 || storedArgsLowerNow.Contains("mcp_for_unity")
                                                 || storedArgsLowerNow.Contains("uvx")
@@ -1112,8 +1112,8 @@ namespace Squido.JungleMCP.Editor.Services
                     {
                         bool mentionsMcp = wmicCompact.Contains("mcp-for-unity")
                                            || wmicCompact.Contains("mcp_for_unity")
-                                           || wmicCompact.Contains("mcpforunity")
-                                           || wmicCompact.Contains("mcpforunityserver");
+                                           || wmicCompact.Contains("junglemcp")
+                                           || wmicCompact.Contains("junglemcpserver");
                         bool mentionsTransport = wmicCompact.Contains("--transporthttp") || (wmicCompact.Contains("--transport") && wmicCompact.Contains("http"));
                         bool mentionsUvicorn = wmicCombined.Contains("uvicorn");
 
@@ -1143,7 +1143,7 @@ namespace Squido.JungleMCP.Editor.Services
                 {
                     bool mentionsMcp = sCompact.Contains("mcp-for-unity")
                                        || sCompact.Contains("mcp_for_unity")
-                                       || sCompact.Contains("mcpforunity");
+                                       || sCompact.Contains("junglemcp");
 
                     // If it explicitly mentions the server package/entrypoint, that is sufficient.
                     // Note: Check before Unity exclusion since "mcp-for-unity" contains "unity".

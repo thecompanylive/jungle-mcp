@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 namespace Squido.JungleMCP.Editor.Windows.Components.Connection
 {
     /// <summary>
-    /// Controller for the Connection section of the MCP For Unity editor window.
+    /// Controller for the Connection section of the Jungle MCP editor window.
     /// Handles transport protocol, HTTP/stdio configuration, connection status, and health checks.
     /// </summary>
     public class McpConnectionSection
