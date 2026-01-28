@@ -1,4 +1,4 @@
-# Jungle MCP Server
+# MCP for Unity Server
 
 [![MCP](https://badge.mcpx.dev?status=on 'MCP Enabled')](https://modelcontextprotocol.io/introduction)
 [![python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
@@ -69,7 +69,7 @@ Use this to run the latest released version from the repository. Change the vers
       "command": "uvx",
       "args": [
         "--from",
-        "git+https://github.com/CoplayDev/unity-mcp@v9.0.8#subdirectory=Server",
+        "git+https://github.com/CoplayDev/unity-mcp@v9.2.0#subdirectory=Server",
         "mcp-for-unity",
         "--transport",
         "stdio"
@@ -117,6 +117,7 @@ The server connects to Unity Editor automatically when both are running. No addi
 
 **Environment Variables:**
 
+- `DISABLE_TELEMETRY=true` - Opt out of anonymous usage analytics
 - `LOG_LEVEL=DEBUG` - Enable detailed logging (default: INFO)
 
 ---

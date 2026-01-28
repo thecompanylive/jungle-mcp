@@ -1,3 +1,18 @@
+from starlette.requests import Request
+from transport.unity_instance_middleware import (
+    UnityInstanceMiddleware,
+    get_unity_instance_middleware
+)
+from transport.legacy.unity_connection import get_unity_connection_pool, UnityConnectionPool
+from services.tools import register_all_tools
+from core.telemetry import record_milestone, record_telemetry, MilestoneType, RecordType, get_package_version
+from services.resources import register_all_resources
+from transport.plugin_registry import PluginRegistry
+from transport.plugin_hub import PluginHub
+from services.custom_tool_service import CustomToolService
+from core.config import config
+from starlette.routing import WebSocketRoute
+from starlette.responses import JSONResponse
 import argparse
 import asyncio
 import logging
@@ -37,22 +52,20 @@ except Exception:
 
 from fastmcp import FastMCP
 from logging.handlers import RotatingFileHandler
-from starlette.requests import Request
-from starlette.responses import JSONResponse
-from starlette.routing import WebSocketRoute
 
-from core.config import config
-from services.custom_tool_service import CustomToolService
-from transport.plugin_hub import PluginHub
-from transport.plugin_registry import PluginRegistry
-from services.resources import register_all_resources
-from core.version import get_package_version
-from services.tools import register_all_tools
-from transport.legacy.unity_connection import get_unity_connection_pool, UnityConnectionPool
-from transport.unity_instance_middleware import (
-    UnityInstanceMiddleware,
-    get_unity_instance_middleware
-)
+
+class WindowsSafeRotatingFileHandler(RotatingFileHandler):
+    """RotatingFileHandler that gracefully handles Windows file locking during rotation."""
+
+    def doRollover(self):
+        """Override to catch PermissionError on Windows when log file is locked."""
+        try:
+            super().doRollover()
+        except PermissionError:
+            # On Windows, another process may have the log file open.
+            # Skip rotation this time - we'll try again on the next rollover.
+            pass
+
 
 # Configure logging using settings from config
 logging.basicConfig(
@@ -69,12 +82,21 @@ try:
         "~/Library/Application Support/UnityMCP"), "Logs")
     os.makedirs(_log_dir, exist_ok=True)
     _file_path = os.path.join(_log_dir, "unity_mcp_server.log")
-    _fh = RotatingFileHandler(
+    _fh = WindowsSafeRotatingFileHandler(
         _file_path, maxBytes=512*1024, backupCount=2, encoding="utf-8")
     _fh.setFormatter(logging.Formatter(config.log_format))
     _fh.setLevel(getattr(logging, config.log_level))
     logger.addHandler(_fh)
     logger.propagate = False  # Prevent double logging to root logger
+    # Also route telemetry logger to the same rotating file and normal level
+    try:
+        tlog = logging.getLogger("unity-mcp-telemetry")
+        tlog.setLevel(getattr(logging, config.log_level))
+        tlog.addHandler(_fh)
+        tlog.propagate = False  # Prevent double logging for telemetry too
+    except Exception as exc:
+        # Never let logging setup break startup
+        logger.debug("Failed to configure telemetry logger", exc_info=exc)
 except Exception as exc:
     # Never let logging setup break startup
     logger.debug("Failed to configure main logger file handler", exc_info=exc)
@@ -86,6 +108,16 @@ for noisy in ("httpx", "urllib3", "mcp.server.lowlevel.server"):
         logging.getLogger(noisy).propagate = False
     except Exception:
         pass
+
+# Import telemetry only after logging is configured to ensure its logs use stderr and proper levels
+# Ensure a slightly higher telemetry timeout unless explicitly overridden by env
+try:
+
+    # Ensure generous timeout unless explicitly overridden by env
+    if not os.environ.get("UNITY_MCP_TELEMETRY_TIMEOUT"):
+        os.environ["UNITY_MCP_TELEMETRY_TIMEOUT"] = "5.0"
+except Exception:
+    pass
 
 # Global connection pool
 _unity_connection_pool: UnityConnectionPool | None = None
@@ -99,7 +131,7 @@ custom_tool_service: CustomToolService | None = None
 async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
     """Handle server startup and shutdown."""
     global _unity_connection_pool
-    logger.info("Jungle MCP Server starting up")
+    logger.info("MCP for Unity Server starting up")
 
     # Register custom tool management endpoints with FastMCP
     # Routes are declared globally below after FastMCP initialization
@@ -120,8 +152,22 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
         loop = asyncio.get_running_loop()
         PluginHub.configure(_plugin_registry, loop)
 
+    # Record server startup telemetry
+    start_time = time.time()
+    start_clk = time.perf_counter()
     server_version = get_package_version()
-    logger.info(f"Jungle MCP Server version: {server_version}")
+    # Defer initial telemetry by 1s to avoid stdio handshake interference
+
+    def _emit_startup():
+        try:
+            record_telemetry(RecordType.STARTUP, {
+                "server_version": server_version,
+                "startup_time": start_time,
+            })
+            record_milestone(MilestoneType.FIRST_STARTUP)
+        except Exception:
+            logger.debug("Deferred startup telemetry failed", exc_info=True)
+    threading.Timer(1.0, _emit_startup).start()
 
     try:
         skip_connect = os.environ.get(
@@ -143,6 +189,16 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
                     _unity_connection_pool.get_connection()
                     logger.info(
                         "Connected to default Unity instance on startup")
+
+                    # Record successful Unity connection (deferred)
+                    threading.Timer(1.0, lambda: record_telemetry(
+                        RecordType.UNITY_CONNECTION,
+                        {
+                            "status": "connected",
+                            "connection_time_ms": (time.perf_counter() - start_clk) * 1000,
+                            "instance_count": len(instances)
+                        }
+                    )).start()
                 except Exception as e:
                     logger.warning(
                         f"Could not connect to default Unity instance: {e}")
@@ -151,8 +207,28 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
 
     except ConnectionError as e:
         logger.warning(f"Could not connect to Unity on startup: {e}")
+
+        # Record connection failure (deferred)
+        _err_msg = str(e)[:200]
+        threading.Timer(1.0, lambda: record_telemetry(
+            RecordType.UNITY_CONNECTION,
+            {
+                "status": "failed",
+                "error": _err_msg,
+                "connection_time_ms": (time.perf_counter() - start_clk) * 1000,
+            }
+        )).start()
     except Exception as e:
         logger.warning(f"Unexpected error connecting to Unity on startup: {e}")
+        _err_msg = str(e)[:200]
+        threading.Timer(1.0, lambda: record_telemetry(
+            RecordType.UNITY_CONNECTION,
+            {
+                "status": "failed",
+                "error": _err_msg,
+                "connection_time_ms": (time.perf_counter() - start_clk) * 1000,
+            }
+        )).start()
 
     try:
         # Yield shared state for lifespan consumers (e.g., middleware)
@@ -163,16 +239,25 @@ async def server_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
     finally:
         if _unity_connection_pool:
             _unity_connection_pool.disconnect_all()
-        logger.info("Jungle MCP Server shut down")
+        logger.info("MCP for Unity Server shut down")
 
-# Initialize MCP server
-mcp = FastMCP(
-    name="mcp-for-unity-server",
-    lifespan=server_lifespan,
-    instructions="""
+
+def _build_instructions(project_scoped_tools: bool) -> str:
+    if project_scoped_tools:
+        custom_tools_note = (
+            "I have a dynamic tool system. Always check the mcpforunity://custom-tools resource first "
+            "to see what special capabilities are available for the current project."
+        )
+    else:
+        custom_tools_note = (
+            "Custom tools are registered as standard tools when Unity connects. "
+            "No project-scoped custom tools resource is available."
+        )
+
+    return f"""
 This server provides tools to interact with the Unity Game Engine Editor.
 
-I have a dynamic tool system. Always check the mcpforunity://custom-tools resource first to see what special capabilities are available for the current project.
+{custom_tools_note}
 
 Targeting Unity instances:
 - Use the resource mcpforunity://instances to list active Unity sessions (Name@hash).
@@ -219,57 +304,135 @@ Payload sizing & paging (important):
   - Use paging (`page_size`, `page_number`) and keep `page_size` modest (e.g. **25-50**) to avoid token-heavy responses.
   - Keep `generate_preview=false` unless you explicitly need thumbnails (previews may include large base64 payloads).
 """
-)
-
-custom_tool_service = CustomToolService(mcp)
 
 
-@mcp.custom_route("/health", methods=["GET"])
-async def health_http(_: Request) -> JSONResponse:
-    return JSONResponse({
-        "status": "healthy",
-        "timestamp": time.time(),
-        "message": "Jungle MCP server is running"
-    })
+def create_mcp_server(project_scoped_tools: bool) -> FastMCP:
+    mcp = FastMCP(
+        name="mcp-for-unity-server",
+        lifespan=server_lifespan,
+        instructions=_build_instructions(project_scoped_tools),
+    )
 
+    global custom_tool_service
+    custom_tool_service = CustomToolService(
+        mcp, project_scoped_tools=project_scoped_tools)
 
-@mcp.custom_route("/plugin/sessions", methods=["GET"])
-async def plugin_sessions_route(_: Request) -> JSONResponse:
-    data = await PluginHub.get_sessions()
-    return JSONResponse(data.model_dump())
+    @mcp.custom_route("/health", methods=["GET"])
+    async def health_http(_: Request) -> JSONResponse:
+        return JSONResponse({
+            "status": "healthy",
+            "timestamp": time.time(),
+            "message": "MCP for Unity server is running"
+        })
 
+    @mcp.custom_route("/api/command", methods=["POST"])
+    async def cli_command_route(request: Request) -> JSONResponse:
+        """REST endpoint for CLI commands to Unity."""
+        try:
+            body = await request.json()
 
-# Initialize and register middleware for session-based Unity instance routing
-# Using the singleton getter ensures we use the same instance everywhere
-unity_middleware = get_unity_instance_middleware()
-mcp.add_middleware(unity_middleware)
-logger.info("Registered Unity instance middleware for session-based routing")
+            command_type = body.get("type")
+            params = body.get("params", {})
+            unity_instance = body.get("unity_instance")
 
-# Mount plugin websocket hub at /hub/plugin when HTTP transport is active
-existing_routes = [
-    route for route in mcp._get_additional_http_routes()
-    if isinstance(route, WebSocketRoute) and route.path == "/hub/plugin"
-]
-if not existing_routes:
-    mcp._additional_http_routes.append(
-        WebSocketRoute("/hub/plugin", PluginHub))
+            if not command_type:
+                return JSONResponse({"success": False, "error": "Missing 'type' field"}, status_code=400)
 
-# Register all tools
-register_all_tools(mcp)
+            # Get available sessions
+            sessions = await PluginHub.get_sessions()
+            if not sessions.sessions:
+                return JSONResponse({
+                    "success": False,
+                    "error": "No Unity instances connected. Make sure Unity is running with MCP plugin."
+                }, status_code=503)
 
-# Register all resources
-register_all_resources(mcp)
+            # Find target session
+            session_id = None
+            if unity_instance:
+                # Try to match by hash or project name
+                for sid, details in sessions.sessions.items():
+                    if details.hash == unity_instance or details.project == unity_instance:
+                        session_id = sid
+                        break
+
+                # If a specific unity_instance was requested but not found, return an error
+                if not session_id:
+                    return JSONResponse(
+                        {
+                            "success": False,
+                            "error": f"Unity instance '{unity_instance}' not found",
+                        },
+                        status_code=404,
+                    )
+            else:
+                # No specific unity_instance requested: use first available session
+                session_id = next(iter(sessions.sessions.keys()))
+
+            # Send command to Unity
+            result = await PluginHub.send_command(session_id, command_type, params)
+            return JSONResponse(result)
+
+        except Exception as e:
+            logger.error(f"CLI command error: {e}")
+            return JSONResponse({"success": False, "error": str(e)}, status_code=500)
+
+    @mcp.custom_route("/api/instances", methods=["GET"])
+    async def cli_instances_route(_: Request) -> JSONResponse:
+        """REST endpoint to list connected Unity instances."""
+        try:
+            sessions = await PluginHub.get_sessions()
+            instances = []
+            for session_id, details in sessions.sessions.items():
+                instances.append({
+                    "session_id": session_id,
+                    "project": details.project,
+                    "hash": details.hash,
+                    "unity_version": details.unity_version,
+                    "connected_at": details.connected_at,
+                })
+            return JSONResponse({"success": True, "instances": instances})
+        except Exception as e:
+            return JSONResponse({"success": False, "error": str(e)}, status_code=500)
+
+    @mcp.custom_route("/plugin/sessions", methods=["GET"])
+    async def plugin_sessions_route(_: Request) -> JSONResponse:
+        data = await PluginHub.get_sessions()
+        return JSONResponse(data.model_dump())
+
+    # Initialize and register middleware for session-based Unity instance routing
+    # Using the singleton getter ensures we use the same instance everywhere
+    unity_middleware = get_unity_instance_middleware()
+    mcp.add_middleware(unity_middleware)
+    logger.info("Registered Unity instance middleware for session-based routing")
+
+    # Mount plugin websocket hub at /hub/plugin when HTTP transport is active
+    existing_routes = [
+        route for route in mcp._get_additional_http_routes()
+        if isinstance(route, WebSocketRoute) and route.path == "/hub/plugin"
+    ]
+    if not existing_routes:
+        mcp._additional_http_routes.append(
+            WebSocketRoute("/hub/plugin", PluginHub))
+
+    # Register all tools
+    register_all_tools(mcp, project_scoped_tools=project_scoped_tools)
+
+    # Register all resources
+    register_all_resources(mcp, project_scoped_tools=project_scoped_tools)
+
+    return mcp
 
 
 def main():
     """Entry point for uvx and console scripts."""
     parser = argparse.ArgumentParser(
-        description="Jungle MCP Server",
+        description="MCP for Unity Server",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Environment Variables:
   UNITY_MCP_DEFAULT_INSTANCE   Default Unity instance to target (project name, hash, or 'Name@hash')
   UNITY_MCP_SKIP_STARTUP_CONNECT   Skip initial Unity connection attempt (set to 1/true/yes/on)
+  UNITY_MCP_TELEMETRY_ENABLED   Enable telemetry (set to 1/true/yes/on)
   UNITY_MCP_TRANSPORT   Transport protocol: stdio or http (default: stdio)
   UNITY_MCP_HTTP_URL   HTTP server URL (default: http://localhost:8080)
   UNITY_MCP_HTTP_HOST   HTTP server host (overrides URL host)
@@ -344,6 +507,11 @@ Examples:
         help="Optional path where the server will write its PID on startup. "
              "Used by Unity to stop the exact process it launched when running in a terminal."
     )
+    parser.add_argument(
+        "--project-scoped-tools",
+        action="store_true",
+        help="Keep custom tools scoped to the active Unity project and enable the custom tools resource."
+    )
 
     args = parser.parse_args()
 
@@ -365,8 +533,17 @@ Examples:
     # Allow individual host/port to override URL components
     http_host = args.http_host or os.environ.get(
         "UNITY_MCP_HTTP_HOST") or parsed_url.hostname or "localhost"
-    http_port = args.http_port or (int(os.environ.get("UNITY_MCP_HTTP_PORT")) if os.environ.get(
-        "UNITY_MCP_HTTP_PORT") else None) or parsed_url.port or 8080
+
+    # Safely parse optional environment port (may be None or non-numeric)
+    _env_port_str = os.environ.get("UNITY_MCP_HTTP_PORT")
+    try:
+        _env_port = int(_env_port_str) if _env_port_str is not None else None
+    except ValueError:
+        logger.warning(
+            "Invalid UNITY_MCP_HTTP_PORT value '%s', ignoring", _env_port_str)
+        _env_port = None
+
+    http_port = args.http_port or _env_port or parsed_url.port or 8080
 
     os.environ["UNITY_MCP_HTTP_HOST"] = http_host
     os.environ["UNITY_MCP_HTTP_PORT"] = str(http_port)
@@ -392,6 +569,8 @@ Examples:
     if args.http_port:
         logger.info(f"HTTP port override: {http_port}")
 
+    mcp = create_mcp_server(args.project_scoped_tools)
+
     # Determine transport mode
     if transport_mode == 'http':
         # Use HTTP transport for FastMCP
@@ -401,8 +580,7 @@ Examples:
         parsed_url = urlparse(http_url)
         host = args.http_host or os.environ.get(
             "UNITY_MCP_HTTP_HOST") or parsed_url.hostname or "localhost"
-        port = args.http_port or (int(os.environ.get("UNITY_MCP_HTTP_PORT")) if os.environ.get(
-            "UNITY_MCP_HTTP_PORT") else None) or parsed_url.port or 8080
+        port = args.http_port or _env_port or parsed_url.port or 8080
         logger.info(f"Starting FastMCP with HTTP transport on {host}:{port}")
         mcp.run(transport=transport, host=host, port=port)
     else:

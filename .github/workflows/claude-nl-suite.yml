@@ -218,7 +218,7 @@ jobs:
               -stackTraceLogType Full \
               -projectPath "${{ github.workspace }}/TestProjects/UnityMCPTests" \
               "${manual_args[@]}" \
-              -executeMethod JungleMCP.Editor.McpCiBoot.StartStdioForCi
+              -executeMethod MCPForUnity.Editor.McpCiBoot.StartStdioForCi
 
       # ---------- Wait for Unity bridge ----------
       - name: Wait for Unity bridge (robust)

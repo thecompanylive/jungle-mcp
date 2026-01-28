@@ -6,6 +6,7 @@ import logging
 from pathlib import Path
 
 from fastmcp import FastMCP
+from core.telemetry_decorator import telemetry_resource
 from core.logging_decorator import log_execution
 
 from services.registry import get_registered_resources
@@ -17,14 +18,14 @@ logger = logging.getLogger("mcp-for-unity-server")
 __all__ = ['register_all_resources']
 
 
-def register_all_resources(mcp: FastMCP):
+def register_all_resources(mcp: FastMCP, *, project_scoped_tools: bool = True):
     """
     Auto-discover and register all resources in the resources/ directory.
 
     Any .py file in this directory or subdirectories with @mcp_for_unity_resource decorated
     functions will be automatically registered.
     """
-    logger.info("Auto-discovering Jungle MCP Server resources...")
+    logger.info("Auto-discovering MCP for Unity Server resources...")
     # Dynamic import of all modules in this directory
     resources_dir = Path(__file__).parent
 
@@ -45,11 +46,18 @@ def register_all_resources(mcp: FastMCP):
         description = resource_info['description']
         kwargs = resource_info['kwargs']
 
+        if not project_scoped_tools and resource_name == "custom_tools":
+            logger.info(
+                "Skipping custom_tools resource registration (project-scoped tools disabled)")
+            continue
+
         # Check if URI contains query parameters (e.g., {?unity_instance})
         has_query_params = '{?' in uri
 
         if has_query_params:
             wrapped_template = log_execution(resource_name, "Resource")(func)
+            wrapped_template = telemetry_resource(
+                resource_name)(wrapped_template)
             wrapped_template = mcp.resource(
                 uri=uri,
                 name=resource_name,
@@ -62,6 +70,7 @@ def register_all_resources(mcp: FastMCP):
             resource_info['func'] = wrapped_template
         else:
             wrapped = log_execution(resource_name, "Resource")(func)
+            wrapped = telemetry_resource(resource_name)(wrapped)
             wrapped = mcp.resource(
                 uri=uri,
                 name=resource_name,

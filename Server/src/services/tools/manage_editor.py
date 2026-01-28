@@ -4,6 +4,7 @@ from fastmcp import Context
 from mcp.types import ToolAnnotations
 
 from services.registry import mcp_for_unity_tool
+from core.telemetry import is_telemetry_enabled, record_tool_usage
 from services.tools import get_unity_instance_from_context
 from transport.unity_transport import send_with_unity_instance
 from transport.legacy.unity_connection import async_send_command_with_retry
@@ -11,14 +12,14 @@ from services.tools.utils import coerce_bool
 
 
 @mcp_for_unity_tool(
-    description="Controls and queries the Unity editor's state and settings. Tip: pass booleans as true/false; if your client only sends strings, 'true'/'false' are accepted. Modifying actions: play, pause, stop, set_active_tool, add_tag, remove_tag, add_layer, remove_layer.",
+    description="Controls and queries the Unity editor's state and settings. Tip: pass booleans as true/false; if your client only sends strings, 'true'/'false' are accepted. Read-only actions: telemetry_status, telemetry_ping. Modifying actions: play, pause, stop, set_active_tool, add_tag, remove_tag, add_layer, remove_layer.",
     annotations=ToolAnnotations(
         title="Manage Editor",
     ),
 )
 async def manage_editor(
     ctx: Context,
-    action: Annotated[Literal["play", "pause", "stop", "set_active_tool", "add_tag", "remove_tag", "add_layer", "remove_layer"], "Get and update the Unity Editor state."],
+    action: Annotated[Literal["telemetry_status", "telemetry_ping", "play", "pause", "stop", "set_active_tool", "add_tag", "remove_tag", "add_layer", "remove_layer"], "Get and update the Unity Editor state."],
     wait_for_completion: Annotated[bool | str,
                                    "Optional. If True, waits for certain actions (accepts true/false or 'true'/'false')"] | None = None,
     tool_name: Annotated[str,
@@ -34,6 +35,13 @@ async def manage_editor(
     wait_for_completion = coerce_bool(wait_for_completion)
 
     try:
+        # Diagnostics: quick telemetry checks
+        if action == "telemetry_status":
+            return {"success": True, "telemetry_enabled": is_telemetry_enabled()}
+
+        if action == "telemetry_ping":
+            record_tool_usage("diagnostic_ping", True, 1.0, None)
+            return {"success": True, "message": "telemetry ping queued"}
         # Prepare parameters, removing None values
         params = {
             "action": action,
