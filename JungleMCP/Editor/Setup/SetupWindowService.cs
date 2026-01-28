@@ -81,7 +81,7 @@ namespace Squido.JungleMCP.Editor.Setup
             try
             {
                 dependencyResult ??= DependencyManager.CheckAllDependencies();
-                McpSetupWindow.ShowWindow(dependencyResult);
+                MCPSetupWindow.ShowWindow(dependencyResult);
             }
             catch (Exception ex)
             {

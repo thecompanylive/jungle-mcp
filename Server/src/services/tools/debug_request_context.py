@@ -2,7 +2,7 @@ from typing import Any
 import os
 import sys
 
-from core.version import get_package_version
+from core.telemetry import get_package_version
 
 from fastmcp import Context
 from mcp.types import ToolAnnotations

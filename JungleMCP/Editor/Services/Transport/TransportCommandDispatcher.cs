@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Squido.JungleMCP.Editor.Helpers;
 using Squido.JungleMCP.Editor.Models;
 using Squido.JungleMCP.Editor.Tools;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 
 namespace Squido.JungleMCP.Editor.Services.Transport
@@ -229,6 +229,12 @@ namespace Squido.JungleMCP.Editor.Services.Transport
 
             lock (PendingLock)
             {
+                // Early exit inside lock to prevent per-frame List allocations (GitHub issue #577)
+                if (Pending.Count == 0)
+                {
+                    return;
+                }
+
                 ready = new List<(string, PendingCommand)>(Pending.Count);
                 foreach (var kvp in Pending)
                 {

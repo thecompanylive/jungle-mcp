@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import TypeVar
 
 from fastmcp import Context, FastMCP
+from core.telemetry_decorator import telemetry_tool
 from core.logging_decorator import log_execution
 from utils.module_discovery import discover_modules
 from services.registry import get_registered_tools
@@ -19,14 +20,14 @@ __all__ = [
 ]
 
 
-def register_all_tools(mcp: FastMCP):
+def register_all_tools(mcp: FastMCP, *, project_scoped_tools: bool = True):
     """
     Auto-discover and register all tools in the tools/ directory.
 
     Any .py file in this directory or subdirectories with @mcp_for_unity_tool decorated
     functions will be automatically registered.
     """
-    logger.info("Auto-discovering Jungle MCP Server tools...")
+    logger.info("Auto-discovering MCP for Unity Server tools...")
     # Dynamic import of all modules in this directory
     tools_dir = Path(__file__).parent
 
@@ -45,8 +46,14 @@ def register_all_tools(mcp: FastMCP):
         description = tool_info['description']
         kwargs = tool_info['kwargs']
 
-        # Apply the @mcp.tool decorator and logging
+        if not project_scoped_tools and tool_name == "execute_custom_tool":
+            logger.info(
+                "Skipping execute_custom_tool registration (project-scoped tools disabled)")
+            continue
+
+        # Apply the @mcp.tool decorator, telemetry, and logging
         wrapped = log_execution(tool_name, "Tool")(func)
+        wrapped = telemetry_tool(tool_name)(wrapped)
         wrapped = mcp.tool(
             name=tool_name, description=description, **kwargs)(wrapped)
         tool_info['func'] = wrapped

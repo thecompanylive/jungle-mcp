@@ -1,4 +1,4 @@
-# Jungle MCP Server (Docker Image)
+# MCP for Unity Server (Docker Image)
 
 [![MCP](https://badge.mcpx.dev?status=on 'MCP Enabled')](https://modelcontextprotocol.io/introduction)
 [![License](https://img.shields.io/badge/License-MIT-red.svg 'MIT License')](https://opensource.org/licenses/MIT)
@@ -52,6 +52,7 @@ The server connects to the Unity Editor automatically when both are running. No 
 
 **Environment Variables:**
 
+- `DISABLE_TELEMETRY=true` - Opt out of anonymous usage analytics
 - `LOG_LEVEL=DEBUG` - Enable detailed logging (default: INFO)
 
 Example running with environment variables:

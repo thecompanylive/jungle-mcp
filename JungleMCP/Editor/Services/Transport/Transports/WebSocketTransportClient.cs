@@ -6,11 +6,11 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Squido.JungleMCP.Editor.Helpers;
 using Squido.JungleMCP.Editor.Services;
 using Squido.JungleMCP.Editor.Services.Transport;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Squido.JungleMCP.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
 
@@ -682,16 +682,23 @@ namespace Squido.JungleMCP.Editor.Services.Transport.Transports
                 throw new InvalidOperationException($"Invalid MCP base URL: {baseUrl}");
             }
 
-            string scheme = httpUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase) ? "wss" : "ws";
-            string builder = $"{scheme}://{httpUri.Authority}";
-            if (!string.IsNullOrEmpty(httpUri.AbsolutePath) && httpUri.AbsolutePath != "/")
+            // Replace bind-only addresses with localhost for client connections
+            // 0.0.0.0 and :: are only valid for server binding, not client connections
+            string host = httpUri.Host;
+            if (host == "0.0.0.0" || host == "::")
             {
-                builder += httpUri.AbsolutePath.TrimEnd('/');
+                McpLog.Warn($"[WebSocket] Base URL host '{host}' is bind-only; using 'localhost' for client connection.");
+                host = "localhost";
             }
 
-            builder += "/hub/plugin";
+            var builder = new UriBuilder(httpUri)
+            {
+                Scheme = httpUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase) ? "wss" : "ws",
+                Host = host,
+                Path = httpUri.AbsolutePath.TrimEnd('/') + "/hub/plugin"
+            };
 
-            return new Uri(builder);
+            return builder.Uri;
         }
     }
 }

@@ -1,8 +1,8 @@
 using System;
 using System.Net;
-using Newtonsoft.Json.Linq;
 using Squido.JungleMCP.Editor.Constants;
 using Squido.JungleMCP.Editor.Helpers;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 
 namespace Squido.JungleMCP.Editor.Services
@@ -131,6 +131,15 @@ namespace Squido.JungleMCP.Editor.Services
         {
             try
             {
+                // GitHub API endpoint (Option 1 - has rate limits):
+                // https://api.github.com/repos/CoplayDev/unity-mcp/releases/latest
+                //
+                // We use Option 2 (package.json directly) because:
+                // - No API rate limits (GitHub serves raw files freely)
+                // - Simpler - just parse JSON for version field
+                // - More reliable - doesn't require releases to be published
+                // - Direct source of truth from the main branch
+
                 using (var client = new WebClient())
                 {
                     client.Headers.Add("User-Agent", "Unity-JungleMCP-UpdateChecker");

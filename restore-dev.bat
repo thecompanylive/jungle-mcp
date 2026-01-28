@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 echo ===============================================
-echo Jungle MCP Development Restore Script
+echo MCP for Unity Development Restore Script
 echo ===============================================
 echo.
 echo Note: The Python server is bundled under Server in the package.

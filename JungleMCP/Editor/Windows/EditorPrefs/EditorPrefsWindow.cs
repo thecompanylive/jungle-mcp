@@ -38,7 +38,9 @@ namespace Squido.JungleMCP.Editor.Windows
             { EditorPrefKeys.SetupCompleted, EditorPrefType.Bool },
             { EditorPrefKeys.SetupDismissed, EditorPrefType.Bool },
             { EditorPrefKeys.CustomToolRegistrationEnabled, EditorPrefType.Bool },
+            { EditorPrefKeys.TelemetryDisabled, EditorPrefType.Bool },
             { EditorPrefKeys.DevModeForceServerRefresh, EditorPrefType.Bool },
+            { EditorPrefKeys.ProjectScopedToolsLocalHttp, EditorPrefType.Bool },
             
             // Integer prefs
             { EditorPrefKeys.UnitySocketPort, EditorPrefType.Int },
@@ -154,15 +156,18 @@ namespace Squido.JungleMCP.Editor.Windows
             allKeys.Sort();
             
             // Create items for existing prefs
-            var items = allKeys
-                .Select(key => CreateEditorPrefItem(key))
-                .Where(item => item != null)
-                .ToList();
-            
-            currentPrefs.AddRange(items);
-            foreach (var item in items)
+            foreach (var key in allKeys)
             {
-                prefsContainer.Add(CreateItemUI(item));
+                // Skip Customer UUID but show everything else that's defined
+                if (key != EditorPrefKeys.CustomerUuid)
+                {
+                    var item = CreateEditorPrefItem(key);
+                    if (item != null)
+                    {
+                        currentPrefs.Add(item);
+                        prefsContainer.Add(CreateItemUI(item));
+                    }
+                }
             }
         }
         

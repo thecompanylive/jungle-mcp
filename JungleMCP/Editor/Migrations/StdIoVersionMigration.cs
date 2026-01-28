@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 using Squido.JungleMCP.Editor.Clients;
 using Squido.JungleMCP.Editor.Constants;
 using Squido.JungleMCP.Editor.Helpers;
 using Squido.JungleMCP.Editor.Models;
 using Squido.JungleMCP.Editor.Services;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -54,10 +54,24 @@ namespace Squido.JungleMCP.Editor.Migrations
             {
                 try
                 {
-                    if (!ConfigUsesStdIo(configurator.Client))
+                    if (!configurator.SupportsAutoConfigure)
                         continue;
 
-                    if (!configurator.SupportsAutoConfigure)
+                    // Handle CLI-based configurators (e.g., Claude Code CLI)
+                    // CheckStatus with attemptAutoRewrite=true will auto-reregister if version mismatch
+                    if (configurator is ClaudeCliMcpConfigurator cliConfigurator)
+                    {
+                        var previousStatus = configurator.Status;
+                        configurator.CheckStatus(attemptAutoRewrite: true);
+                        if (configurator.Status != previousStatus)
+                        {
+                            touchedAny = true;
+                        }
+                        continue;
+                    }
+
+                    // Handle JSON file-based configurators
+                    if (!ConfigUsesStdIo(configurator.Client))
                         continue;
 
                     MCPServiceLocator.Client.ConfigureClient(configurator);

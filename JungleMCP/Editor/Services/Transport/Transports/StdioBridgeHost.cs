@@ -7,14 +7,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Helpers;
 using Squido.JungleMCP.Editor.Models;
 using Squido.JungleMCP.Editor.Services.Transport;
+using Squido.JungleMCP.Editor.Tools;
 using Squido.JungleMCP.Editor.Tools.Prefabs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Squido.JungleMCP.Editor.Constants;
-using Squido.JungleMCP.Editor.Helpers;
-using Squido.JungleMCP.Editor.Tools;
 using UnityEditor;
 using UnityEngine;
 
@@ -89,10 +89,13 @@ namespace Squido.JungleMCP.Editor.Services.Transport.Transports
                 currentUnityPort = PortManager.GetPortWithFallback();
                 Start();
                 isAutoConnectMode = true;
+
+                TelemetryHelper.RecordBridgeStartup();
             }
             catch (Exception ex)
             {
                 McpLog.Error($"Auto-connect failed: {ex.Message}");
+                TelemetryHelper.RecordBridgeConnection(false, ex.Message);
                 throw;
             }
         }
@@ -818,6 +821,12 @@ namespace Squido.JungleMCP.Editor.Services.Transport.Transports
                 List<(string id, QueuedCommand command)> work;
                 lock (lockObj)
                 {
+                    // Early exit inside lock to prevent per-frame List allocations (GitHub issue #577)
+                    if (commandQueue.Count == 0)
+                    {
+                        return;
+                    }
+
                     work = new List<(string, QueuedCommand)>(commandQueue.Count);
                     foreach (var kvp in commandQueue)
                     {
