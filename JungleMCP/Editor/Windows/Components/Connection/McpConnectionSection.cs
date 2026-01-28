@@ -5,13 +5,14 @@ using Squido.JungleMCP.Editor.Helpers;
 using Squido.JungleMCP.Editor.Services;
 using Squido.JungleMCP.Editor.Services.Transport;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Squido.JungleMCP.Editor.Windows.Components.Connection
 {
     /// <summary>
-    /// Controller for the Connection section of the Jungle MCP editor window.
+    /// Controller for the Connection section of the MCP For Unity editor window.
     /// Handles transport protocol, HTTP/stdio configuration, connection status, and health checks.
     /// </summary>
     public class McpConnectionSection
@@ -34,6 +35,8 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
         private TextField httpUrlField;
         private Button startHttpServerButton;
         private Button stopHttpServerButton;
+        private VisualElement projectScopedToolsRow;
+        private Toggle projectScopedToolsToggle;
         private VisualElement unitySocketPortRow;
         private TextField unityPortField;
         private VisualElement statusIndicator;
@@ -82,6 +85,8 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
             httpUrlField = Root.Q<TextField>("http-url");
             startHttpServerButton = Root.Q<Button>("start-http-server-button");
             stopHttpServerButton = Root.Q<Button>("stop-http-server-button");
+            projectScopedToolsRow = Root.Q<VisualElement>("project-scoped-tools-row");
+            projectScopedToolsToggle = Root.Q<Toggle>("project-scoped-tools-toggle");
             unitySocketPortRow = Root.Q<VisualElement>("unity-socket-port-row");
             unityPortField = Root.Q<TextField>("unity-port");
             statusIndicator = Root.Q<VisualElement>("status-indicator");
@@ -122,6 +127,14 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
             }
 
             httpUrlField.value = HttpEndpointUtility.GetBaseUrl();
+
+            if (projectScopedToolsToggle != null)
+            {
+                projectScopedToolsToggle.value = EditorPrefs.GetBool(
+                    EditorPrefKeys.ProjectScopedToolsLocalHttp,
+                    false
+                );
+            }
 
             int unityPort = EditorPrefs.GetInt(EditorPrefKeys.UnitySocketPort, 0);
             if (unityPort == 0)
@@ -228,6 +241,16 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
                     // If a session is active, this will end it and attempt to stop the local server.
                     OnHttpServerToggleClicked();
                 };
+            }
+
+            if (projectScopedToolsToggle != null)
+            {
+                projectScopedToolsToggle.RegisterValueChangedCallback(evt =>
+                {
+                    EditorPrefs.SetBool(EditorPrefKeys.ProjectScopedToolsLocalHttp, evt.newValue);
+                    UpdateHttpServerCommandDisplay();
+                    OnManualConfigUpdateRequested?.Invoke();
+                });
             }
 
             if (copyHttpServerCommandButton != null)
@@ -397,6 +420,7 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
                 httpServerCommandSection.style.display = DisplayStyle.None;
                 httpServerCommandField.value = string.Empty;
                 httpServerCommandField.tooltip = string.Empty;
+                httpServerCommandField.SetEnabled(false);
                 if (httpServerCommandHint != null)
                 {
                     httpServerCommandHint.text = string.Empty;
@@ -414,12 +438,22 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
             {
                 httpServerCommandField.value = string.Empty;
                 httpServerCommandField.tooltip = string.Empty;
+                httpServerCommandField.SetEnabled(false);
+                httpServerCommandSection.EnableInClassList("http-local-invalid-url", true);
                 if (httpServerCommandHint != null)
                 {
-                    httpServerCommandHint.text = "HTTP Local requires a localhost URL (localhost/127.0.0.1/0.0.0.0/::1).";
+                    httpServerCommandHint.text = "⚠ HTTP Local requires a localhost URL (localhost/127.0.0.1/0.0.0.0/::1).";
+                    httpServerCommandHint.AddToClassList("http-local-url-error");
                 }
                 copyHttpServerCommandButton?.SetEnabled(false);
                 return;
+            }
+
+            httpServerCommandSection.EnableInClassList("http-local-invalid-url", false);
+            httpServerCommandField.SetEnabled(true);
+            if (httpServerCommandHint != null)
+            {
+                httpServerCommandHint.RemoveFromClassList("http-local-url-error");
             }
 
             if (MCPServiceLocator.Server.TryGetLocalHttpServerCommand(out var command, out var error))
@@ -455,7 +489,22 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
             bool useHttp = (TransportProtocol)transportDropdown.value != TransportProtocol.Stdio;
 
             httpUrlRow.style.display = useHttp ? DisplayStyle.Flex : DisplayStyle.None;
+            UpdateProjectScopedToolsVisibility();
             unitySocketPortRow.style.display = useHttp ? DisplayStyle.None : DisplayStyle.Flex;
+        }
+
+        private void UpdateProjectScopedToolsVisibility()
+        {
+            if (projectScopedToolsRow == null)
+            {
+                return;
+            }
+
+            bool useHttp = transportDropdown != null && (TransportProtocol)transportDropdown.value != TransportProtocol.Stdio;
+            bool httpLocalSelected = IsHttpLocalSelected();
+            projectScopedToolsRow.style.display = useHttp && httpLocalSelected
+                ? DisplayStyle.Flex
+                : DisplayStyle.None;
         }
 
         private bool IsHttpLocalSelected()
@@ -513,6 +562,7 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
         {
             UpdateStartHttpButtonState();
             UpdateHttpServerCommandDisplay();
+            UpdateProjectScopedToolsVisibility();
         }
 
         private async void OnHttpServerToggleClicked()
@@ -673,6 +723,12 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
             {
                 if (bridgeService.IsRunning)
                 {
+                    // Clear any resume flags when user manually ends the session to prevent
+                    // getting stuck in "Resuming..." state (the flag may have been set by a
+                    // domain reload that started just before the user clicked End Session)
+                    try { EditorPrefs.DeleteKey(EditorPrefKeys.ResumeStdioAfterReload); } catch { }
+                    try { EditorPrefs.DeleteKey(EditorPrefKeys.ResumeHttpAfterReload); } catch { }
+
                     await bridgeService.StopAsync();
                 }
                 else
@@ -716,6 +772,11 @@ namespace Squido.JungleMCP.Editor.Windows.Components.Connection
             {
                 connectionToggleInProgress = true;
                 connectionToggleButton?.SetEnabled(false);
+
+                // Clear resume flags to prevent getting stuck in "Resuming..." state
+                try { EditorPrefs.DeleteKey(EditorPrefKeys.ResumeStdioAfterReload); } catch { }
+                try { EditorPrefs.DeleteKey(EditorPrefKeys.ResumeHttpAfterReload); } catch { }
+
                 await MCPServiceLocator.Bridge.StopAsync();
             }
             catch (Exception ex)

@@ -1,8 +1,8 @@
 using System;
 using System.Net;
-using Newtonsoft.Json.Linq;
 using Squido.JungleMCP.Editor.Constants;
 using Squido.JungleMCP.Editor.Helpers;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 
 namespace Squido.JungleMCP.Editor.Services
@@ -14,7 +14,7 @@ namespace Squido.JungleMCP.Editor.Services
     {
         private const string LastCheckDateKey = EditorPrefKeys.LastUpdateCheck;
         private const string CachedVersionKey = EditorPrefKeys.LatestKnownVersion;
-        private const string PackageJsonUrl = "https://raw.githubusercontent.com/thecompanylive/jungle-mcp/main/JungleMCP/package.json";
+        private const string PackageJsonUrl = "https://raw.githubusercontent.com/CoplayDev/unity-mcp/main/MCPForUnity/package.json";
 
         /// <inheritdoc/>
         public UpdateCheckResult CheckForUpdate(string currentVersion)
@@ -131,9 +131,18 @@ namespace Squido.JungleMCP.Editor.Services
         {
             try
             {
+                // GitHub API endpoint (Option 1 - has rate limits):
+                // https://api.github.com/repos/CoplayDev/unity-mcp/releases/latest
+                //
+                // We use Option 2 (package.json directly) because:
+                // - No API rate limits (GitHub serves raw files freely)
+                // - Simpler - just parse JSON for version field
+                // - More reliable - doesn't require releases to be published
+                // - Direct source of truth from the main branch
+
                 using (var client = new WebClient())
                 {
-                    client.Headers.Add("User-Agent", "Unity-JungleMCP-UpdateChecker");
+                    client.Headers.Add("User-Agent", "Unity-MCPForUnity-UpdateChecker");
                     string jsonContent = client.DownloadString(PackageJsonUrl);
 
                     var packageJson = JObject.Parse(jsonContent);

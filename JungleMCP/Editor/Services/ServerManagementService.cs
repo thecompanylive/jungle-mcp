@@ -109,7 +109,7 @@ namespace Squido.JungleMCP.Editor.Services
         private static string GetLocalHttpServerPidDirectory()
         {
             // Keep it project-scoped and out of version control.
-            return Path.Combine(GetProjectRootPath(), "Library", "JungleMCP", "RunState");
+            return Path.Combine(GetProjectRootPath(), "Library", "MCPForUnity", "RunState");
         }
 
         private static string GetLocalHttpServerPidFilePath(int port)
@@ -841,7 +841,7 @@ namespace Squido.JungleMCP.Editor.Services
                         // Note: "mcp-for-unity" includes "unity", so detect MCP indicators first.
                         bool storedMentionsMcp = storedArgsLowerNow.Contains("mcp-for-unity")
                                                  || storedArgsLowerNow.Contains("mcp_for_unity")
-                                                 || storedArgsLowerNow.Contains("junglemcp");
+                                                 || storedArgsLowerNow.Contains("mcpforunity");
                         if (storedArgsLowerNow.Contains("unityhub")
                             || storedArgsLowerNow.Contains("unity hub")
                             || (storedArgsLowerNow.Contains("unity") && !storedMentionsMcp))
@@ -863,7 +863,7 @@ namespace Squido.JungleMCP.Editor.Services
                                     // Older versions didn't store a fingerprint; accept common server indicators.
                                     allowKill = storedArgsLowerNow.Contains("uvicorn")
                                                 || storedArgsLowerNow.Contains("fastmcp")
-                                                || storedArgsLowerNow.Contains("junglemcp")
+                                                || storedArgsLowerNow.Contains("mcpforunity")
                                                 || storedArgsLowerNow.Contains("mcp-for-unity")
                                                 || storedArgsLowerNow.Contains("mcp_for_unity")
                                                 || storedArgsLowerNow.Contains("uvx")
@@ -1112,7 +1112,7 @@ namespace Squido.JungleMCP.Editor.Services
                     {
                         bool mentionsMcp = wmicCompact.Contains("mcp-for-unity")
                                            || wmicCompact.Contains("mcp_for_unity")
-                                           || wmicCompact.Contains("junglemcp")
+                                           || wmicCompact.Contains("mcpforunity")
                                            || wmicCompact.Contains("mcpforunityserver");
                         bool mentionsTransport = wmicCompact.Contains("--transporthttp") || (wmicCompact.Contains("--transport") && wmicCompact.Contains("http"));
                         bool mentionsUvicorn = wmicCombined.Contains("uvicorn");
@@ -1143,7 +1143,7 @@ namespace Squido.JungleMCP.Editor.Services
                 {
                     bool mentionsMcp = sCompact.Contains("mcp-for-unity")
                                        || sCompact.Contains("mcp_for_unity")
-                                       || sCompact.Contains("junglemcp");
+                                       || sCompact.Contains("mcpforunity");
 
                     // If it explicitly mentions the server package/entrypoint, that is sufficient.
                     // Note: Check before Unity exclusion since "mcp-for-unity" contains "unity".
@@ -1310,10 +1310,16 @@ namespace Squido.JungleMCP.Editor.Services
             }
 
             // Use central helper that checks both DevModeForceServerRefresh AND local path detection.
+            // Note: --reinstall is not supported by uvx, use --no-cache --refresh instead
             string devFlags = AssetPathUtility.ShouldForceUvxRefresh() ? "--no-cache --refresh " : string.Empty;
+            bool projectScopedTools = EditorPrefs.GetBool(
+                EditorPrefKeys.ProjectScopedToolsLocalHttp,
+                true
+            );
+            string scopedFlag = projectScopedTools ? " --project-scoped-tools" : string.Empty;
             string args = string.IsNullOrEmpty(fromUrl)
-                ? $"{devFlags}{packageName} --transport http --http-url {httpUrl}"
-                : $"{devFlags}--from {fromUrl} {packageName} --transport http --http-url {httpUrl}";
+                ? $"{devFlags}{packageName} --transport http --http-url {httpUrl}{scopedFlag}"
+                : $"{devFlags}--from {fromUrl} {packageName} --transport http --http-url {httpUrl}{scopedFlag}";
 
             fileName = uvxPath;
             arguments = args;
@@ -1371,7 +1377,7 @@ namespace Squido.JungleMCP.Editor.Services
 
 #if UNITY_EDITOR_OSX
             // macOS: Avoid AppleScript (automation permission prompts). Use a .command script and open it.
-            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "JungleMCP", "TerminalScripts");
+            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "MCPForUnity", "TerminalScripts");
             Directory.CreateDirectory(scriptsDir);
             string scriptPath = Path.Combine(scriptsDir, "mcp-terminal.command");
             File.WriteAllText(
@@ -1390,7 +1396,7 @@ namespace Squido.JungleMCP.Editor.Services
             };
 #elif UNITY_EDITOR_WIN
             // Windows: Avoid brittle nested-quote escaping by writing a .cmd script and starting it in a new window.
-            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "JungleMCP", "TerminalScripts");
+            string scriptsDir = Path.Combine(GetProjectRootPath(), "Library", "MCPForUnity", "TerminalScripts");
             Directory.CreateDirectory(scriptsDir);
             string scriptPath = Path.Combine(scriptsDir, "mcp-terminal.cmd");
             File.WriteAllText(

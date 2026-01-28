@@ -1,7 +1,7 @@
 namespace Squido.JungleMCP.Editor.Constants
 {
     /// <summary>
-    /// Centralized list of EditorPrefs keys used by the Jungle MCP package.
+    /// Centralized list of EditorPrefs keys used by the MCP for Unity package.
     /// Keeping them in one place avoids typos and simplifies migrations.
     /// </summary>
     internal static class EditorPrefKeys
@@ -28,6 +28,7 @@ namespace Squido.JungleMCP.Editor.Constants
         internal const string WebSocketUrlOverride = "JungleMCP.WebSocketUrl";
         internal const string GitUrlOverride = "JungleMCP.GitUrlOverride";
         internal const string DevModeForceServerRefresh = "JungleMCP.DevModeForceServerRefresh";
+        internal const string ProjectScopedToolsLocalHttp = "JungleMCP.ProjectScopedTools.LocalHttp";
 
         internal const string PackageDeploySourcePath = "JungleMCP.PackageDeploy.SourcePath";
         internal const string PackageDeployLastBackupPath = "JungleMCP.PackageDeploy.LastBackupPath";
@@ -50,5 +51,8 @@ namespace Squido.JungleMCP.Editor.Constants
         internal const string LastUpdateCheck = "JungleMCP.LastUpdateCheck";
         internal const string LatestKnownVersion = "JungleMCP.LatestKnownVersion";
         internal const string LastStdIoUpgradeVersion = "JungleMCP.LastStdIoUpgradeVersion";
+
+        internal const string TelemetryDisabled = "JungleMCP.TelemetryDisabled";
+        internal const string CustomerUuid = "JungleMCP.CustomerUUID";
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Squido.JungleMCP.Editor.Dependencies;
 using Squido.JungleMCP.Editor.Dependencies.Models;
 using Squido.JungleMCP.Editor.Helpers;
@@ -10,7 +11,7 @@ namespace Squido.JungleMCP.Editor.Windows
     /// <summary>
     /// Setup window for checking and guiding dependency installation
     /// </summary>
-    public class McpSetupWindow : EditorWindow
+    public class MCPSetupWindow : EditorWindow
     {
         // UI Elements
         private VisualElement pythonIndicator;
@@ -31,8 +32,9 @@ namespace Squido.JungleMCP.Editor.Windows
 
         public static void ShowWindow(DependencyCheckResult dependencyResult = null)
         {
-            var window = GetWindow<McpSetupWindow>("Jungle MCP Setup");
+            var window = GetWindow<MCPSetupWindow>("MCP Setup");
             window.minSize = new Vector2(480, 320);
+            // window.maxSize = new Vector2(600, 700);
             window._dependencyResult = dependencyResult ?? DependencyManager.CheckAllDependencies();
             window.Show();
         }
@@ -43,12 +45,12 @@ namespace Squido.JungleMCP.Editor.Windows
 
             // Load UXML
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
-                $"{basePath}/Editor/Windows/McpSetupWindow.uxml"
+                $"{basePath}/Editor/Windows/MCPSetupWindow.uxml"
             );
 
             if (visualTree == null)
             {
-                McpLog.Error($"Failed to load UXML at: {basePath}/Editor/Windows/McpSetupWindow.uxml");
+                McpLog.Error($"Failed to load UXML at: {basePath}/Editor/Windows/MCPSetupWindow.uxml");
                 return;
             }
 
@@ -133,13 +135,13 @@ namespace Squido.JungleMCP.Editor.Windows
             // Update overall status
             if (_dependencyResult.IsSystemReady)
             {
-                statusMessage.text = "✓ All requirements met! Jungle MCP is ready to use.";
+                statusMessage.text = "✓ All requirements met! MCP for Unity is ready to use.";
                 statusMessage.style.color = new StyleColor(Color.green);
                 installationSection.style.display = DisplayStyle.None;
             }
             else
             {
-                statusMessage.text = "⚠ Missing dependencies. Jungle MCP requires all dependencies to function.";
+                statusMessage.text = "⚠ Missing dependencies. MCP for Unity requires all dependencies to function.";
                 statusMessage.style.color = new StyleColor(new Color(1f, 0.6f, 0f)); // Orange
                 installationSection.style.display = DisplayStyle.Flex;
                 installationInstructions.text = DependencyManager.GetInstallationRecommendations();

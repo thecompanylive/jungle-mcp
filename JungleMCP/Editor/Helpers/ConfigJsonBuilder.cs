@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Squido.JungleMCP.Editor.Constants;
+using Squido.JungleMCP.Editor.Clients.Configurators;
 using Squido.JungleMCP.Editor.Helpers;
+using Squido.JungleMCP.Editor.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Squido.JungleMCP.Editor.Clients.Configurators;
-using Squido.JungleMCP.Editor.Constants;
-using Squido.JungleMCP.Editor.Models;
 using UnityEditor;
 using UnityEngine;
 
@@ -159,10 +159,11 @@ namespace Squido.JungleMCP.Editor.Helpers
         private static IList<string> BuildUvxArgs(string fromUrl, string packageName)
         {
             // Dev mode: force a fresh install/resolution (avoids stale cached builds while iterating).
-            // `--no-cache` is the key flag; `--refresh` ensures metadata is revalidated.
+            // `--no-cache` avoids reading from cache; `--refresh` ensures metadata is revalidated.
+            // Note: --reinstall is not supported by uvx and will cause a warning.
             // Keep ordering consistent with other uvx builders: dev flags first, then --from <url>, then package name.
             var args = new List<string>();
-            
+
             // Use central helper that checks both DevModeForceServerRefresh AND local path detection.
             if (AssetPathUtility.ShouldForceUvxRefresh())
             {
